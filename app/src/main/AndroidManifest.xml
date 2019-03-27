@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.VideoPlayerActivity"></activity>
-        <activity android:name=".Activity.PageActivityUser" />
-        <activity android:name=".Activity.PageActivityEditor" />
-        <activity android:name=".Activity.ImageActivity" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".source.activity.VideoPlayerActivity"></activity>
+        <activity android:name=".source.activity.PageActivityUser" />
+        <activity android:name=".source.activity.PageActivityEditor" />
+        <activity android:name=".source.activity.ImageActivity" />
+        <activity android:name=".source.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

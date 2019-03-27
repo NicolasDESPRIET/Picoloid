@@ -1,11 +1,10 @@
-package managerData;
+package com.example.picoloid.source.managerData;
 
 import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
 import java.io.File;
-import java.net.URI;
 
 public class FileManager {
     public FileManager() {
