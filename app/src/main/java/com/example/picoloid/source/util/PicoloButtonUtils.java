@@ -1,11 +1,11 @@
-package util;
+package com.example.picoloid.source.util;
 
 import android.support.annotation.NonNull;
 
 import java.net.URI;
 
-import model.PicoloButton;
-import model.PicoloButtonType;
+import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonType;
 
 public class PicoloButtonUtils {
 

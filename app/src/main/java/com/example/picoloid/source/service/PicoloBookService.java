@@ -1,6 +1,6 @@
-package service;
+package com.example.picoloid.source.service;
 
-import model.PicoloBook;
+import com.example.picoloid.source.model.PicoloBook;
 
 public class PicoloBookService {
     private static class PicoloBookServiceHolder {
