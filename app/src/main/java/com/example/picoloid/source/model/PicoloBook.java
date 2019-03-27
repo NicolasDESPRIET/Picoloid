@@ -1,4 +1,4 @@
-package model;
+package com.example.picoloid.source.model;
 
 import java.util.ArrayList;
 import java.util.List;
