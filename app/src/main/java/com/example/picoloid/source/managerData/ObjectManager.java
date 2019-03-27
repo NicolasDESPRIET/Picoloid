@@ -1,4 +1,4 @@
-package managerData;
+package com.example.picoloid.source.managerData;
 
 public class ObjectManager {
     public ObjectManager() {

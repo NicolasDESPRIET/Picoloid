@@ -1,4 +1,4 @@
-package model;
+package com.example.picoloid.source.model;
 
 public enum PicoloButtonType {
     NONE,
