@@ -1,5 +1,9 @@
 package com.example.picoloid.source.managerData;
 
+import com.example.picoloid.source.model.*;
+
+import org.json.JSONObject;
+
 public class ObjectManager {
     public ObjectManager() {
     }
@@ -8,7 +12,9 @@ public class ObjectManager {
 
     public void createPage(){}
 
-    public void createBook(){}
+    public void createBook(JSONObject jsonObject){
+
+    }
 
     public void SaveButton(){}
 
