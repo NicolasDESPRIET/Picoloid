@@ -60,6 +60,12 @@
           ]
         }
       ]
+    },
+    {
+      "name" : "mathilde",
+      "id": 2,
+      "settings" : null,
+      "list_page" : []
     }
   ]
 }
