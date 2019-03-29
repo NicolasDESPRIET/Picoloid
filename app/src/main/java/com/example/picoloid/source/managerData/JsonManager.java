@@ -15,7 +15,7 @@ import java.util.List;
 
 public class JsonManager {
 
-    public String readJsonFromAsset(Context context, String file) throws IOException{
+    public static String readJsonFromAsset(Context context, String file) throws IOException{
         String json = null;
 
         InputStream is = context.getAssets().open(file);
@@ -31,7 +31,7 @@ public class JsonManager {
 
     //String path = context.getFilesDir().getAbsolutePath(); retour le chemin du filedirectory
 
-    public String readJsonFromFile(Context context, String file) throws IOException{
+    public static String readJsonFromFile(Context context, String file) throws IOException{
         String json = null;
 
         InputStream is = context.openFileInput(file);

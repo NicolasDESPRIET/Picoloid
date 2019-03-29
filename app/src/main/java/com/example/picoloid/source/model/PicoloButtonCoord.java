@@ -36,5 +36,7 @@ public class PicoloButtonCoord {
         return leftMargin;
     }
 
-
+    public int getTopMargin() {
+        return topMargin;
+    }
 }

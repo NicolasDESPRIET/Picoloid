@@ -23,6 +23,10 @@ public class PicoloBook {
         return book;
     }
 
+    public void addJsonPage(PicoloPage page){
+        pageList.add(page);
+    }
+
     public void addPage(PicoloPage page){
         page.setId(getLastPageId() + 1);
         pageList.add(page);
@@ -49,5 +53,9 @@ public class PicoloBook {
             }
         }
         return -1;
+    }
+
+    public String getName() {
+        return name;
     }
 }
