@@ -1,0 +1,71 @@
+{
+  "book": [
+    {
+      "name" : "Theo",
+      "id": 1,
+      "settings" : null,
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": [
+            {
+              "title" : "ma sortie au cirque",
+              "id" : 0,
+              "coordonate" : null,
+              "type" : "PAGE",
+              "image_path" : "lien_image",
+              "special_path" : null,
+              "page_id" : 1
+            },
+            {
+              "title" : "ma famille",
+              "id" : 1,
+              "coordonate" : null,
+              "type" : "PAGE",
+              "image_path" : "liens_image2",
+              "special_path" : null,
+              "page_id" : 2
+            }
+          ]
+        },
+        {
+          "name" : "cirque",
+          "id" : 1,
+          "button_list": [
+            {
+              "title" : "un lion",
+              "id" : 0,
+              "coordonate" : null,
+              "type" : "IMAGE",
+              "image_path" : "liens_image3",
+              "special_path" : null,
+              "page_id" : null
+            }
+          ]
+        },
+        {
+          "name" : "ma famille",
+          "id" : 2,
+          "button_list": [
+            {
+              "title" : "mon papa",
+              "id" : 0,
+              "coordonate" : null,
+              "type" : "IMAGE",
+              "image_path" : "liens_image4",
+              "special_path" : null,
+              "page_id" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "mathilde",
+      "id": 2,
+      "settings" : null,
+      "list_page" : []
+    }
+  ]
+}
