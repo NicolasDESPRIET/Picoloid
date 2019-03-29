@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PicoloBook {
+
     private String name;
     private int id;
     private PicoloBookSettings settings;
@@ -14,7 +15,12 @@ public class PicoloBook {
         this.id = id;
         settings = new PicoloBookSettings();
         pageList = new ArrayList<PicoloPage>();
-        pageList.add(new PicoloPage("MainPage"));
+    }
+
+    public static PicoloBook newBookFromUser(String name){
+        PicoloBook book = new PicoloBook(name,0);
+        book.pageList.add(new PicoloPage("MainPage"));
+        return book;
     }
 
     public void addPage(PicoloPage page){

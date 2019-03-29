@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonManager {
-    public JsonManager() {
-    }
 
     public String readJsonFromAsset(Context context, String file) throws IOException{
         String json = null;
@@ -53,38 +51,6 @@ public class JsonManager {
 
     public String jsonObjectToString(JSONObject json) throws JSONException{
         return json.toString(2);
-    }
-
-    public JSONArray getJsonArray(JSONObject json, String nametab) throws JSONException{
-        return json.getJSONArray(nametab);
-    }
-
-    public Integer getIntValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getInt(nameVal);
-    }
-
-    public Double getDoubleValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getDouble(nameVal);
-    }
-
-    public String getStringValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getString(nameVal);
-    }
-
-    public void setArrayInJson(JSONObject json, JSONArray jsonArray, String nameVal) throws JSONException{
-        json.put(nameVal, jsonArray);
-    }
-
-    public void setIntValInJson(JSONObject json, String nameVal, int val) throws JSONException{
-        json.put(nameVal, val);
-    }
-
-    public void setDoubleValInJson(JSONObject json, String nameVal, double val) throws JSONException{
-        json.put(nameVal,val);
-    }
-
-    public void setStringValInJson(JSONObject json, String nameVal, String val) throws JSONException{
-        json.put(nameVal,val);
     }
 
     public List<JSONObject> getArrayformJarray(JSONArray Jarray) throws JSONException{
