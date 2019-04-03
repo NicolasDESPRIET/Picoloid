@@ -15,6 +15,10 @@ public class PicoloPage{
         this.buttonList = new ArrayList<PicoloButton>();
     }
 
+    public void addJsonButton(PicoloButton button){
+        buttonList.add(button);
+    }
+
     public void addButton(PicoloButton button){
         button.setId(getLastButtonId() + 1);
         buttonList.add(button);
