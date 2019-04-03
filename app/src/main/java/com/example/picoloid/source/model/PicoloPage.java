@@ -21,6 +21,7 @@ public class PicoloPage{
 
     public void addButton(PicoloButton button){
         button.setId(getLastButtonId() + 1);
+        button.setPageId(id);
         buttonList.add(button);
     }
 
@@ -72,5 +73,10 @@ public class PicoloPage{
 
     public void setButtonList(List<PicoloButton> buttonList) {
         this.buttonList = buttonList;
+    }
+
+    @Override
+    public String toString(){
+        return "Page of id "+id+" named "+name+". Number of buttons : "+buttonList.size();
     }
 }

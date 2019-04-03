@@ -92,4 +92,9 @@ public class PicoloBook {
     public void setPageList(List<PicoloPage> pageList) {
         this.pageList = pageList;
     }
+
+    @Override
+    public String toString(){
+        return name+"'s book : "+pageList.size()+" pages, id = "+id;
+    }
 }

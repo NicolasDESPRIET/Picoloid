@@ -14,7 +14,7 @@ import java.net.URI;
 
 public class ObjectManager {
 
-    public static PicoloBook loadBookAssetsmod( String name, Context context, String file) throws IOException, JSONException {
+    public static PicoloBook loadBookAssetsmod(String name, Context context, String file) throws IOException, JSONException {
         //TODO pass in filemod when this will be implement too.
         String json = JsonManager.readJsonFromAsset(context,file);
         JSONArray profils = new JSONObject(json).getJSONArray("book");
