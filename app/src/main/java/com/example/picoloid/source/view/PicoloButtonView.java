@@ -1,10 +1,13 @@
 package com.example.picoloid.source.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 
+import com.example.picoloid.source.activity.MainActivity;
+import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.model.PicoloButton;
 
 public class PicoloButtonView extends AppCompatButton {
@@ -46,11 +49,11 @@ public class PicoloButtonView extends AppCompatButton {
     }
 
     private void startImageActivity(){
-
+        Log.d(TAG, "startImageActivity");
     }
 
     private void startVideoActivity(){
-
+        Log.d(TAG, "startVideoActivity");
     }
 
     private void startSoundPlaying(){
@@ -58,6 +61,12 @@ public class PicoloButtonView extends AppCompatButton {
     }
 
     private void openPage(){
+        Intent ii=new Intent(getContext(), PageActivityUser.class);
+        ii.putExtra("pageId", buttonData.getPageId());
+        getContext().startActivity(ii);
+    }
 
+    public PicoloButton getButtonData(){
+        return buttonData;
     }
 }

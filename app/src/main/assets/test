@@ -47,6 +47,7 @@
               "title" : "un lion",
               "id" : 0,
               "coordonate" : {
+
                 "width" : 9,
                 "height" : 10,
                 "leftMargin" : 11,
