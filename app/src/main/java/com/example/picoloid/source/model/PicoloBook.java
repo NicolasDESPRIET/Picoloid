@@ -17,7 +17,7 @@ public class PicoloBook {
         pageList = new ArrayList<PicoloPage>();
     }
 
-    public static PicoloBook newBookFromUser(String name){
+    public static PicoloBook newBookFromUser(String name, int id){
         PicoloBook book = new PicoloBook(name,0);
         book.pageList.add(new PicoloPage("MainPage"));
         return book;
@@ -35,6 +35,10 @@ public class PicoloBook {
         pageList.remove(id);
     }
 
+    public PicoloPage getPage(int pageId){
+        return pageList.get(findListIdByPageId(pageId));
+    }
+
     private int getLastPageId(){
         int maxId = 0;
         for(int i=0;i<pageList.size();i++){
@@ -49,5 +53,37 @@ public class PicoloBook {
             }
         }
         return -1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public PicoloBookSettings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(PicoloBookSettings settings) {
+        this.settings = settings;
+    }
+
+    public List<PicoloPage> getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(List<PicoloPage> pageList) {
+        this.pageList = pageList;
     }
 }
