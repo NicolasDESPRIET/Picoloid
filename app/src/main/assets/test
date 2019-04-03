@@ -13,10 +13,10 @@
               "title" : "ma sortie au cirque",
               "id" : 0,
               "coordonate" : {
-                "width" : 1,
-                "height" : 2,
-                "leftMargin" : 3,
-                "topMargin" : 4
+                "width" : 400,
+                "height" : 400,
+                "leftMargin" : 0,
+                "topMargin" : 0
               },
               "type" : "PAGE",
               "image_path" : "lien_image",
@@ -27,10 +27,10 @@
               "title" : "ma famille",
               "id" : 1,
               "coordonate" : {
-                "width" : 5,
-                "height" : 6,
-                "leftMargin" : 7,
-                "topMargin" : 8
+                "width" : 400,
+                "height" : 400,
+                "leftMargin" : 600,
+                "topMargin" : 600
               },
               "type" : "PAGE",
               "image_path" : "liens_image2",
@@ -47,6 +47,7 @@
               "title" : "un lion",
               "id" : 0,
               "coordonate" : {
+
                 "width" : 9,
                 "height" : 10,
                 "leftMargin" : 11,

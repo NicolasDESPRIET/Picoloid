@@ -77,4 +77,9 @@ public class PicoloButton {
     public void setPageId(int pageId) {
         this.pageId = pageId;
     }
+
+    @Override
+    public String toString(){
+        return "Button : "+title+" of id "+id+". Coord : "+coord.toString()+". Type = "+type.toString();
+    }
 }

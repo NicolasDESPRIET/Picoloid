@@ -36,7 +36,11 @@ public class PicoloButtonCoord {
         return leftMargin;
     }
 
-    public int getTopMargin() {
+    public int getTopMargin(){
         return topMargin;
+    }
+
+    public String toString(){
+        return width + " " + height + " " + leftMargin + " " + topMargin;
     }
 }

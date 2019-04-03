@@ -24,6 +24,7 @@ import java.util.List;
 
 public class JsonManager {
 
+
     public static String readJsonFromAsset(Context context, String file) throws IOException {
         String json = null;
 
