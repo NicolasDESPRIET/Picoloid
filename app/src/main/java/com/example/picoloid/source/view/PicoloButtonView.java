@@ -63,7 +63,7 @@ public class PicoloButtonView extends AppCompatButton {
     private void openPage(){
         Intent ii=new Intent(getContext(), PageActivityUser.class);
         ii.putExtra("pageId", buttonData.getPageId());
-        //startActivity(ii);
+        getContext().startActivity(ii);
     }
 
     public PicoloButton getButtonData(){

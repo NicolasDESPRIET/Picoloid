@@ -19,7 +19,10 @@ public class PicoloBook {
 
     public static PicoloBook newBookFromUser(String name, int id){
         PicoloBook book = new PicoloBook(name,0);
-        book.pageList.add(new PicoloPage("MainPage"));
+        PicoloPage mainPage = new PicoloPage("MainPage");
+        mainPage.setId(0);
+        book.pageList.add(mainPage);
+
         return book;
     }
 

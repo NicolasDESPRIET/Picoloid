@@ -30,6 +30,7 @@ public class PicoloBookTest {
 
         book.getPageList().get(0).addButton(button1);
         book.getPageList().get(0).addButton(button2);
+        book.getPageList().get(0).addButton(button3);
 
         return book;
     }

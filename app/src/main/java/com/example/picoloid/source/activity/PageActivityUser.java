@@ -29,6 +29,8 @@ public class PageActivityUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_user);
 
+
+
         layout = (RelativeLayout)findViewById(R.id.pageActivityLayout_user);
 
         init();
@@ -43,7 +45,8 @@ public class PageActivityUser extends AppCompatActivity {
             int j =(int) b.get("pageId");
             Log.d(TAG, "pageId: "+j);
 
-            currentPage = PicoloBookService.getBook().getPageList().get(0);
+            currentPage = PicoloBookService.getBook().getPageList().get(j);
+            Log.d(TAG, "onCreate: Loading page id = "+currentPage.getId());
         }else{
             Toast.makeText(this,"Error loading book",Toast.LENGTH_SHORT);
             Intent returnToMain = new Intent(PageActivityUser.this, MainActivity.class);
