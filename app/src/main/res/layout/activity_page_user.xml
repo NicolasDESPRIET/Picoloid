@@ -7,7 +7,7 @@
     tools:context=".source.activity.PageActivityUser">
 
     <RelativeLayout
-        android:id="@+id/pageActivityLayout_user"
+        android:id="@+id/buttonLayout_User"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
