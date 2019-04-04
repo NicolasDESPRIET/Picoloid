@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.picoloid">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,17 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".source.activity.VideoPlayerActivity"></activity>
-        <activity android:name=".source.activity.PageActivityUser" />
-        <activity android:name=".source.activity.PageActivityEditor" />
-        <activity android:name=".source.activity.ImageActivity" />
-        <activity android:name=".source.activity.MainActivity">
+
+        <activity android:name=".source.activity.VideoPlayerActivity"
+            android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".source.activity.PageActivityUser"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".source.activity.PageActivityEditor"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".source.activity.ImageActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".source.activity.MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
