@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.RecycleViewAdapter;
@@ -53,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initlist(){
         //TODO a modifier pour initialiser correctement l'app
+        //Toast.makeText(this, this.getFilesDir().getPath(), Toast.LENGTH_LONG).show();
+        try {
+            JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
+            String test = JsonManager.readOnFile(this);
+            Toast.makeText(this, test, Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             profils = new JSONObject(JsonManager.readJsonFromAsset(this,"test")).getJSONArray("book");
         } catch (JSONException e) {

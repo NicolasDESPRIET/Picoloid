@@ -2,25 +2,16 @@ package com.example.picoloid.source.managerData;
 
 
 import android.content.Context;
-import android.os.Environment;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JsonManager {
 
@@ -39,16 +30,12 @@ public class JsonManager {
         return json;
     }
 
-    public static void writeFile(String fileName, String jsonString, Context context) {
-
-        File sdLien = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        File monFichier = new File(sdLien, fileName + ".json");
+    public static void writer(File file, String data){
         BufferedWriter writer = null;
         try {
-            FileWriter out = new FileWriter(monFichier);
+            FileWriter out = new FileWriter(file);
             writer = new BufferedWriter(out);
-            writer.write(jsonString);
-            Toast.makeText(context, sdLien.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            writer.write(data);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -62,10 +49,32 @@ public class JsonManager {
         }
     }
 
-    public static String readOnFile(Context context, String fileName){
+    public static void InitFile(String jsonString, Context context){
+        //File sdLien = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
 
-        File sdLien = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        File file = new File(sdLien, fileName + ".json");
+        File sdLien = new File(context.getFilesDir().getPath());
+
+        File monFichier = new File(sdLien, "DataPicoloid.json");
+
+        if (monFichier.exists()){
+            //Toast.makeText(context, "file exist"+ monFichier.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        }else{
+            writer(monFichier,jsonString);
+        }
+    }
+
+    public static void saveDataOnFiles(Context context, String data){
+        File sdLien = new File(context.getFilesDir().getPath());
+        File file = new File(sdLien, "DataPicoloid.json");
+
+        writer(file,data);
+    }
+
+
+    public static String readOnFile(Context context){
+
+        File sdLien = new File(context.getFilesDir().getPath());
+        File file = new File(sdLien, "DataPicoloid.json");
 
         String result = null;
         if (file.exists()) {
