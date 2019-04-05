@@ -1,6 +1,7 @@
 package com.example.picoloid.source.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,15 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.activity.PageActivityUser;
+import com.example.picoloid.source.managerData.ObjectManager;
+import com.example.picoloid.source.service.PicoloBookService;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<String> profilList = new ArrayList<>();
+    private JSONArray profilList = new JSONArray();
 
-    public RecycleViewAdapter(Context context, ArrayList<String> profilList) {
+    public RecycleViewAdapter(Context context, JSONArray profilList) {
         this.context = context;
         this.profilList = profilList;
     }
@@ -42,19 +47,32 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             viewHolder.imageView.setImageResource(R.drawable.bulle3_p);
         }
         //text
-        viewHolder.textView.setText(profilList.get(position));
+        try {
+            viewHolder.textView.setText(profilList.getJSONObject(position).getString("name"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, profilList.get(position), Toast.LENGTH_SHORT).show();
+                try {
+                    PicoloBookService.setBook(ObjectManager.loadPicoloBookfromJson(profilList.getJSONObject(position)));
+                    Intent ii = new Intent(context, PageActivityUser.class);
+                    ii.putExtra("pageId",0);
+                    context.startActivity(ii);
+
+                    Toast.makeText(context, profilList.getJSONObject(position).getString("name"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return profilList.size();
+        return profilList.length();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

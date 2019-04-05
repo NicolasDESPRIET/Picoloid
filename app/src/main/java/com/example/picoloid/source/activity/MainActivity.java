@@ -1,38 +1,33 @@
 package com.example.picoloid.source.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.RecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
-import com.example.picoloid.source.managerData.ObjectManager;
-import com.example.picoloid.source.service.PicoloBookService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static com.example.picoloid.R.id.recycler_view;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> profilList = new ArrayList<>();
+    private JSONArray profils = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
+        /*try {
             PicoloBookService.setBook(ObjectManager.loadBookAssetsmod(
                     "Theo",
                     this,
@@ -51,19 +46,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
         initlist();
     }
 
     private void initlist(){
         //TODO a modifier pour initialiser correctement l'app
-        JSONArray profils = null;
         try {
             profils = new JSONObject(JsonManager.readJsonFromAsset(this,"test")).getJSONArray("book");
-            for (int i = 0; i< profils.length(); i++){
-                profilList.add(profils.getJSONObject(i).getString("name"));
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -75,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecycleView(){
         RecyclerView recyclerView = findViewById(recycler_view);
-        RecycleViewAdapter adapter = new RecycleViewAdapter(this, profilList);
+        RecycleViewAdapter adapter = new RecycleViewAdapter(this, profils);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
