@@ -9,11 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
+import com.example.picoloid.source.view.PicoloButtonEditView;
 import com.example.picoloid.source.view.PicoloButtonView;
 import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
@@ -26,6 +28,8 @@ public class PageActivityEditor extends AppCompatActivity {
     private RelativeLayout buttonLayout;
 
     private PicoloPage currentPage;
+
+    private PicoloButtonEditView selectedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class PageActivityEditor extends AppCompatActivity {
                 this,
                 buttonLayout
         );
-        printer.showButtons();
+        printer.showButtons("edit");
 
     }
 
@@ -73,6 +77,9 @@ public class PageActivityEditor extends AppCompatActivity {
                 Log.d(TAG, "onOptionsItemSelected: user clicked");
                 saveAndQuit();
                 break;
+            case R.id.change_button_data:
+                Toast.makeText(this, "Select button", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -81,11 +88,11 @@ public class PageActivityEditor extends AppCompatActivity {
     }
 
     private void saveAndQuit(){
-        ArrayList<PicoloButtonView> list = new ArrayList<PicoloButtonView>();
+        ArrayList<PicoloButtonEditView> list = new ArrayList<PicoloButtonEditView>();
         ViewGroup views = (ViewGroup)buttonLayout;
 
         for(int i=0; i< views.getChildCount();i++){
-            updateSingleViewCoord((PicoloButtonView)views.getChildAt(i));
+            updateSingleViewCoord((PicoloButtonEditView)views.getChildAt(i));
         }
 
         Intent ii = new Intent(getApplicationContext(), PageActivityUser.class);
@@ -94,7 +101,7 @@ public class PageActivityEditor extends AppCompatActivity {
         finish();
     }
 
-    private void updateSingleViewCoord(PicoloButtonView view){
+    private void updateSingleViewCoord(PicoloButtonEditView view){
         int[] array = view.getCoordOnScreen();
         view.getButtonData().getCoord().setPosition(array[0],array[1]);
     }

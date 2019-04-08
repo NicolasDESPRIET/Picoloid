@@ -8,6 +8,7 @@ import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonCoord;
 import com.example.picoloid.source.model.PicoloPage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PicoloButtonViewPrinter {
@@ -16,23 +17,51 @@ public class PicoloButtonViewPrinter {
     Context currentActivity;
     RelativeLayout currentActivityLayout;
 
+    ArrayList<PicoloButtonView> buttonList;
+    ArrayList<PicoloButtonEditView> editButtonList;
+
     public PicoloButtonViewPrinter(PicoloPage page,
                                     Context ctxt,
                                     RelativeLayout layout){
         currentPage = page;
         currentActivity = ctxt;
         currentActivityLayout = layout;
+
+        buttonList = new ArrayList<PicoloButtonView>();
+        editButtonList = new ArrayList<PicoloButtonEditView>();
     }
 
-    public void showButtons(){
+    public void showButtons(String buttonType){
         List<PicoloButton> buttonList = currentPage.getButtonList();
         for(int i=0;i<buttonList.size();i++){
-            showSingleButton(buttonList.get(i));
+            switch(buttonType){
+                case "user":
+                    showSingleButton(buttonList.get(i));
+                    break;
+                case "edit":
+                    showSingleEditButton(buttonList.get(i));
+                    break;
+            }
         }
+    }
+
+    public List<PicoloButtonView> getButtonList(){
+        return buttonList;
+    }
+
+    public List<PicoloButtonEditView> getEditButtonList(){
+        return editButtonList;
     }
 
     private void showSingleButton(PicoloButton data){
         PicoloButtonView button = new PicoloButtonView(currentActivity,data);
+        buttonList.add(button);
+        currentActivityLayout.addView(button,coordToLayoutParams(data.getCoord()));
+    }
+
+    private void showSingleEditButton(PicoloButton data){
+        PicoloButtonEditView button = new PicoloButtonEditView(currentActivity,data);
+        editButtonList.add(button);
         currentActivityLayout.addView(button,coordToLayoutParams(data.getCoord()));
     }
 

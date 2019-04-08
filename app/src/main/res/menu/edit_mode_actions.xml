@@ -7,4 +7,10 @@
         android:title="save_change_action"
         app:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/change_button_data"
+        android:icon="@drawable/ic_baseline_extension_24px"
+        android:title="save_change_action"
+        app:showAsAction="ifRoom"
+        />
 </menu>

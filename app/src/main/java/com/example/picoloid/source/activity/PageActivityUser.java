@@ -48,7 +48,7 @@ public class PageActivityUser extends AppCompatActivity {
                 this,
                 buttonLayout
         );
-        printer.showButtons();
+        printer.showButtons("user");
     }
 
     @Override
@@ -68,6 +68,19 @@ public class PageActivityUser extends AppCompatActivity {
                 this.startActivity(ii);
                 finish();
                 break;
+            case R.id.create_new_next_page:
+                break;
+            case R.id.help:
+                break;
+            case R.id.options:
+                break;
+            case R.id.about:
+                break;
+            case R.id.show_all_pages:
+                break;
+            case R.id.create_new_page:
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

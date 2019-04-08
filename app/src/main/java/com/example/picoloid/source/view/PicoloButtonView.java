@@ -29,40 +29,13 @@ public class PicoloButtonView extends AppCompatButton {
         Log.d(TAG, "Loading view: "+buttonData.toString());
     }
 
-    float dX,dY;
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if(ApplicationRuntimeInfos.isEdit){
-            buttonClickOnEdit(event);
-        }else{
-            buttonClickOnUser(event);
-        }
+        buttonClickOnUser(event);
         return true;
     }
 
-    private void buttonClickOnEdit(MotionEvent event){
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                dX = this.getX() - event.getRawX();
-                dY = this.getY() - event.getRawY();
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                this.animate()
-                        .x(event.getRawX() + dX)
-                        .y(event.getRawY() + dY)
-                        .setDuration(0)
-                        .start();
-                break;
-
-            default:
-                break;
-        }
-
-    }
 
     private void buttonClickOnUser(MotionEvent event){
         Log.d(TAG, buttonData.getTitle()+" clicked.");
@@ -116,14 +89,8 @@ public class PicoloButtonView extends AppCompatButton {
         getContext().startActivity(openNewPage);
     }
 
-
-
     public PicoloButton getButtonData(){
         return buttonData;
     }
 
-    public int[] getCoordOnScreen(){
-        int[] array = {(int)getX(),(int)getY()};
-        return array;
-    }
 }

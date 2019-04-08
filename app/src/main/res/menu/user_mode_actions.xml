@@ -7,4 +7,42 @@
         android:title="goto_editmode_button"
         app:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/create_new_page"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="create new page"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/create_new_next_page"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="create next page"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="help"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/options"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="options"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="about"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/show_all_pages"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="show all pages"
+        app:showAsAction="never"
+        />
+
+
 </menu>
