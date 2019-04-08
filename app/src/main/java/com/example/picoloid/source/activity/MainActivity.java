@@ -1,41 +1,40 @@
 package com.example.picoloid.source.activity;
 
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.adapter.RecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
-import com.example.picoloid.source.managerData.ObjectManager;
-import com.example.picoloid.source.model.PicoloBook;
-import com.example.picoloid.source.model.PicoloButton;
-import com.example.picoloid.source.service.PicoloBookService;
-import com.example.picoloid.source.util.PicoloBookTest;
-import com.example.picoloid.source.view.PicoloButtonView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import static com.example.picoloid.R.id.recycler_view;
+
 public class MainActivity extends AppCompatActivity {
+
+    private JSONArray profils = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
+        /*try {
             PicoloBookService.setBook(ObjectManager.loadBookAssetsmod(
                     "Theo",
                     this,
                     "test"
             ));
-            Button button = (Button)findViewById(R.id.openPageButton);
+            Button button = findViewById(R.id.openPageButton);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -48,6 +47,36 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }*/
+
+        initlist();
+    }
+
+    private void initlist(){
+        //TODO a modifier pour initialiser correctement l'app
+        //Toast.makeText(this, this.getFilesDir().getPath(), Toast.LENGTH_LONG).show();
+        try {
+            JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
+            String test = JsonManager.readOnFile(this);
+            Toast.makeText(this, test, Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        try {
+            profils = new JSONObject(JsonManager.readJsonFromAsset(this,"test")).getJSONArray("book");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        initRecycleView();
+    }
+
+    private void initRecycleView(){
+        RecyclerView recyclerView = findViewById(recycler_view);
+        RecycleViewAdapter adapter = new RecycleViewAdapter(this, profils);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
