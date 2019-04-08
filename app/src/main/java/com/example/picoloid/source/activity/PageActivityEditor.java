@@ -20,6 +20,7 @@ import com.example.picoloid.source.view.PicoloButtonView;
 import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PageActivityEditor extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class PageActivityEditor extends AppCompatActivity {
     private RelativeLayout buttonLayout;
 
     private PicoloPage currentPage;
+
+    private List<PicoloButtonEditView> buttonList;
 
     private PicoloButtonEditView selectedButton;
 
@@ -48,7 +51,10 @@ public class PageActivityEditor extends AppCompatActivity {
                 buttonLayout
         );
         printer.showButtons("edit");
-
+        buttonList = printer.getEditButtonList();
+        for(int i=0;i<buttonList.size();i++){
+            buttonList.get(i).setEditor(this);
+        }
     }
 
     private void getIntentArgs(){
@@ -106,6 +112,15 @@ public class PageActivityEditor extends AppCompatActivity {
         view.getButtonData().getCoord().setPosition(array[0],array[1]);
     }
 
+    public void unselectAllButtons(){
+        for(int i=0; i<buttonList.size();i++){
+            buttonList.get(i).unselect();
+        }
+        selectedButton = null;
+    }
 
+    public void setSelectedButton(PicoloButtonEditView button){
+        selectedButton = button;
+    }
 
 }
