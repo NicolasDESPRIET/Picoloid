@@ -14,21 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".source.activity.SettingsActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".source.activity.VideoPlayerActivity"
             android:screenOrientation="landscape" />
-
-        <activity android:name=".source.activity.PageActivityUser"
-            android:screenOrientation="landscape"/>
-
-        <activity android:name=".source.activity.PageActivityEditor"
-            android:screenOrientation="landscape"/>
-
-        <activity android:name=".source.activity.ImageActivity"
-            android:screenOrientation="landscape"/>
-
-        <activity android:name=".source.activity.MainActivity"
+        <activity
+            android:name=".source.activity.PageActivityUser"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".source.activity.PageActivityEditor"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".source.activity.ImageActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".source.activity.MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

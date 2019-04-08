@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9B9C98"
+    tools:context=".source.activity.SettingsActivity">
+
+    <TextView
+        android:id="@+id/nameBook"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="70dp"
+        android:background="#ffffff"
+        android:text="Nom"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/nameBookData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="235dp"
+        android:layout_marginTop="81dp"
+        android:layout_toEndOf="@+id/nameBook"
+        android:background="#ffffff"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill,LabelFor" />
+
+    <TextView
+        android:id="@+id/colorBackground"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/nameBook"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="71dp"
+        android:background="#ffffff"
+        android:text="couleur de fond"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/BGcolorData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameBookData"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="84dp"
+        android:layout_toEndOf="@+id/colorBackground"
+        android:background="#ffffff"
+        android:ems="10"
+        android:inputType="textPersonName|text"
+        tools:ignore="Autofill,HardcodedText,LabelFor" />
+
+    <TextView
+        android:id="@+id/colorBG"
+        android:layout_width="49dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="151dp"
+        android:layout_toEndOf="@+id/BGcolorData" />
+
+    <TextView
+        android:id="@+id/colorOverviewFramework"
+        android:layout_width="228dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/colorBackground"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="70dp"
+        android:background="#ffffff"
+        android:text="couleur de selection"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/OFcolorData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BGcolorData"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="85dp"
+        android:layout_toEndOf="@+id/colorOverviewFramework"
+        android:background="#ffffff"
+        android:ems="10"
+        android:inputType="textPersonName|text"
+        tools:ignore="Autofill,HardcodedText,LabelFor" />
+
+    <TextView
+        android:id="@+id/colorOF"
+        android:layout_width="49dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/colorBG"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="64dp"
+        android:layout_toEndOf="@+id/BGcolorData" />
+
+    <Button
+        android:id="@+id/validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/OFcolorData"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="468dp"
+        android:layout_marginTop="202dp"
+        android:text="valider"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
