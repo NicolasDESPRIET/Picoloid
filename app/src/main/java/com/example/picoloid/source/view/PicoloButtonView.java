@@ -30,13 +30,14 @@ public class PicoloButtonView extends AppCompatButton {
     }
 
     float dX,dY;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if(ApplicationRuntimeInfos.isEdit){
             buttonClickOnEdit(event);
         }else{
-            buttonClickOnUser();
+            buttonClickOnUser(event);
         }
         return true;
     }
@@ -63,8 +64,10 @@ public class PicoloButtonView extends AppCompatButton {
 
     }
 
-    private void buttonClickOnUser(){
+    private void buttonClickOnUser(MotionEvent event){
         Log.d(TAG, buttonData.getTitle()+" clicked.");
+
+        if(event.getAction() != MotionEvent.ACTION_UP) return;
 
         switch(buttonData.getType()){
             case NONE:
@@ -106,7 +109,7 @@ public class PicoloButtonView extends AppCompatButton {
     }
 
     private void openPage(){
-        Log.d(TAG, "openPage of id = "+buttonData.getId());
+        Log.d(TAG, "openPage of id = "+buttonData.getPageId());
 
         Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
         openNewPage.putExtra("pageId", buttonData.getPageId());
@@ -117,5 +120,10 @@ public class PicoloButtonView extends AppCompatButton {
 
     public PicoloButton getButtonData(){
         return buttonData;
+    }
+
+    public int[] getCoordOnScreen(){
+        int[] array = {(int)getX(),(int)getY()};
+        return array;
     }
 }

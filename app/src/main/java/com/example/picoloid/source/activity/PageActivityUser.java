@@ -32,6 +32,8 @@ public class PageActivityUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_user);
 
+        Log.d(TAG, "onCreate: OPEN PAGE");
+
         ApplicationRuntimeInfos.isEdit = false;
 
         buttonLayout = (RelativeLayout)findViewById(R.id.buttonLayout_User);

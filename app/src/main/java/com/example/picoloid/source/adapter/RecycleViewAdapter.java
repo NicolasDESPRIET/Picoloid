@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.activity.PageActivityEditor;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.managerData.ObjectManager;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -57,7 +58,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             public void onClick(View v) {
                 try {
                     PicoloBookService.setBook(ObjectManager.loadPicoloBookfromJson(profilList.getJSONObject(position)));
-                    Intent ii = new Intent(context, PageActivityUser.class);
+                    Intent ii = new Intent(context, PageActivityEditor.class);
                     ii.putExtra("pageId",0);
                     context.startActivity(ii);
 
