@@ -38,7 +38,6 @@ public class ObjectManager {
             settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getString("backgroundColor"),
                     jsonObject.getJSONObject("settings").getString("OverviewFrameworkColor"));
         }
-        //TODO implements setting when this will be implement too.
         for (int i = 0; i < pagelist.length(); i++){
             PicoloPage page = loadPicoloPagefromJson(pagelist.getJSONObject(i));
             book.addJsonPage(page);
