@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.view.PicoloButtonView;
 
 public class PageActivityEditor extends AppCompatActivity {
@@ -17,5 +18,9 @@ public class PageActivityEditor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_editor);
 
+        ApplicationRuntimeInfos.isEdit = true;
+
     }
+
+
 }

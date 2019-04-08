@@ -11,6 +11,8 @@ import com.example.picoloid.R;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonCoord;
 import com.example.picoloid.source.model.PicoloPage;
+import com.example.picoloid.source.service.ApplicationRuntimeInfos;
+import com.example.picoloid.source.service.MediaPlayerService;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.view.PicoloButtonView;
 
@@ -29,29 +31,24 @@ public class PageActivityUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_user);
 
+        ApplicationRuntimeInfos.isEdit = false;
+
         buttonLayout = (RelativeLayout)findViewById(R.id.buttonLayout_User);
 
-        init();
+        getIntentArgs();
         showButtons();
     }
 
-    private void init(){
+    private void getIntentArgs(){
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
         try{
             int id = (int)bundle.get("pageId");
             currentPage = PicoloBookService.getBook().getPage(id);
         }catch (Exception e){
-            Toast.makeText(this,"Error loading book",Toast.LENGTH_SHORT);
-            Log.d(TAG, "init: coulnd't load book");
-            returnToMainPage();
+            Log.d(TAG, "init: coulnd't load page");
+            finish();
         }
-    }
-
-    private void returnToMainPage(){
-        Intent returnToMain = new Intent(PageActivityUser.this, MainActivity.class);
-        startActivity(returnToMain);
-        finish();
     }
 
     private void showButtons(){
