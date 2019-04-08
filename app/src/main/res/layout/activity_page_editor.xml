@@ -7,7 +7,7 @@
     tools:context=".source.activity.PageActivityEditor">
 
     <RelativeLayout
-        android:id="@+id/editor_relative_layout"
+        android:id="@+id/buttonLayout_Edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

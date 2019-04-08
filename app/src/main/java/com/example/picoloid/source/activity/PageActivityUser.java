@@ -15,6 +15,7 @@ import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.MediaPlayerService;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.view.PicoloButtonView;
+import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
 import java.util.List;
 
@@ -36,7 +37,13 @@ public class PageActivityUser extends AppCompatActivity {
         buttonLayout = (RelativeLayout)findViewById(R.id.buttonLayout_User);
 
         getIntentArgs();
-        showButtons();
+
+        PicoloButtonViewPrinter printer = new PicoloButtonViewPrinter(
+                currentPage,
+                this,
+                buttonLayout
+        );
+        printer.showButtons();
     }
 
     private void getIntentArgs(){
@@ -49,25 +56,6 @@ public class PageActivityUser extends AppCompatActivity {
             Log.d(TAG, "init: coulnd't load page");
             finish();
         }
-    }
-
-    private void showButtons(){
-        List<PicoloButton> buttonList = currentPage.getButtonList();
-        for(int i=0;i<buttonList.size();i++){
-            showSingleButton(buttonList.get(i));
-        }
-    }
-
-    private void showSingleButton(PicoloButton data){
-        PicoloButtonView button = new PicoloButtonView(this,data);
-        buttonLayout.addView(button,coordToLayoutParams(data.getCoord()));
-    }
-
-    private RelativeLayout.LayoutParams coordToLayoutParams(PicoloButtonCoord coord){
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(coord.getWidth(), coord.getHeight());
-        params.leftMargin = coord.getLeftMargin();
-        params.topMargin = coord.getTopMargin();
-        return params;
     }
 
 }
