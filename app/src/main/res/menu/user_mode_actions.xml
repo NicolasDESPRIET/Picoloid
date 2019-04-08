@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/save_changes"
-        android:icon="@drawable/ic_baseline_done_24px"
-        android:title="save_change_action"
+        android:id="@+id/go_to_edit_mode"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="goto_editmode_button"
         app:showAsAction="ifRoom"
         />
 </menu>

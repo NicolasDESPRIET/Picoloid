@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -46,6 +49,30 @@ public class PageActivityUser extends AppCompatActivity {
                 buttonLayout
         );
         printer.showButtons();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.user_mode_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.go_to_edit_mode:
+                Log.d(TAG, "onOptionsItemSelected: user clicked");
+                Intent ii = new Intent(this, PageActivityEditor.class);
+                ii.putExtra("pageId",currentPage.getId());
+                this.startActivity(ii);
+                finish();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 
     private void getIntentArgs(){

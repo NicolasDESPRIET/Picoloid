@@ -58,7 +58,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             public void onClick(View v) {
                 try {
                     PicoloBookService.setBook(ObjectManager.loadPicoloBookfromJson(profilList.getJSONObject(position)));
-                    Intent ii = new Intent(context, PageActivityEditor.class);
+                    Intent ii = new Intent(context, PageActivityUser.class);
                     ii.putExtra("pageId",0);
                     context.startActivity(ii);
 
