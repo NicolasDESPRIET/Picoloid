@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.activity.PageActivityUser;
@@ -62,7 +61,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     ii.putExtra("pageId",0);
                     context.startActivity(ii);
 
-                    Toast.makeText(context, profilList.getJSONObject(position).getString("name"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, profilList.getJSONObject(position).getString("name"), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -30,7 +30,7 @@ public class JsonManager {
         return json;
     }
 
-    public static void writer(File file, String data){
+    private static void writer(File file, String data){
         BufferedWriter writer = null;
         try {
             FileWriter out = new FileWriter(file);
