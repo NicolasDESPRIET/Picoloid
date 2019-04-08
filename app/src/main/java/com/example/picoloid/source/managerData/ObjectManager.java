@@ -110,12 +110,4 @@ public class ObjectManager {
         button.setId(jsonObject.getInt("id"));
         return button;
     }
-
-    public void SaveBook(){}
-
-    public void SavePage(){}
-
-    public void SaveButton(){}
-
-    //TODO
 }
