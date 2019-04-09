@@ -28,6 +28,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private static final String TAG = "ButtonEditorActivity";
 
     private PicoloButton currentButton;
+    private int currentPageId;
 
     private EditText buttonTitle;
     private Button saveButton;
@@ -51,6 +52,10 @@ public class ButtonEditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentButton.setTitle(buttonTitle.getText().toString());
+                currentButton.setType(convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId()));
+                Intent ii = new Intent(getApplicationContext(), PageActivityEditor.class);
+                ii.putExtra("pageId",currentPageId);
+                startActivity(ii);
                 finish();
             }
         });
@@ -59,20 +64,20 @@ public class ButtonEditorActivity extends AppCompatActivity {
         radioGroup.check(convertTypeToRadioButtonId(currentButton.getType()));
     }
 
-    private int convertRadioButtonIdToState(int id){
+    private PicoloButtonType convertRadioButtonIdToState(int id){
         switch(id){
             case R.id.btnedit_none:
-                return 0;
+                return NONE;
             case R.id.btnedit_image:
-                return 1;
+                return IMAGE;
             case R.id.btnedit_video:
-                return 2;
+                return VIDEO;
             case R.id.btnedit_sound:
-                return 3;
+                return SOUND;
             case R.id.btnedit_page:
-                return 4;
+                return PAGE;
             default:
-                return 0;
+                return NONE;
         }
     }
 
@@ -98,10 +103,10 @@ public class ButtonEditorActivity extends AppCompatActivity {
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
         try{
-            int pid = (int)bundle.get("pageId");
+            currentPageId = (int)bundle.get("pageId");
             int bid = (int)bundle.get("buttonId");
-            Log.d(TAG, "getIntentArgs: pageid and buttonid : "+pid+ " " +bid);
-            currentButton = PicoloBookService.getBook().getPageFromId(pid).getButtonFromId(bid);
+            Log.d(TAG, "getIntentArgs: pageid and buttonid : "+currentPageId+ " " +bid);
+            currentButton = PicoloBookService.getBook().getPageFromId(currentPageId).getButtonFromId(bid);
             Log.d(TAG, "getIntentArgs: currentbutton :"+currentButton);
         }catch (Exception e){
             Log.d(TAG, "init: coulnd't load page");
