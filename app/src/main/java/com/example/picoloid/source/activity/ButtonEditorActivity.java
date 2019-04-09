@@ -7,12 +7,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.view.PicoloButtonViewPrinter;
+
+import static com.example.picoloid.source.model.PicoloButtonType.IMAGE;
+import static com.example.picoloid.source.model.PicoloButtonType.NONE;
+import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
+import static com.example.picoloid.source.model.PicoloButtonType.SOUND;
+import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 
 public class ButtonEditorActivity extends AppCompatActivity {
 
@@ -22,6 +31,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     private EditText buttonTitle;
     private Button saveButton;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +54,45 @@ public class ButtonEditorActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        radioGroup = (RadioGroup)findViewById(R.id.buttoneditor_radiogroup);
+        radioGroup.check(convertTypeToRadioButtonId(currentButton.getType()));
     }
+
+    private int convertRadioButtonIdToState(int id){
+        switch(id){
+            case R.id.btnedit_none:
+                return 0;
+            case R.id.btnedit_image:
+                return 1;
+            case R.id.btnedit_video:
+                return 2;
+            case R.id.btnedit_sound:
+                return 3;
+            case R.id.btnedit_page:
+                return 4;
+            default:
+                return 0;
+        }
+    }
+
+    private int convertTypeToRadioButtonId(PicoloButtonType type){
+        switch(type){
+            case NONE:
+                return R.id.btnedit_none;
+            case IMAGE:
+                return R.id.btnedit_image;
+            case VIDEO:
+                return R.id.btnedit_video;
+            case SOUND:
+                return R.id.btnedit_sound;
+            case PAGE:
+                return R.id.btnedit_page;
+            default:
+                return R.id.btnedit_none;
+        }
+    }
+
 
     private void getIntentArgs(){
         Intent args= getIntent();
