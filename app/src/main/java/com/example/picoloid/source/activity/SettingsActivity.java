@@ -40,6 +40,5 @@ public class SettingsActivity extends AppCompatActivity {
         showBGC.setBackgroundColor(Color.parseColor(BGcolor.getText().toString()));
         showOFC.setBackgroundColor(Color.parseColor(OFcolor.getText().toString()));
 
-
     }
 }

@@ -2,6 +2,7 @@ package com.example.picoloid.source.managerData;
 
 import android.content.Context;
 
+import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 
@@ -13,12 +14,23 @@ import java.io.IOException;
 
 public class JsonCreator {
 
-    public static JSONObject saveJsonBookFromObject(Context context, PicoloPage picoloPage) throws IOException, JSONException {
+    public static JSONObject saveJsonBookFromObject(Context context, PicoloBook picoloBook) throws IOException, JSONException {
         JSONObject book = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonBook.js"));
-
+        JSONArray page_list = new JSONArray();
         JSONObject settings = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonSetting.js"));
 
-        //TODO finir
+        settings.put("backgroundColor", picoloBook.getSettings().getBackgroundColor());
+        settings.put("OverviewFrameworkColor", picoloBook.getSettings().getOverviewFrameworkColor());
+
+        book.put("name", picoloBook.getName());
+        book.put("id", picoloBook.getId());
+        book.put("settings", settings);
+
+        for (int i = 0; i< picoloBook.getPageList().size(); i++){
+            page_list.put(saveJsonPageFromObject(context, picoloBook.getPageList().get(i)));
+        }
+
+        book.put("list_page", page_list);
 
         return book;
     }

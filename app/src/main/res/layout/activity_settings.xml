@@ -64,8 +64,8 @@
         android:layout_width="49dp"
         android:layout_height="31dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="151dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="186dp"
         android:layout_toEndOf="@+id/BGcolorData" />
 
     <TextView
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/BGcolorData"
-        android:layout_marginStart="113dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="85dp"
         android:layout_toEndOf="@+id/colorOverviewFramework"
         android:background="#ffffff"
@@ -99,8 +99,8 @@
         android:layout_width="49dp"
         android:layout_height="31dp"
         android:layout_below="@+id/colorBG"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="79dp"
         android:layout_toEndOf="@+id/BGcolorData" />
 
     <Button
@@ -112,6 +112,28 @@
         android:layout_marginStart="468dp"
         android:layout_marginTop="202dp"
         android:text="valider"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/colorPick1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="179dp"
+        android:layout_toEndOf="@+id/colorBG"
+        android:text="Select"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/colorPick2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorPick1"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="60dp"
+        android:layout_toEndOf="@+id/colorOF"
+        android:text="Select"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
