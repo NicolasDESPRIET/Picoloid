@@ -1,10 +1,12 @@
 package com.example.picoloid.source.managerData;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
+import com.example.picoloid.source.service.PicoloBookService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,10 +16,35 @@ import java.io.IOException;
 
 public class JsonCreator {
 
-    public static JSONObject saveJsonBookFromObject(Context context, PicoloBook picoloBook) throws IOException, JSONException {
-        JSONObject book = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonBook.js"));
+    private static final String TAG = "JsonCreator";
+
+    public static void save(Context context) throws JSONException, IOException {
+        JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+
+        PicoloBook book = PicoloBookService.getBook();
+        JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
+
+        JSONArray listBook = jsonObjectProfils.getJSONArray("book");
+        for (int i = 0; i< listBook.length(); i++){
+            if (listBook.getJSONObject(i).getInt("id") == jsonObjectBook.getInt("id")){
+                listBook.remove(i);
+                Log.d(TAG, "boucle for du save");
+            }
+        }
+        listBook.put(jsonObjectBook);
+
+        jsonObjectProfils.put("book",listBook);
+        String Saved = jsonObjectProfils.toString();
+
+        Log.d(TAG, Saved);
+
+        JsonManager.saveDataOnFiles(context, Saved);
+    }
+
+    private static JSONObject saveJsonBookFromObject(Context context, PicoloBook picoloBook) throws IOException, JSONException {
+        JSONObject book = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonBook.json"));
         JSONArray page_list = new JSONArray();
-        JSONObject settings = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonSetting.js"));
+        JSONObject settings = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonSetting.json"));
 
         settings.put("backgroundColor", picoloBook.getSettings().getBackgroundColor());
         settings.put("OverviewFrameworkColor", picoloBook.getSettings().getOverviewFrameworkColor());
@@ -35,8 +62,8 @@ public class JsonCreator {
         return book;
     }
 
-    public static JSONObject saveJsonPageFromObject(Context context, PicoloPage picoloPage) throws IOException, JSONException {
-        JSONObject page = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonButton.js"));
+    private static JSONObject saveJsonPageFromObject(Context context, PicoloPage picoloPage) throws IOException, JSONException {
+        JSONObject page = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonButton.json"));
         page.put("name", picoloPage.getName());
         page.put("id", picoloPage.getId());
         JSONArray buttonlist = new JSONArray();
@@ -51,8 +78,8 @@ public class JsonCreator {
     }
 
 
-    public static JSONObject saveJsonButtonFromObject(Context context, PicoloButton picoloButton) throws IOException, JSONException {
-        JSONObject button = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonButton.js"));
+    private static JSONObject saveJsonButtonFromObject(Context context, PicoloButton picoloButton) throws IOException, JSONException {
+        JSONObject button = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonButton.json"));
         button.put("title", picoloButton.getTitle());
         button.put("id", picoloButton.getId());
         button.put("type", picoloButton.getType());

@@ -2,6 +2,7 @@ package com.example.picoloid.source.managerData;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 public class JsonManager {
 
+    private static final String TAG = "JsonManager";
 
     public static String readJsonFromAsset(Context context, String file) throws IOException {
         String json = null;
@@ -57,9 +59,10 @@ public class JsonManager {
         File monFichier = new File(sdLien, "DataPicoloid.json");
 
         if (monFichier.exists()){
-            //Toast.makeText(context, "file exist"+ monFichier.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "file exist", Toast.LENGTH_LONG).show();
         }else{
             writer(monFichier,jsonString);
+            Log.d(TAG, "InitFile: action");
         }
     }
 
@@ -68,6 +71,7 @@ public class JsonManager {
         File file = new File(sdLien, "DataPicoloid.json");
 
         writer(file,data);
+        Log.d(TAG, "saveDataOnFiles: "+ data);
     }
 
 
