@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -16,10 +15,8 @@ import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.view.PicoloButtonEditView;
-import com.example.picoloid.source.view.PicoloButtonView;
 import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PageActivityEditor extends AppCompatActivity {
@@ -62,7 +59,7 @@ public class PageActivityEditor extends AppCompatActivity {
         Bundle bundle = args.getExtras();
         try{
             int id = (int)bundle.get("pageId");
-            currentPage = PicoloBookService.getBook().getPage(id);
+            currentPage = PicoloBookService.getBook().getPageFromId(id);
         }catch (Exception e){
             Log.d(TAG, "init: coulnd't load page");
             finish();
@@ -84,7 +81,11 @@ public class PageActivityEditor extends AppCompatActivity {
                 saveAndQuit();
                 break;
             case R.id.change_button_data:
-                Toast.makeText(this, "Select button", Toast.LENGTH_SHORT).show();
+                Intent ii = new Intent(getApplicationContext(), ButtonEditorActivity.class);
+                ii.putExtra("pageId",currentPage.getId());
+                ii.putExtra("buttonId",selectedButton.getButtonData().getId());
+                Log.d(TAG, "onOptionsItemSelected: selected button id = "+selectedButton.getId() + "title:"+selectedButton.getButtonData().getId());
+                startActivity(ii);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -94,13 +95,13 @@ public class PageActivityEditor extends AppCompatActivity {
     }
 
     private void saveAndQuit(){
-        ArrayList<PicoloButtonEditView> list = new ArrayList<PicoloButtonEditView>();
-        ViewGroup views = (ViewGroup)buttonLayout;
-
-        for(int i=0; i< views.getChildCount();i++){
-            updateSingleViewCoord((PicoloButtonEditView)views.getChildAt(i));
+        for(int i=0; i< buttonList.size();i++){
+            updateSingleViewCoord(buttonList.get(i));
         }
+        returnToUserMode();
+    }
 
+    private void returnToUserMode(){
         Intent ii = new Intent(getApplicationContext(), PageActivityUser.class);
         ii.putExtra("pageId",currentPage.getId());
         startActivity(ii);
