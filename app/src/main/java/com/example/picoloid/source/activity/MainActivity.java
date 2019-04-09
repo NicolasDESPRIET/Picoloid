@@ -1,14 +1,17 @@
 package com.example.picoloid.source.activity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.RecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
+import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +19,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static com.example.picoloid.R.id.recycler_view;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        calculateScreenSize();
 
         /*try {
             PicoloBookService.setBook(ObjectManager.loadBookAssetsmod(
@@ -74,9 +78,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecycleView(){
-        RecyclerView recyclerView = findViewById(recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.main_recycler);
         RecycleViewAdapter adapter = new RecycleViewAdapter(this, profils);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void calculateScreenSize(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        ApplicationRuntimeInfos.screenWidth = size.x;
+        ApplicationRuntimeInfos.screenHeight = size.y;
     }
 }
