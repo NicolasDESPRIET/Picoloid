@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical|none"
     tools:context=".source.activity.MainActivity">
 
     <Button
@@ -27,16 +28,16 @@
         tools:ignore="HardcodedText" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="696dp"
-        android:id="@+id/recycler_view"
         android:layout_above="@+id/openPageButton"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

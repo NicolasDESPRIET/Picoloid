@@ -28,28 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*try {
-            PicoloBookService.setBook(ObjectManager.loadBookAssetsmod(
-                    "Theo",
-                    this,
-                    "test"
-            ));
-            Button button = findViewById(R.id.openPageButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent ii=new Intent(MainActivity.this, PageActivityUser.class);
-                    ii.putExtra("pageId", 0);
-                    startActivity(ii);
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
         initlist();
 
         Button button = findViewById(R.id.openPageButton);

@@ -2,7 +2,6 @@ package com.example.picoloid.source.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,9 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText nameBook;
     private TextView showBGC;
     private TextView showOFC;
-    private Button picker1;
-    private Button picker2;
-    private Button validate;
     private PicoloBook book;
     private String C1;
     private String C2;
@@ -50,9 +46,9 @@ public class SettingsActivity extends AppCompatActivity {
         showOFC = findViewById(R.id.textView2);
         showBGC = findViewById(R.id.textView);
 
-        validate = findViewById(R.id.validate);
-        picker1 = findViewById(R.id.pickColorBG);
-        picker2 = findViewById(R.id.pickColorOF);
+        Button validate = findViewById(R.id.validate);
+        Button picker1 = findViewById(R.id.pickColorBG);
+        Button picker2 = findViewById(R.id.pickColorOF);
 
         DefaultColor1 = Color.parseColor(book.getSettings().getBackgroundColor());
         DefaultColor2 = Color.parseColor(book.getSettings().getOverviewFrameworkColor());
@@ -61,14 +57,27 @@ public class SettingsActivity extends AppCompatActivity {
         showOFC.setBackgroundColor(DefaultColor2);
         nameBook.setText(book.getName());
 
+        picker1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openColorPicker(DefaultColor1,0);
+            }
+        });
+
+        picker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openColorPicker(DefaultColor2, 1);
+            }
+        });
+
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                book.getSettings().setBackgroundColor("#" + Integer.toHexString(DefaultColor1).toUpperCase());
-                book.getSettings().setOverviewFrameworkColor("#" + Integer.toHexString(DefaultColor2).toUpperCase());
                 book.setName(nameBook.getText().toString());
                 book.setId(id);
                 PicoloBookService.setBook(book);
+                Toast.makeText(SettingsActivity.this, book.getSettings().getBackgroundColor() + " -- " + book.getSettings().getOverviewFrameworkColor(), Toast.LENGTH_LONG).show();
                 try {
                     JsonCreator.save(getApplicationContext());
                 } catch (JSONException e) {
@@ -107,25 +116,27 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void pickerColor(Boolean AlphaSupports, int DefaultColor) {
-        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
-            @Override
-            public void onOk(AmbilWarnaDialog dialog, int color) {
-                Toast.makeText(SettingsActivity.this, "pas de couleurs choisies", Toast.LENGTH_SHORT).show();
-            }
-
+    public void openColorPicker(int Dcolor, final int c){
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, Dcolor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
-                // cancel was selected by the user
+
             }
 
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                if (c == 0){
+                    showBGC.setBackgroundColor(color);
+                    DefaultColor1 = color;
+                    book.getSettings().setBackgroundColor(Integer.toHexString(DefaultColor1).toUpperCase().substring(2));
+                }else{
+                    showOFC.setBackgroundColor(color);
+                    DefaultColor2 = color;
+                    book.getSettings().setOverviewFrameworkColor(Integer.toHexString(DefaultColor2).toUpperCase().substring(2));
+                }
+            }
         });
-        dialog.show();
+        colorPicker.show();
     }
 
-
-    public String getColorFromTV(TextView back){
-        ColorDrawable cd = (ColorDrawable) back.getBackground();
-        return "#" + Integer.toHexString(cd.getColor()).toUpperCase();
-    }
 }
