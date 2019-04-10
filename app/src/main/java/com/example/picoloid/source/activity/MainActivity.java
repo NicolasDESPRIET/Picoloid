@@ -1,15 +1,15 @@
 package com.example.picoloid.source.activity;
 
-import android.graphics.Point;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
-import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
+
 import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.RecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;

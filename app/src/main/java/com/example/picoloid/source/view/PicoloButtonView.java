@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.model.PicoloButton;
-import com.example.picoloid.source.model.PicoloButtonCoord;
-import com.example.picoloid.source.service.ApplicationRuntimeInfos;
-import com.example.picoloid.source.service.MediaPlayerService;
+//import com.example.picoloid.source.service.MediaPlayerService;
 
 public class PicoloButtonView extends AppCompatButton {
 
