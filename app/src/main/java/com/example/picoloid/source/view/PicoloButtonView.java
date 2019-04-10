@@ -2,6 +2,7 @@ package com.example.picoloid.source.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,6 +14,11 @@ import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonCoord;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.MediaPlayerService;
+
+import java.net.URISyntaxException;
+
+import static com.example.picoloid.source.service.MediaPlayerService.setContext;
+import static com.example.picoloid.source.service.MediaPlayerService.startMediaPlayer;
 
 public class PicoloButtonView extends AppCompatButton {
 
@@ -78,7 +84,15 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startSoundPlaying(){
         Log.d(TAG, "startSoundPlaying");
-
+        if(buttonData.getSpecialPath()!=null) {
+            Uri son = buttonData.getSpecialPath();
+            setContext(getContext());
+            try {
+                startMediaPlayer(son);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void openPage(){
