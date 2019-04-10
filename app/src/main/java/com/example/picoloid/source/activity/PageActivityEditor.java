@@ -1,5 +1,7 @@
 package com.example.picoloid.source.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.dialog.DeleteButtonDialog;
+import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -78,15 +81,26 @@ public class PageActivityEditor extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.save_changes:
                 Log.d(TAG, "onOptionsItemSelected: user clicked");
-                saveAndQuit();
+                saveModifs();
+                returnToUserMode();
                 break;
             case R.id.change_button_data:
+                if(selectedButton == null)return true;
                 Intent ii = new Intent(getApplicationContext(), ButtonEditorActivity.class);
                 ii.putExtra("pageId",currentPage.getId());
                 ii.putExtra("buttonId",selectedButton.getButtonData().getId());
                 Log.d(TAG, "onOptionsItemSelected: selected button id = "+selectedButton.getId() + "title:"+selectedButton.getButtonData().getId());
                 startActivity(ii);
                 break;
+            case R.id.add_button:
+                PicoloButton newButton = new PicoloButton();
+                currentPage.addButton(newButton);
+                saveModifs();
+                refreshPage();
+            case R.id.delete_button:
+                if(selectedButton == null)return true;
+                DeleteButtonDialog dialog = new DeleteButtonDialog(this,this,selectedButton.getButtonData());
+                dialog.showDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -94,15 +108,21 @@ public class PageActivityEditor extends AppCompatActivity {
         return true;
     }
 
-    private void saveAndQuit(){
+    public void saveModifs(){
         for(int i=0; i< buttonList.size();i++){
             updateSingleViewCoord(buttonList.get(i));
         }
-        returnToUserMode();
     }
 
     private void returnToUserMode(){
         Intent ii = new Intent(getApplicationContext(), PageActivityUser.class);
+        ii.putExtra("pageId",currentPage.getId());
+        startActivity(ii);
+        finish();
+    }
+
+    public void refreshPage(){
+        Intent ii = new Intent(getApplicationContext(), PageActivityEditor.class);
         ii.putExtra("pageId",currentPage.getId());
         startActivity(ii);
         finish();
@@ -123,5 +143,7 @@ public class PageActivityEditor extends AppCompatActivity {
     public void setSelectedButton(PicoloButtonEditView button){
         selectedButton = button;
     }
-
+    public PicoloPage getCurrentPage(){
+        return currentPage;
+    }
 }

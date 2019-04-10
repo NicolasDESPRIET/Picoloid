@@ -6,8 +6,8 @@ public class PicoloBookSettings {
     private String OverviewFrameworkColor;
 
     public PicoloBookSettings() {
-        this.backgroundColor = "#ffffff";
-        this.OverviewFrameworkColor = "#ff0000";
+        this.backgroundColor = "#FFFFFF";
+        this.OverviewFrameworkColor = "#FF0000";
     }
 
     public PicoloBookSettings(String backgroundColor, String overviewFrameworkColor) {

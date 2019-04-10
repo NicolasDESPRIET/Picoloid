@@ -14,6 +14,7 @@ import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 
 public class PicoloButtonEditView extends AppCompatButton {
+    
     public static final String TAG = "PicoloButtonEditView";
 
     private PicoloButton buttonData;

@@ -1,13 +1,15 @@
 package com.example.picoloid.source.activity;
 
 import android.graphics.Point;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.widget.Toast;
-
+import android.view.View;
+import android.widget.Button;
 import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.RecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
@@ -22,8 +24,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private JSONArray profils = null;
-
+    private JSONArray profiles = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,46 +32,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         calculateScreenSize();
-
-        /*try {
-            PicoloBookService.setBook(ObjectManager.loadBookAssetsmod(
-                    "Theo",
-                    this,
-                    "test"
-            ));
-            Button button = findViewById(R.id.openPageButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent ii=new Intent(MainActivity.this, PageActivityUser.class);
-                    ii.putExtra("pageId", 0);
-                    startActivity(ii);
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
         initlist();
+
+        Button button = findViewById(R.id.openPageButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ii=new Intent(MainActivity.this, SettingsActivity.class);
+                ii.putExtra("bookId", profiles.length());
+                ii.putExtra("mod", "new");
+                startActivity(ii);
+            }
+        });
     }
 
     private void initlist(){
-        //TODO a modifier pour initialiser correctement l'app
-        //Toast.makeText(this, this.getFilesDir().getPath(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, JsonManager.readOnFile(this), Toast.LENGTH_SHORT).show();
         try {
             JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
-            String test = JsonManager.readOnFile(this);
-            Toast.makeText(this, test, Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            profils = new JSONObject(JsonManager.readJsonFromAsset(this,"test")).getJSONArray("book");
+            profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
