@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.dialog.NewPageDialog;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -72,6 +73,8 @@ public class PageActivityUser extends AppCompatActivity {
             case R.id.show_all_pages:
                 break;
             case R.id.create_new_page:
+                NewPageDialog dialog = new NewPageDialog(this,this,false);
+                dialog.showDialog();
                 break;
 
             default:

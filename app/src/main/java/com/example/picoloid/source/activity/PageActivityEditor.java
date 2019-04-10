@@ -84,6 +84,7 @@ public class PageActivityEditor extends AppCompatActivity {
                 Log.d(TAG, "onOptionsItemSelected: user clicked");
                 saveModifs();
                 JsonCreator.save(this);
+
                 returnToUserMode();
                 break;
             case R.id.change_button_data:
@@ -98,7 +99,7 @@ public class PageActivityEditor extends AppCompatActivity {
                 PicoloButton newButton = new PicoloButton();
                 currentPage.addButton(newButton);
                 saveModifs();
-                JsonCreator.save(this);
+
                 refreshPage();
             case R.id.delete_button:
                 if(selectedButton == null)return true;
@@ -120,6 +121,7 @@ public class PageActivityEditor extends AppCompatActivity {
     private void returnToUserMode(){
         Intent ii = new Intent(getApplicationContext(), PageActivityUser.class);
         ii.putExtra("pageId",currentPage.getId());
+
         startActivity(ii);
         finish();
     }
