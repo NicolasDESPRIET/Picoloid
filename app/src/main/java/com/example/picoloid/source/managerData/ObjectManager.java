@@ -1,6 +1,7 @@
 package com.example.picoloid.source.managerData;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.example.picoloid.source.model.*;
 import com.example.picoloid.source.util.PicoloButtonUtils;
@@ -10,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URI;
+
 
 public class ObjectManager {
 
@@ -56,11 +57,11 @@ public class ObjectManager {
     public static PicoloButton loadPicolobuttonfromJson(JSONObject jsonObject) throws JSONException {
         /*
          * create empty button and empty coordonate for him
-         * create URI from the string path image in the jsonobject
+         * create Uri from the string path image in the jsonobject
          * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();
-        URI image_path = URI.create(jsonObject.getString("image_path"));
+        Uri image_path = Uri.parse(jsonObject.getString("image_path"));
 
         /*
          * set variable in the PicoloButtonCoord with the variable in the json
@@ -81,11 +82,11 @@ public class ObjectManager {
                 PicoloButtonUtils.switchButtonToImage(button);
                 break;
             case "VIDEO":
-                URI video_path = URI.create(jsonObject.getString("special_path"));
+                Uri video_path = Uri.parse(jsonObject.getString("special_path"));
                 PicoloButtonUtils.switchButtonToVideo(button, video_path);
                 break;
             case "SOUND":
-                URI sound_path = URI.create(jsonObject.getString("special_path"));
+                Uri sound_path = Uri.parse(jsonObject.getString("special_path"));
                 PicoloButtonUtils.switchButtonToSound(button, sound_path);
                 break;
             case "PAGE":
