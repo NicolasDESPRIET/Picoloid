@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 
 import com.example.picoloid.source.activity.MainActivity;
 import com.example.picoloid.source.activity.PageActivityEditor;
+import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 
 public class DeleteButtonDialog {
@@ -30,6 +31,7 @@ public class DeleteButtonDialog {
                     public void onClick(DialogInterface dialog,int id) {
                         editor.getCurrentPage().removeButton(buttonToDelete);
                         editor.saveModifs();
+                        JsonCreator.save(context);
                         editor.refreshPage();
                     }
                 })

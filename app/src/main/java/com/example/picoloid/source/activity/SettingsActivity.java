@@ -78,13 +78,8 @@ public class SettingsActivity extends AppCompatActivity {
                 book.setId(id);
                 PicoloBookService.setBook(book);
                 Toast.makeText(SettingsActivity.this, book.getSettings().getBackgroundColor() + " -- " + book.getSettings().getOverviewFrameworkColor(), Toast.LENGTH_LONG).show();
-                try {
-                    JsonCreator.save(getApplicationContext());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                JsonCreator.save(getApplicationContext());
                 if (mod.equals("new")){
                     Intent ii=new Intent(SettingsActivity.this, MainActivity.class);
                     startActivity(ii);

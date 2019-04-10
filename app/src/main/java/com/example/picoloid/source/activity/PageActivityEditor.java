@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.DeleteButtonDialog;
+import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
@@ -82,6 +83,7 @@ public class PageActivityEditor extends AppCompatActivity {
             case R.id.save_changes:
                 Log.d(TAG, "onOptionsItemSelected: user clicked");
                 saveModifs();
+                JsonCreator.save(this);
                 returnToUserMode();
                 break;
             case R.id.change_button_data:
@@ -96,6 +98,7 @@ public class PageActivityEditor extends AppCompatActivity {
                 PicoloButton newButton = new PicoloButton();
                 currentPage.addButton(newButton);
                 saveModifs();
+                JsonCreator.save(this);
                 refreshPage();
             case R.id.delete_button:
                 if(selectedButton == null)return true;
