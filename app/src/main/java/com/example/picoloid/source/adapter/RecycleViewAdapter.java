@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.activity.PageActivityEditor;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.managerData.ObjectManager;
 import com.example.picoloid.source.service.PicoloBookService;

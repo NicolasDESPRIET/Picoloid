@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonCoord;
+import com.example.picoloid.source.service.ApplicationRuntimeInfos;
+import com.example.picoloid.source.service.MediaPlayerService;
 
 public class PicoloButtonView extends AppCompatButton {
 
@@ -20,17 +25,22 @@ public class PicoloButtonView extends AppCompatButton {
 
         this.buttonData = buttonData;
         this.setText(buttonData.getTitle());
-        this.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                buttonClick();
-            }
-        });
 
         Log.d(TAG, "Loading view: "+buttonData.toString());
     }
 
-    private void buttonClick(){
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        buttonClickOnUser(event);
+        return true;
+    }
+
+
+    private void buttonClickOnUser(MotionEvent event){
         Log.d(TAG, buttonData.getTitle()+" clicked.");
+
+        if(event.getAction() != MotionEvent.ACTION_UP) return;
 
         switch(buttonData.getType()){
             case NONE:
@@ -52,25 +62,35 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startImageActivity(){
         Log.d(TAG, "startImageActivity");
+
+        Intent openImage = new Intent(getContext(), ImageActivity.class);
+        openImage.putExtra("imagePath", buttonData.getImagePath().getPath());
+        getContext().startActivity(openImage);
     }
 
     private void startVideoActivity(){
         Log.d(TAG, "startVideoActivity");
+
+        Intent openVideo = new Intent(getContext(), ImageActivity.class);
+        openVideo.putExtra("videoPath", buttonData.getSpecialPath().getPath());
+        getContext().startActivity(openVideo);
     }
 
     private void startSoundPlaying(){
         Log.d(TAG, "startSoundPlaying");
+
     }
 
     private void openPage(){
-        Log.d(TAG, "openPage of id = "+buttonData.getId());
+        Log.d(TAG, "openPage of id = "+buttonData.getPageId());
 
-        Intent ii=new Intent(getContext(), PageActivityUser.class);
-        ii.putExtra("pageId", buttonData.getPageId());
-        getContext().startActivity(ii);
+        Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
+        openNewPage.putExtra("pageId", buttonData.getPageId());
+        getContext().startActivity(openNewPage);
     }
 
     public PicoloButton getButtonData(){
         return buttonData;
     }
+
 }

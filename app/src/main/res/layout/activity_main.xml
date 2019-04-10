@@ -28,7 +28,8 @@
         tools:ignore="HardcodedText" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+
+        android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="696dp"
         android:layout_above="@+id/openPageButton"

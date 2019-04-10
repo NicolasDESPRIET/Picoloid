@@ -1,5 +1,7 @@
 package com.example.picoloid.source.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,15 @@ public class PicoloPage{
         return -1;
     }
 
+    public PicoloButton getButtonFromId(int id){
+        for(int i=0; i<buttonList.size();i++){
+            if(buttonList.get(i).getId() == id){
+                Log.d("PicoloPage", "getButtonFromId: button found !");
+                return buttonList.get(i);
+            }
+        }
+        return null;
+    }
 
     public String getName() {
         return name;
