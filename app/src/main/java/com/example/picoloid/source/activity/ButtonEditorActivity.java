@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -53,6 +54,9 @@ public class ButtonEditorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 currentButton.setTitle(buttonTitle.getText().toString());
                 currentButton.setType(convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId()));
+
+                JsonCreator.save(getApplicationContext());
+
                 Intent ii = new Intent(getApplicationContext(), PageActivityEditor.class);
                 ii.putExtra("pageId",currentPageId);
                 startActivity(ii);
