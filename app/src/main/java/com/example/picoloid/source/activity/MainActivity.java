@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private JSONArray profiles = null;
