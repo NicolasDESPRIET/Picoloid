@@ -84,15 +84,6 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startSoundPlaying(){
         Log.d(TAG, "startSoundPlaying");
-        if(buttonData.getSpecialPath()!=null) {
-            Uri son = buttonData.getSpecialPath();
-            setContext(getContext());
-            try {
-                startMediaPlayer(son);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void openPage(){
