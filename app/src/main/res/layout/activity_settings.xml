@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9B9C98"
+    tools:context=".source.activity.SettingsActivity">
+
+    <TextView
+        android:id="@+id/nameBook"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="70dp"
+        android:background="#FFFFFF"
+        android:text="Nom"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/nameBookData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="81dp"
+        android:layout_toEndOf="@+id/nameBook"
+        android:background="#ffffff"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:ignore="Autofill,LabelFor" />
+
+    <TextView
+        android:id="@+id/colorBackground"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/nameBook"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="71dp"
+        android:background="#ffffff"
+        android:text="couleur de fond"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/colorOverviewFramework"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/colorBackground"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="70dp"
+        android:background="#ffffff"
+        android:text="couleur de selection"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorOverviewFramework"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="460dp"
+        android:layout_marginTop="123dp"
+        android:text="valider"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/nameBookData"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="51dp"
+        android:layout_toEndOf="@+id/colorBackground" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/colorOverviewFramework" />
+
+    <Button
+        android:id="@+id/pickColorBG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameBookData"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="75dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="Couleur"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/pickColorOF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pickColorBG"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:text="Couleur"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
