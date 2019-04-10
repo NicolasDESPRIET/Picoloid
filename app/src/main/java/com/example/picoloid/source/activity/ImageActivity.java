@@ -9,12 +9,12 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.service.PicoloBookService;
 
 
 public class ImageActivity extends AppCompatActivity {
 
     private ImageView imageview;
-
     private static final String TAG = "ImageActivity";
 
     private String imagePath;

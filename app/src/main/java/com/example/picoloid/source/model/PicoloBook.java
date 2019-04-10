@@ -42,7 +42,7 @@ public class PicoloBook {
         pageList.remove(id);
     }
 
-    public PicoloPage getPage(int pageId){
+    public PicoloPage getPageFromId(int pageId){
         return pageList.get(findListIdByPageId(pageId));
     }
 

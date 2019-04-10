@@ -30,11 +30,19 @@ public class ObjectManager {
     public static PicoloBook loadPicoloBookfromJson (JSONObject jsonObject) throws JSONException{
         PicoloBook book = new PicoloBook(jsonObject.getString("name"), jsonObject.getInt("id"));
         JSONArray pagelist = jsonObject.getJSONArray("list_page");
-        //TODO implements setting when this will be implement too.
+        PicoloBookSettings settings = null;
+        if (jsonObject.getJSONObject("settings").getString("backgroundColor")== null
+                && jsonObject.getJSONObject("settings").getString("OverviewFrameworkColor")==null){
+            settings = new PicoloBookSettings();
+        }else{
+            settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getString("backgroundColor"),
+                    jsonObject.getJSONObject("settings").getString("OverviewFrameworkColor"));
+        }
         for (int i = 0; i < pagelist.length(); i++){
             PicoloPage page = loadPicoloPagefromJson(pagelist.getJSONObject(i));
             book.addJsonPage(page);
         }
+        book.setSettings(settings);
         return book;
     }
 
@@ -102,12 +110,4 @@ public class ObjectManager {
         button.setId(jsonObject.getInt("id"));
         return button;
     }
-
-    public void SaveBook(){}
-
-    public void SavePage(){}
-
-    public void SaveButton(){}
-
-    //TODO
 }
