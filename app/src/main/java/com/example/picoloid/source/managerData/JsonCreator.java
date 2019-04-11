@@ -18,27 +18,36 @@ public class JsonCreator {
 
     private static final String TAG = "JsonCreator";
 
-    public static void save(Context context) throws JSONException, IOException {
-        JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+    public static void save(Context context) {
+        try{
+            JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
 
-        PicoloBook book = PicoloBookService.getBook();
-        JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
+            PicoloBook book = PicoloBookService.getBook();
+            JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
 
-        JSONArray listBook = jsonObjectProfils.getJSONArray("book");
-        for (int i = 0; i< listBook.length(); i++){
-            if (listBook.getJSONObject(i).getInt("id") == jsonObjectBook.getInt("id")){
-                listBook.remove(i);
-                Log.d(TAG, "boucle for du save");
+            JSONArray listBook = jsonObjectProfils.getJSONArray("book");
+            for (int i = 0; i< listBook.length(); i++){
+                if (listBook.getJSONObject(i).getInt("id") == jsonObjectBook.getInt("id")){
+                    listBook.remove(i);
+                    Log.d(TAG, "boucle for du save");
+                }
             }
+            listBook.put(jsonObjectBook);
+
+            jsonObjectProfils.put("book",listBook);
+            String Saved = jsonObjectProfils.toString();
+
+            Log.d(TAG, Saved);
+
+            JsonManager.saveDataOnFiles(context, Saved);
         }
-        listBook.put(jsonObjectBook);
+        catch(JSONException e){
 
-        jsonObjectProfils.put("book",listBook);
-        String Saved = jsonObjectProfils.toString();
+        }
+        catch(IOException e){
 
-        Log.d(TAG, Saved);
+        }
 
-        JsonManager.saveDataOnFiles(context, Saved);
     }
 
     private static JSONObject saveJsonBookFromObject(Context context, PicoloBook picoloBook) throws IOException, JSONException {
