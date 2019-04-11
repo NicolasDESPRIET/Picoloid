@@ -18,10 +18,24 @@ public class JsonCreator {
 
     private static final String TAG = "JsonCreator";
 
-    public static void save(Context context) {
-        try{
+    public static void saveAll(Context context, JSONArray jsonArray){
+        try {
             JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+            jsonObjectProfils.put("book",jsonArray);
+            String Saved = jsonObjectProfils.toString();
 
+            Log.d(TAG, Saved);
+
+            JsonManager.saveDataOnFiles(context, Saved);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void save(Context context) {
+        JSONObject jsonObjectProfils = null;
+        try {
+            jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
             PicoloBook book = PicoloBookService.getBook();
             JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
 
@@ -35,18 +49,21 @@ public class JsonCreator {
             listBook.put(jsonObjectBook);
 
             jsonObjectProfils.put("book",listBook);
-            String Saved = jsonObjectProfils.toString();
 
-            Log.d(TAG, Saved);
-
-            JsonManager.saveDataOnFiles(context, Saved);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(JSONException e){
 
+        String Saved = null;
+        if (jsonObjectProfils != null) {
+            Saved = jsonObjectProfils.toString();
         }
-        catch(IOException e){
 
-        }
+        Log.d(TAG, Saved);
+
+        JsonManager.saveDataOnFiles(context, Saved);
 
     }
 

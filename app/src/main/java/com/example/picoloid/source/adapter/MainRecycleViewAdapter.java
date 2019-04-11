@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.picoloid.R;
-import com.example.picoloid.source.activity.PageActivityEditor;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.managerData.ObjectManager;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -20,12 +19,12 @@ import com.example.picoloid.source.service.PicoloBookService;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
+public class MainRecycleViewAdapter extends RecyclerView.Adapter<MainRecycleViewAdapter.ViewHolder> {
 
     private Context context;
-    private JSONArray profilList = new JSONArray();
+    private JSONArray profilList;
 
-    public RecycleViewAdapter(Context context, JSONArray profilList) {
+    public MainRecycleViewAdapter(Context context, JSONArray profilList) {
         this.context = context;
         this.profilList = profilList;
     }
