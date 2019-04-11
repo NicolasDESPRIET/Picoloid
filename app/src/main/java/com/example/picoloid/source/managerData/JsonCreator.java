@@ -92,15 +92,28 @@ public class JsonCreator {
         button.put("title", picoloButton.getTitle());
         button.put("id", picoloButton.getId());
         button.put("type", picoloButton.getType());
-        button.put("image_path", picoloButton.getImagePath().getPath());
+        if (picoloButton.getImagePath() == null){
+            button.put("image_path", null);
+        }else{
+            button.put("image_path", picoloButton.getImagePath().getPath());
+        }
         button.put("page_id", -1);
 
         switch (button.getString("type")){
             case "VIDEO":
-                button.put("special_path", picoloButton.getSpecialPath().getPath());
+                if (picoloButton.getSpecialPath() == null){
+                    button.put("special_path", null);
+                }else{
+                    button.put("special_path", picoloButton.getSpecialPath().getPath());
+                }
+
                 break;
             case "SOUND":
-                button.put("special_path", picoloButton.getSpecialPath().getPath());
+                if (picoloButton.getSpecialPath() == null){
+                    button.put("special_path", null);
+                }else{
+                    button.put("special_path", picoloButton.getSpecialPath().getPath());
+                }
                 break;
             case "PAGE":
                 button.put("page_id", picoloButton.getPageId());

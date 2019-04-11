@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ii=new Intent(MainActivity.this, SettingsActivity.class);
-                ii.putExtra("bookId", profiles.length());
+                ii.putExtra("bookId", getBiggerId());
                 ii.putExtra("mod", "new");
                 startActivity(ii);
             }
@@ -67,6 +67,20 @@ public class MainActivity extends AppCompatActivity {
         RecycleViewAdapter adapter = new RecycleViewAdapter(this, profiles);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private int getBiggerId(){
+        int id = 0;
+        for(int i = 0; i < profiles.length(); i++){
+            try {
+                if (profiles.getJSONObject(i).getInt("id" )>id){
+                    id = profiles.getJSONObject(i).getInt("id" );
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return id;
     }
 
     private void calculateScreenSize(){
