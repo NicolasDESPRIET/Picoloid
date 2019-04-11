@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.picoloid.R;
-import com.example.picoloid.source.adapter.RecycleViewAdapter;
+import com.example.picoloid.source.adapter.MainRecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 
@@ -34,14 +34,31 @@ public class MainActivity extends AppCompatActivity {
         calculateScreenSize();
         initlist();
 
-        Button button = findViewById(R.id.openPageButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button openSettingsPage = findViewById(R.id.openPageButton);
+        openSettingsPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ii=new Intent(MainActivity.this, SettingsActivity.class);
-                ii.putExtra("bookId", getBiggerId());
+                ii.putExtra("bookId", getBiggerId()+1);
                 ii.putExtra("mod", "new");
                 startActivity(ii);
+            }
+        });
+
+        Button openDeleteDialog = findViewById(R.id.deleteButtonPage);
+        openDeleteDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        Button openDeleteAc = findViewById(R.id.deleteButtonPage);
+        openDeleteAc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent jj = new Intent(MainActivity.this, DeleteBookActivity.class);
+                startActivity(jj);
             }
         });
     }
@@ -64,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecycleView(){
         RecyclerView recyclerView = findViewById(R.id.main_recycler);
-        RecycleViewAdapter adapter = new RecycleViewAdapter(this, profiles);
+        MainRecycleViewAdapter adapter = new MainRecycleViewAdapter(this, profiles);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
