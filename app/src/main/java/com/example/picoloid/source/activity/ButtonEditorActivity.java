@@ -3,19 +3,16 @@ package com.example.picoloid.source.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
-import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
 import static com.example.picoloid.source.model.PicoloButtonType.IMAGE;
 import static com.example.picoloid.source.model.PicoloButtonType.NONE;
@@ -27,9 +24,11 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     private static final String TAG = "ButtonEditorActivity";
 
+    //data
     private PicoloButton currentButton;
     private int currentPageId;
 
+    //xml
     private EditText buttonTitle;
     private Button saveButton;
     private RadioGroup radioGroup;
@@ -44,37 +43,56 @@ public class ButtonEditorActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        buttonTitle = (EditText) findViewById(R.id.buttoneditor_title);
+        buttonTitle = (EditText) findViewById(R.id.buttonEditor_ButtonTitle);
         buttonTitle.setText(currentButton.getTitle());
 
-        saveButton = (Button) findViewById(R.id.buttoneditor_savebutton);
+        saveButton = (Button) findViewById(R.id.buttonEditor_SaveChanges);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentButton.setTitle(buttonTitle.getText().toString());
-                currentButton.setType(convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId()));
-                Intent ii = new Intent(getApplicationContext(), PageActivityEditor.class);
-                ii.putExtra("pageId",currentPageId);
-                startActivity(ii);
-                finish();
+                saveAndQuit();
             }
         });
 
-        radioGroup = (RadioGroup)findViewById(R.id.buttoneditor_radiogroup);
+        radioGroup = (RadioGroup)findViewById(R.id.buttonEditor_ButtonTypeRadioGroup);
         radioGroup.check(convertTypeToRadioButtonId(currentButton.getType()));
+    }
+
+    private void saveAndQuit(){
+        currentButton.setTitle(buttonTitle.getText().toString());
+        currentButton.setType(convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId()));
+
+        JsonCreator.save(getApplicationContext());
+
+        Intent returnToEditor = new Intent(getApplicationContext(), PageActivityEditor.class);
+        returnToEditor.putExtra("pageId",currentPageId);
+        startActivity(returnToEditor);
+        finish();
+    }
+
+    private void getIntentArgs(){
+        Intent args= getIntent();
+        Bundle bundle = args.getExtras();
+        try{
+            currentPageId = (int)bundle.get("pageId");
+            int bid = (int)bundle.get("buttonId");
+            currentButton = PicoloBookService.getBook().getPageFromId(currentPageId).getButtonFromId(bid);
+        }catch (Exception e){
+            finish();
+        }
     }
 
     private PicoloButtonType convertRadioButtonIdToState(int id){
         switch(id){
-            case R.id.btnedit_none:
+            case R.id.buttonEditor_Type_None:
                 return NONE;
-            case R.id.btnedit_image:
+            case R.id.buttonEditor_Type_Image:
                 return IMAGE;
-            case R.id.btnedit_video:
+            case R.id.buttonEditor_Type_Video:
                 return VIDEO;
-            case R.id.btnedit_sound:
+            case R.id.buttonEditor_Type_Sound:
                 return SOUND;
-            case R.id.btnedit_page:
+            case R.id.buttonEditor_Type_Page:
                 return PAGE;
             default:
                 return NONE;
@@ -84,35 +102,17 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private int convertTypeToRadioButtonId(PicoloButtonType type){
         switch(type){
             case NONE:
-                return R.id.btnedit_none;
+                return R.id.buttonEditor_Type_None;
             case IMAGE:
-                return R.id.btnedit_image;
+                return R.id.buttonEditor_Type_Image;
             case VIDEO:
-                return R.id.btnedit_video;
+                return R.id.buttonEditor_Type_Video;
             case SOUND:
-                return R.id.btnedit_sound;
+                return R.id.buttonEditor_Type_Sound;
             case PAGE:
-                return R.id.btnedit_page;
+                return R.id.buttonEditor_Type_Page;
             default:
-                return R.id.btnedit_none;
+                return R.id.buttonEditor_Type_None;
         }
     }
-
-
-    private void getIntentArgs(){
-        Intent args= getIntent();
-        Bundle bundle = args.getExtras();
-        try{
-            currentPageId = (int)bundle.get("pageId");
-            int bid = (int)bundle.get("buttonId");
-            Log.d(TAG, "getIntentArgs: pageid and buttonid : "+currentPageId+ " " +bid);
-            currentButton = PicoloBookService.getBook().getPageFromId(currentPageId).getButtonFromId(bid);
-            Log.d(TAG, "getIntentArgs: currentbutton :"+currentButton);
-        }catch (Exception e){
-            Log.d(TAG, "init: coulnd't load page");
-            finish();
-        }
-    }
-
-
 }

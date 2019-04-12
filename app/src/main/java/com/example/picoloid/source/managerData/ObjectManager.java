@@ -3,7 +3,11 @@ package com.example.picoloid.source.managerData;
 import android.content.Context;
 import android.net.Uri;
 
-import com.example.picoloid.source.model.*;
+import com.example.picoloid.source.model.PicoloBook;
+import com.example.picoloid.source.model.PicoloBookSettings;
+import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonCoord;
+import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.util.PicoloButtonUtils;
 
 import org.json.JSONArray;
@@ -16,7 +20,6 @@ import java.io.IOException;
 public class ObjectManager {
 
     public static PicoloBook loadBookAssetsmod(String name, Context context, String file) throws IOException, JSONException {
-        //TODO pass in filemod when this will be implement too.
         String json = JsonManager.readJsonFromAsset(context,file);
         JSONArray profils = new JSONObject(json).getJSONArray("book");
         PicoloBook book = null;
@@ -69,7 +72,12 @@ public class ObjectManager {
          * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();
-        Uri image_path = Uri.parse(jsonObject.getString("image_path"));
+        URI image_path = null;
+        URI special_path = null;
+
+        if (jsonObject.getString("image_path") != null){
+            image_path = URI.create(jsonObject.getString("image_path"));
+        }
 
         /*
          * set variable in the PicoloButtonCoord with the variable in the json
@@ -90,12 +98,20 @@ public class ObjectManager {
                 PicoloButtonUtils.switchButtonToImage(button);
                 break;
             case "VIDEO":
-                Uri video_path = Uri.parse(jsonObject.getString("special_path"));
-                PicoloButtonUtils.switchButtonToVideo(button, video_path);
+                if (jsonObject.getString("special_path") == null){
+                    PicoloButtonUtils.switchButtonToVideo(button, null);
+                }else{
+                    special_path = URI.create(jsonObject.getString("special_path"));
+                    PicoloButtonUtils.switchButtonToVideo(button, special_path);
+                }
                 break;
             case "SOUND":
-                Uri sound_path = Uri.parse(jsonObject.getString("special_path"));
-                PicoloButtonUtils.switchButtonToSound(button, sound_path);
+                if (jsonObject.getString("special_path") == null){
+                    PicoloButtonUtils.switchButtonToSound(button, null);
+                }else{
+                    special_path = URI.create(jsonObject.getString("special_path"));
+                    PicoloButtonUtils.switchButtonToSound(button, special_path);
+                }
                 break;
             case "PAGE":
                 PicoloButtonUtils.switchButtonToPage(button,jsonObject.getInt("page_id"));

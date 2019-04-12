@@ -18,27 +18,53 @@ public class JsonCreator {
 
     private static final String TAG = "JsonCreator";
 
-    public static void save(Context context) throws JSONException, IOException {
-        JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+    public static void saveAll(Context context, JSONArray jsonArray){
+        try {
+            JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+            jsonObjectProfils.put("book",jsonArray);
+            String Saved = jsonObjectProfils.toString();
 
-        PicoloBook book = PicoloBookService.getBook();
-        JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
+            Log.d(TAG, Saved);
 
-        JSONArray listBook = jsonObjectProfils.getJSONArray("book");
-        for (int i = 0; i< listBook.length(); i++){
-            if (listBook.getJSONObject(i).getInt("id") == jsonObjectBook.getInt("id")){
-                listBook.remove(i);
-                Log.d(TAG, "boucle for du save");
-            }
+            JsonManager.saveDataOnFiles(context, Saved);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        listBook.put(jsonObjectBook);
+    }
 
-        jsonObjectProfils.put("book",listBook);
-        String Saved = jsonObjectProfils.toString();
+    public static void save(Context context) {
+        JSONObject jsonObjectProfils = null;
+        try {
+            jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
+            PicoloBook book = PicoloBookService.getBook();
+            JSONObject jsonObjectBook = saveJsonBookFromObject(context, book);
+
+            JSONArray listBook = jsonObjectProfils.getJSONArray("book");
+            for (int i = 0; i< listBook.length(); i++){
+                if (listBook.getJSONObject(i).getInt("id") == jsonObjectBook.getInt("id")){
+                    listBook.remove(i);
+                    Log.d(TAG, "boucle for du save");
+                }
+            }
+            listBook.put(jsonObjectBook);
+
+            jsonObjectProfils.put("book",listBook);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String Saved = null;
+        if (jsonObjectProfils != null) {
+            Saved = jsonObjectProfils.toString();
+        }
 
         Log.d(TAG, Saved);
 
         JsonManager.saveDataOnFiles(context, Saved);
+
     }
 
     private static JSONObject saveJsonBookFromObject(Context context, PicoloBook picoloBook) throws IOException, JSONException {
@@ -83,15 +109,28 @@ public class JsonCreator {
         button.put("title", picoloButton.getTitle());
         button.put("id", picoloButton.getId());
         button.put("type", picoloButton.getType());
-        button.put("image_path", picoloButton.getImagePath().getPath());
+        if (picoloButton.getImagePath() == null){
+            button.put("image_path", null);
+        }else{
+            button.put("image_path", picoloButton.getImagePath().getPath());
+        }
         button.put("page_id", -1);
 
         switch (button.getString("type")){
             case "VIDEO":
-                button.put("special_path", picoloButton.getSpecialPath().getPath());
+                if (picoloButton.getSpecialPath() == null){
+                    button.put("special_path", null);
+                }else{
+                    button.put("special_path", picoloButton.getSpecialPath().getPath());
+                }
+
                 break;
             case "SOUND":
-                button.put("special_path", picoloButton.getSpecialPath().getPath());
+                if (picoloButton.getSpecialPath() == null){
+                    button.put("special_path", null);
+                }else{
+                    button.put("special_path", picoloButton.getSpecialPath().getPath());
+                }
                 break;
             case "PAGE":
                 button.put("page_id", picoloButton.getPageId());

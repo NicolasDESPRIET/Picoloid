@@ -18,8 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
-        <activity android:name=".source.activity.ButtonEditorActivity" android:screenOrientation="landscape" ></activity>
+        <activity
+            android:name=".source.activity.DeleteBookActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".source.activity.ButtonEditorActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".source.activity.SettingsActivity"
             android:screenOrientation="landscape" />
