@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class DeleteBookActivity extends AppCompatActivity {
 
     private JSONArray profiles;
-    private ArrayList<Boolean> deleted;
     private DeleteBookRecycleViewAdapter adapter;
 
     @Override
@@ -44,13 +43,8 @@ public class DeleteBookActivity extends AppCompatActivity {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setDeleted();
-                for ( int i = 0; i < profiles.length(); i++){
-                    if (deleted.get(i)){
-                        profiles.remove(i);
-                    }
-                }
-                JsonCreator.saveAll(getApplicationContext(), profiles);
+                //TODO CORRIGER CETTE SUPPRESSION DE MERDE
+                JsonCreator.saveDeleted(DeleteBookActivity.this, profiles);
                 Intent kk = new Intent(DeleteBookActivity.this, MainActivity.class);
                 startActivity(kk);
             }
@@ -75,7 +69,7 @@ public class DeleteBookActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void setDeleted(){
-        this.deleted = adapter.getDeleted();
+    private ArrayList<Boolean> setDeleted(){
+        return adapter.getDeleted();
     }
 }
