@@ -1,16 +1,20 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.service.PicoloBookService;
 
+
 public class ImageActivity extends AppCompatActivity {
 
+    private ImageView imageview;
     private static final String TAG = "ImageActivity";
 
     private String imagePath;
@@ -32,6 +36,12 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void showImage() throws Exception{
+        Bitmap myBitmap = BitmapFactory.decodeFile(imagePath);
 
+        ImageView myImage = (ImageView) findViewById(R.id.iv);
+
+        myImage.setImageBitmap(myBitmap);
     }
+
 }
+

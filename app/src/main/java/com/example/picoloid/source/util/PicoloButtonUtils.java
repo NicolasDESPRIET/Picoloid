@@ -1,9 +1,7 @@
 package com.example.picoloid.source.util;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
-
-import java.net.URI;
-
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 
@@ -21,13 +19,13 @@ public class PicoloButtonUtils {
         button.setType(PicoloButtonType.IMAGE);
     }
 
-    public static void switchButtonToVideo(@NonNull PicoloButton button, URI videoPath){
+    public static void switchButtonToVideo(@NonNull PicoloButton button, Uri videoPath){
         button.setPageId(-1);
         button.setSpecialPath(videoPath);
         button.setType(PicoloButtonType.VIDEO);
     }
 
-    public static void switchButtonToSound(@NonNull PicoloButton button, URI soundPath){
+    public static void switchButtonToSound(@NonNull PicoloButton button, Uri soundPath){
         button.setPageId(-1);
         button.setSpecialPath(soundPath);
         button.setType(PicoloButtonType.SOUND);
