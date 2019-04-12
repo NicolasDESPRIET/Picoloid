@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/delete_recycler"
+        android:id="@+id/deleteBook_Recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -18,13 +18,13 @@
         android:padding="5dp"
         android:scrollbars="vertical"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/cancelDel"
+        app:layout_constraintBottom_toTopOf="@+id/deleteBook_DeleteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/validateDel"
+        android:id="@+id/deleteBook_DeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,13 +33,13 @@
         android:text="Valider"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cancelDel"
+        app:layout_constraintEnd_toStartOf="@+id/deleteBook_CancelDeleteButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/cancelDel"
+        android:id="@+id/deleteBook_CancelDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

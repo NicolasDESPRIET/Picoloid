@@ -22,21 +22,15 @@ public class PicoloButtonView extends AppCompatButton {
 
         this.buttonData = buttonData;
         this.setText(buttonData.getTitle());
-
-        Log.d(TAG, "Loading view: "+buttonData.toString());
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         buttonClickOnUser(event);
         return true;
     }
 
-
     private void buttonClickOnUser(MotionEvent event){
-        Log.d(TAG, buttonData.getTitle()+" clicked.");
-
         if(event.getAction() != MotionEvent.ACTION_UP) return;
 
         switch(buttonData.getType()){
@@ -58,29 +52,22 @@ public class PicoloButtonView extends AppCompatButton {
     }
 
     private void startImageActivity(){
-        Log.d(TAG, "startImageActivity");
-
         Intent openImage = new Intent(getContext(), ImageActivity.class);
         openImage.putExtra("imagePath", buttonData.getImagePath().getPath());
         getContext().startActivity(openImage);
     }
 
     private void startVideoActivity(){
-        Log.d(TAG, "startVideoActivity");
-
         Intent openVideo = new Intent(getContext(), ImageActivity.class);
         openVideo.putExtra("videoPath", buttonData.getSpecialPath().getPath());
         getContext().startActivity(openVideo);
     }
 
     private void startSoundPlaying(){
-        Log.d(TAG, "startSoundPlaying");
 
     }
 
     private void openPage(){
-        Log.d(TAG, "openPage of id = "+buttonData.getPageId());
-
         Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
         openNewPage.putExtra("pageId", buttonData.getPageId());
         getContext().startActivity(openNewPage);

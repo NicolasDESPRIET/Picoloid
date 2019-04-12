@@ -38,13 +38,7 @@ public class NewPageDialog {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                PicoloPage page = new PicoloPage(input.
-                        getText().toString());
-                PicoloBookService.getBook().addPage(page);
-                JsonCreator.save(context);
-                Intent openNewPage =new Intent(context, PageActivityUser.class);
-                openNewPage.putExtra("pageId", page.getId());
-                context.startActivity(openNewPage);
+                positiveButton(input.getText().toString());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -57,4 +51,12 @@ public class NewPageDialog {
         builder.show();
     }
 
+    private void positiveButton(String input){
+        PicoloPage page = new PicoloPage(input);
+        PicoloBookService.getBook().addPage(page);
+        JsonCreator.save(context);
+        Intent openNewPage =new Intent(context, PageActivityUser.class);
+        openNewPage.putExtra("pageId", page.getId());
+        context.startActivity(openNewPage);
+    }
 }

@@ -22,7 +22,6 @@ public class PicoloBookService {
     }
 
     public static void setBook(PicoloBook book){
-        Log.d(TAG, "setting book");
         PicoloBookServiceHolder.INSTANCE.selectedBook = book;
     }
 }
