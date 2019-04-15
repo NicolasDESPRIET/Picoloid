@@ -1,15 +1,16 @@
 package com.example.picoloid.source.model;
 
-import java.net.URI;
+import android.net.Uri;
+
 
 public class PicoloButton {
 
     private String title;
     private int id;
-    private URI imagePath;
+    private Uri imagePath;
     private PicoloButtonCoord coord;
     private PicoloButtonType type;
-    private URI specialPath;
+    private Uri specialPath;
     private int pageId;
 
     public PicoloButton(){
@@ -39,11 +40,11 @@ public class PicoloButton {
         this.id = id;
     }
 
-    public URI getImagePath() {
+    public Uri getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(URI imagePath) {
+    public void setImagePath(Uri imagePath) {
         this.imagePath = imagePath;
     }
 
@@ -63,11 +64,11 @@ public class PicoloButton {
         this.type = type;
     }
 
-    public URI getSpecialPath() {
+    public Uri getSpecialPath() {
         return specialPath;
     }
 
-    public void setSpecialPath(URI specialPath) {
+    public void setSpecialPath(Uri specialPath) {
         this.specialPath = specialPath;
     }
 
