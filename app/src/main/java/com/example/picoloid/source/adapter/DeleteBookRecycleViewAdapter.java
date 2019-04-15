@@ -1,5 +1,6 @@
 package com.example.picoloid.source.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.picoloid.R;
 
@@ -21,14 +21,12 @@ import java.util.ArrayList;
 public class DeleteBookRecycleViewAdapter extends RecyclerView.Adapter<DeleteBookRecycleViewAdapter.ViewHolder> {
     private Context context;
     private JSONArray profilList;
-    private ArrayList<Boolean> deleted = new ArrayList<>();
+
+    private ArrayList<Integer> deleted = new ArrayList<>();
 
     public DeleteBookRecycleViewAdapter(Context context, JSONArray profilList) {
         this.context = context;
         this.profilList = profilList;
-        for (int i = 0; i < this.profilList.length(); i++){
-            this.deleted.add(false);
-        }
     }
 
     @NonNull
@@ -39,7 +37,7 @@ public class DeleteBookRecycleViewAdapter extends RecyclerView.Adapter<DeleteBoo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
         try {
             viewHolder.textView.setText(profilList.getJSONObject(i).getString("name"));
         } catch (JSONException e) {
@@ -50,25 +48,26 @@ public class DeleteBookRecycleViewAdapter extends RecyclerView.Adapter<DeleteBoo
             @Override
             public void onClick(View v) {
                 if(((CheckBox) v).isChecked()){
-                    deleted.set(i, true);
-                    Toast.makeText(context, deleted.get(i).toString(), Toast.LENGTH_SHORT).show();
+                    try {
+                        deleted.add(profilList.getJSONObject(i).getInt("id"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!((CheckBox) v).isChecked()){
-                    deleted.set(i, false);
-                    Toast.makeText(context, deleted.get(i).toString(), Toast.LENGTH_SHORT).show();
+                    try {
+                        deleted.remove((Integer) profilList.getJSONObject(i).getInt("id"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
-    }
-
-    public ArrayList<Boolean> getDeleted() {
-        return deleted;
     }
 
     @Override
     public int getItemCount() {
         return this.profilList.length();
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -82,5 +81,9 @@ public class DeleteBookRecycleViewAdapter extends RecyclerView.Adapter<DeleteBoo
             checkBox = itemView.findViewById(R.id.checkBoxDelete);
             layout = itemView.findViewById(R.id.deleteParent);
         }
+    }
+
+    public ArrayList<Integer> getDeleted() {
+        return deleted;
     }
 }

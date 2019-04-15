@@ -22,6 +22,8 @@ public class JsonCreator {
         try {
             JSONObject jsonObjectProfils = new JSONObject(JsonManager.readJsonFromAsset(context,"jsonProfil.json"));
 
+            jsonObjectProfils.put("book", jsonArray);
+
             String Saved = jsonObjectProfils.toString();
 
             Log.d(TAG, Saved);

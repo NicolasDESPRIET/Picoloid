@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private JSONArray profiles = null;
 
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button openDeleteDialog = findViewById(R.id.deleteButtonPage);
-        openDeleteDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         Button openDeleteAc = findViewById(R.id.deleteButtonPage);
         openDeleteAc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initlist(){
-        //Toast.makeText(this, JsonManager.readOnFile(this), Toast.LENGTH_SHORT).show();
         try {
             JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
         } catch (IOException e) {
@@ -72,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
             profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
+            Log.d(TAG,  profiles.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -44,6 +44,23 @@ public class DeleteBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO CORRIGER CETTE SUPPRESSION DE MERDE
+                ArrayList<Integer> list = adapter.getDeleted();
+
+                /*for (int i = 0; i< list.size(); i++){
+                    Toast.makeText(DeleteBookActivity.this, list.get(i).toString(), Toast.LENGTH_SHORT).show();
+                }*/
+
+                for (int i = 0; i < profiles.length() ; i++) {
+                    for (int j = 0; j< list.size(); j++){
+                        try {
+                            if ( profiles.getJSONObject(i).getInt("id") == list.get(j)){
+                                profiles.remove(i);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 JsonCreator.saveDeleted(DeleteBookActivity.this, profiles);
                 Intent kk = new Intent(DeleteBookActivity.this, MainActivity.class);
                 startActivity(kk);
@@ -69,7 +86,4 @@ public class DeleteBookActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private ArrayList<Boolean> setDeleted(){
-        return adapter.getDeleted();
-    }
 }
