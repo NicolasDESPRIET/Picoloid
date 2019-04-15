@@ -2,10 +2,10 @@ package com.example.picoloid.source.model;
 
 public class PicoloButtonCoord {
 
-    public int width;
-    public int height;
-    public int leftMargin;
-    public int topMargin;
+    private int width;
+    private int height;
+    private int leftMargin;
+    private int topMargin;
 
     public PicoloButtonCoord(){
         width = 400;
@@ -24,4 +24,23 @@ public class PicoloButtonCoord {
         this.height = height;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getLeftMargin() {
+        return leftMargin;
+    }
+
+    public int getTopMargin(){
+        return topMargin;
+    }
+
+    public String toString(){
+        return width + " " + height + " " + leftMargin + " " + topMargin;
+    }
 }

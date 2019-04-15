@@ -1,5 +1,7 @@
 package com.example.picoloid.source.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,10 @@ public class PicoloPage{
         this.name = name;
         this.id = -1;
         this.buttonList = new ArrayList<PicoloButton>();
+    }
+
+    public void addJsonButton(PicoloButton button){
+        buttonList.add(button);
     }
 
     public void addButton(PicoloButton button){
@@ -45,6 +51,15 @@ public class PicoloPage{
         return -1;
     }
 
+    public PicoloButton getButtonFromId(int id){
+        for(int i=0; i<buttonList.size();i++){
+            if(buttonList.get(i).getId() == id){
+                Log.d("PicoloPage", "getButtonFromId: button found !");
+                return buttonList.get(i);
+            }
+        }
+        return null;
+    }
 
     public String getName() {
         return name;
@@ -68,5 +83,10 @@ public class PicoloPage{
 
     public void setButtonList(List<PicoloButton> buttonList) {
         this.buttonList = buttonList;
+    }
+
+    @Override
+    public String toString(){
+        return "Page of id "+id+" named "+name+". Number of buttons : "+buttonList.size();
     }
 }

@@ -1,8 +1,14 @@
 package com.example.picoloid.source.service;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.example.picoloid.source.model.PicoloBook;
 
 public class PicoloBookService {
+
+    private static final String TAG = "PicoloBookService";
+
     private static class PicoloBookServiceHolder {
         private static final PicoloBookService INSTANCE = new PicoloBookService();
     }
@@ -11,11 +17,11 @@ public class PicoloBookService {
         selectedBook = null;
     }
 
-    public PicoloBook getBook(){
+    public static PicoloBook getBook(){
         return PicoloBookServiceHolder.INSTANCE.selectedBook;
     }
 
-    public void setBook(PicoloBook book){
+    public static void setBook(PicoloBook book){
         PicoloBookServiceHolder.INSTANCE.selectedBook = book;
     }
 }

@@ -1,0 +1,149 @@
+{
+  "book": [
+    {
+      "name" : "Theo",
+      "id": 1,
+      "settings" : {
+        "backgroundColor" : null,
+        "OverviewFrameworkColor": null
+      },
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": [
+            {
+              "title" : "ma sortie au cirque",
+              "id" : 0,
+              "coordonate" : {
+                "width" : 400,
+                "height" : 400,
+                "leftMargin" : 0,
+                "topMargin" : 0
+              },
+              "type" : "PAGE",
+              "image_path" : "lien_image",
+              "special_path" : null,
+              "page_id" : 1
+            },
+            {
+              "title" : "ma famille",
+              "id" : 1,
+              "coordonate" : {
+                "width" : 400,
+                "height" : 400,
+                "leftMargin" : 600,
+                "topMargin" : 600
+              },
+              "type" : "PAGE",
+              "image_path" : "liens_image2",
+              "special_path" : null,
+              "page_id" : 2
+            }
+          ]
+        },
+        {
+          "name" : "cirque",
+          "id" : 1,
+          "button_list": [
+            {
+              "title" : "un lion",
+              "id" : 0,
+              "coordonate" : {
+
+                "width" : 9,
+                "height" : 10,
+                "leftMargin" : 11,
+                "topMargin" : 12
+              },
+              "type" : "IMAGE",
+              "image_path" : "liens_image3",
+              "special_path" : null,
+              "page_id" : null
+            }
+          ]
+        },
+        {
+          "name" : "ma famille",
+          "id" : 2,
+          "button_list": [
+            {
+              "title" : "mon papa",
+              "id" : 0,
+              "coordonate" : {
+                "width" : 13,
+                "height" : 14,
+                "leftMargin" : 15,
+                "topMargin" : 16
+              },
+              "type" : "IMAGE",
+              "image_path" : "liens_image4",
+              "special_path" : null,
+              "page_id" : null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "mathilde",
+      "id": 3,
+      "settings" : {
+        "backgroundColor" : null,
+        "OverviewFrameworkColor": null
+      },
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": []
+        }
+      ]
+    },
+    {
+      "name" : "marine",
+      "id": 4,
+      "settings" : {
+        "backgroundColor" : null,
+        "OverviewFrameworkColor": null
+      },
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": []
+        }
+      ]
+    },
+    {
+      "name" : "JP",
+      "id": 5,
+      "settings" : {
+        "backgroundColor" : null,
+        "OverviewFrameworkColor": null
+      },
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": []
+        }
+      ]
+    },
+    {
+      "name" : "Philémon",
+      "id": 6,
+      "settings" : {
+        "backgroundColor" : null,
+        "OverviewFrameworkColor": null
+      },
+      "list_page" : [
+        {
+          "name" : "main",
+          "id" : 0,
+          "button_list": []
+        }
+      ]
+    }
+  ]
+}

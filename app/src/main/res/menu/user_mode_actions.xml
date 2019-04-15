@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/pageUser_GoToEditMode"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="goto_editmode_button"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/pageUser_CreateNewPage"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="create new page"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_CreateNewNextPage"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="create next page"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_Help"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="help"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_Options"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="options"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_About"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="about"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_ShowAllPages"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="show all pages"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_ChangeUser"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="change user"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_DeletePage"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="delete page"
+        app:showAsAction="never"
+        />
+
+
+</menu>

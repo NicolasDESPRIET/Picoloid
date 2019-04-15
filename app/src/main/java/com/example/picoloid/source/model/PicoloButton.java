@@ -1,25 +1,27 @@
 package com.example.picoloid.source.model;
 
-import java.net.URI;
+import android.net.Uri;
+
 
 public class PicoloButton {
 
     private String title;
     private int id;
-    private URI imagePath;
+    private Uri imagePath;
     private PicoloButtonCoord coord;
     private PicoloButtonType type;
-    private URI specialPath;
+    private Uri specialPath;
     private int pageId;
 
     public PicoloButton(){
         title = "Undefined"; //HARDCODE
         this.id = -1;
-        imagePath = null;
         coord = new PicoloButtonCoord();
         type = PicoloButtonType.NONE;
-        specialPath = null;
         pageId = -1;
+        imagePath = null;
+        specialPath = null;
+
     }
 
     public String getTitle() {
@@ -38,11 +40,11 @@ public class PicoloButton {
         this.id = id;
     }
 
-    public URI getImagePath() {
+    public Uri getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(URI imagePath) {
+    public void setImagePath(Uri imagePath) {
         this.imagePath = imagePath;
     }
 
@@ -62,11 +64,11 @@ public class PicoloButton {
         this.type = type;
     }
 
-    public URI getSpecialPath() {
+    public Uri getSpecialPath() {
         return specialPath;
     }
 
-    public void setSpecialPath(URI specialPath) {
+    public void setSpecialPath(Uri specialPath) {
         this.specialPath = specialPath;
     }
 
@@ -76,5 +78,10 @@ public class PicoloButton {
 
     public void setPageId(int pageId) {
         this.pageId = pageId;
+    }
+
+    @Override
+    public String toString(){
+        return "Button : "+title+" of id "+id+". Coord : "+coord.toString()+". Type = "+type.toString();
     }
 }

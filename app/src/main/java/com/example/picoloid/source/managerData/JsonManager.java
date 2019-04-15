@@ -2,22 +2,23 @@ package com.example.picoloid.source.managerData;
 
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JsonManager {
-    public JsonManager() {
-    }
 
-    public String readJsonFromAsset(Context context, String file) throws IOException{
+    private static final String TAG = "JsonManager";
+
+    public static String readJsonFromAsset(Context context, String file) throws IOException {
         String json = null;
 
         InputStream is = context.getAssets().open(file);
@@ -31,77 +32,79 @@ public class JsonManager {
         return json;
     }
 
-    //String path = context.getFilesDir().getAbsolutePath(); retour le chemin du filedirectory
-
-    public String readJsonFromFile(Context context, String file) throws IOException{
-        String json = null;
-
-        InputStream is = context.openFileInput(file);
-        int size = is.available();
-        byte[] buffer = new byte[size];
-        is.read(buffer);
-        is.close();
-
-        json = new String(buffer, StandardCharsets.UTF_8);
-
-        return json;
-    }
-
-    public JSONObject jsonStringToObject(String json) throws JSONException{
-        return new JSONObject(json);
-    }
-
-    public String jsonObjectToString(JSONObject json) throws JSONException{
-        return json.toString(2);
-    }
-
-    public JSONArray getJsonArray(JSONObject json, String nametab) throws JSONException{
-        return json.getJSONArray(nametab);
-    }
-
-    public Integer getIntValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getInt(nameVal);
-    }
-
-    public Double getDoubleValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getDouble(nameVal);
-    }
-
-    public String getStringValFromJson(JSONObject json, String nameVal) throws JSONException{
-        return json.getString(nameVal);
-    }
-
-    public void setArrayInJson(JSONObject json, JSONArray jsonArray, String nameVal) throws JSONException{
-        json.put(nameVal, jsonArray);
-    }
-
-    public void setIntValInJson(JSONObject json, String nameVal, int val) throws JSONException{
-        json.put(nameVal, val);
-    }
-
-    public void setDoubleValInJson(JSONObject json, String nameVal, double val) throws JSONException{
-        json.put(nameVal,val);
-    }
-
-    public void setStringValInJson(JSONObject json, String nameVal, String val) throws JSONException{
-        json.put(nameVal,val);
-    }
-
-    public List<JSONObject> getArrayformJarray(JSONArray Jarray) throws JSONException{
-        List<JSONObject> list = new ArrayList<JSONObject>();
-        for (int i=0; i<Jarray.length(); i++) {
-            list.add( jsonStringToObject(Jarray.getString(i)) );
+    private static void writer(File file, String data){
+        BufferedWriter writer = null;
+        try {
+            FileWriter out = new FileWriter(file);
+            writer = new BufferedWriter(out);
+            writer.write(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return list;
     }
 
-    public JSONArray setJArrayFromArray(ArrayList<JSONObject> list) throws JSONException{
-        List<String> Slist = new ArrayList<String>();
-        JSONArray Jarray = null;
-        for (int i = 0; i < list.size(); i++){
-            Slist.add(jsonObjectToString(list.get(i)));
+    public static void InitFile(String jsonString, Context context){
+        //File sdLien = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+
+        File sdLien = new File(context.getFilesDir().getPath());
+
+        File monFichier = new File(sdLien, "DataPicoloid.json");
+
+        if (monFichier.exists()){
+            //Toast.makeText(context, "file exist", Toast.LENGTH_LONG).show();
+        }else{
+            writer(monFichier,jsonString);
+            Log.d(TAG, "InitFile: action");
         }
-        Jarray = new JSONArray(Slist);
-        return Jarray;
     }
+
+    public static void saveDataOnFiles(Context context, String data){
+        File sdLien = new File(context.getFilesDir().getPath());
+        File file = new File(sdLien, "DataPicoloid.json");
+
+        writer(file,data);
+        Log.d(TAG, "saveDataOnFiles: "+ data);
+    }
+
+
+    public static String readOnFile(Context context){
+
+        File sdLien = new File(context.getFilesDir().getPath());
+        File file = new File(sdLien, "DataPicoloid.json");
+
+        String result = null;
+        if (file.exists()) {
+            BufferedReader br;
+            try {
+                br = new BufferedReader(new FileReader(file));
+                try {
+                    StringBuilder sb = new StringBuilder();
+                    String line = br.readLine();
+                    while (line != null) {
+                        sb.append(line);
+                        sb.append("\n");
+                        line = br.readLine();
+                    }
+                    result = sb.toString();
+                }
+                finally {
+                    br.close();
+                }
+            }
+            catch (IOException e) {
+                Toast.makeText(context, "error" , Toast.LENGTH_LONG).show();
+            }
+        }
+
+        return result;
+    }
+
 }
