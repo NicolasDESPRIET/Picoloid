@@ -2,6 +2,7 @@ package com.example.picoloid.source.util;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 

@@ -10,12 +10,13 @@ import android.view.MotionEvent;
 import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.model.PicoloButton;
-//import com.example.picoloid.source.service.MediaPlayerService;
 
 import java.net.URISyntaxException;
 
 import static com.example.picoloid.source.service.MediaPlayerService.setContext;
 import static com.example.picoloid.source.service.MediaPlayerService.startMediaPlayer;
+
+//import com.example.picoloid.source.service.MediaPlayerService;
 
 public class PicoloButtonView extends AppCompatButton {
 

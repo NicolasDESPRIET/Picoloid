@@ -72,11 +72,11 @@ public class ObjectManager {
          * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();
-        URI image_path = null;
-        URI special_path = null;
+        Uri image_path = null;
+        Uri special_path = null;
 
         if (jsonObject.getString("image_path") != null){
-            image_path = URI.create(jsonObject.getString("image_path"));
+            image_path = Uri.parse(jsonObject.getString("image_path"));
         }
 
         /*
@@ -101,7 +101,7 @@ public class ObjectManager {
                 if (jsonObject.getString("special_path") == null){
                     PicoloButtonUtils.switchButtonToVideo(button, null);
                 }else{
-                    special_path = URI.create(jsonObject.getString("special_path"));
+                    special_path = Uri.parse(jsonObject.getString("special_path"));
                     PicoloButtonUtils.switchButtonToVideo(button, special_path);
                 }
                 break;
@@ -109,7 +109,7 @@ public class ObjectManager {
                 if (jsonObject.getString("special_path") == null){
                     PicoloButtonUtils.switchButtonToSound(button, null);
                 }else{
-                    special_path = URI.create(jsonObject.getString("special_path"));
+                    special_path = Uri.parse(jsonObject.getString("special_path"));
                     PicoloButtonUtils.switchButtonToSound(button, special_path);
                 }
                 break;
