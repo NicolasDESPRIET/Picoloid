@@ -46,7 +46,7 @@ public class PageActivityEditor extends AppCompatActivity {
     }
 
     private void initViews(){
-        buttonLayout = (RelativeLayout)findViewById(R.id.pageEditor_Layout);
+        buttonLayout = (RelativeLayout)findViewById(R.id.pageUserlayout);
         printPicoloButtons();
     }
 

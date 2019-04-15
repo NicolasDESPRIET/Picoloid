@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -76,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
             setRecycleViewAdapter();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
+            Log.d(TAG,  profiles.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

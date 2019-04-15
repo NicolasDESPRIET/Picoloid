@@ -31,7 +31,9 @@ public class MediaPlayerService {
         if(MediaPlayerServiceHolder.INSTANCE.mediaPlayer!=null){
             MediaPlayerServiceHolder.INSTANCE.mediaPlayer.stop();
         }
-        MediaPlayerServiceHolder.INSTANCE.mediaPlayer=MediaPlayer.create(MediaPlayerServiceHolder.INSTANCE.context,son);
+        if (MediaPlayerServiceHolder.INSTANCE.context != null){
+            MediaPlayerServiceHolder.INSTANCE.mediaPlayer =  MediaPlayer.create(MediaPlayerServiceHolder.INSTANCE.context ,son);
+        }
         MediaPlayerServiceHolder.INSTANCE.mediaPlayer.start();
 
     }

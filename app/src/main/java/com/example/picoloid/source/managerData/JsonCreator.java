@@ -18,16 +18,18 @@ public class JsonCreator {
 
     private static final String TAG = "JsonCreator";
 
-    public static void saveAll(Context context, JSONArray jsonArray){
+    public static void saveDeleted(Context context, JSONArray jsonArray){
         try {
-            JSONObject jsonObjectProfils = new JSONObject(JsonManager.readOnFile(context));
-            jsonObjectProfils.put("book",jsonArray);
+            JSONObject jsonObjectProfils = new JSONObject(JsonManager.readJsonFromAsset(context,"jsonProfil.json"));
+
+            jsonObjectProfils.put("book", jsonArray);
+
             String Saved = jsonObjectProfils.toString();
 
             Log.d(TAG, Saved);
 
             JsonManager.saveDataOnFiles(context, Saved);
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
     }
