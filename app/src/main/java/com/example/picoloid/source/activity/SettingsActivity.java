@@ -15,17 +15,13 @@ import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.service.PicoloBookService;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText nameBook;
-    private TextView showBGC;
-    private TextView showOFC;
+    private static final String TAG = "SettingsActivity";
+
+    //data
     private PicoloBook book;
     private String C1;
     private String C2;
@@ -34,21 +30,25 @@ public class SettingsActivity extends AppCompatActivity {
     private int DefaultColor1;
     private int DefaultColor2;
 
+    //xml
+    private EditText nameBook;
+    private TextView showBGC;
+    private TextView showOFC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        init();
+        getIntentArgs();
 
+        initViews();
+    }
+
+    private void initViews(){
         nameBook = findViewById(R.id.nameBookData);
         showOFC = findViewById(R.id.textView2);
         showBGC = findViewById(R.id.textView);
-
-        Button validate = findViewById(R.id.validate);
-        Button picker1 = findViewById(R.id.pickColorBG);
-        Button picker2 = findViewById(R.id.pickColorOF);
 
         DefaultColor1 = Color.parseColor(book.getSettings().getBackgroundColor());
         DefaultColor2 = Color.parseColor(book.getSettings().getOverviewFrameworkColor());
@@ -56,6 +56,10 @@ public class SettingsActivity extends AppCompatActivity {
         showBGC.setBackgroundColor(DefaultColor1);
         showOFC.setBackgroundColor(DefaultColor2);
         nameBook.setText(book.getName());
+
+        Button validate = findViewById(R.id.validate);
+        Button picker1 = findViewById(R.id.pickColorBG);
+        Button picker2 = findViewById(R.id.pickColorOF);
 
         picker1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,25 +96,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void init(){
-        Intent args= getIntent();
-        Bundle bundle = args.getExtras();
-        if (bundle != null) {
-            mod = bundle.getString("mod");
-        }
-        if (mod != null && mod.equals("new")) {
-            if (bundle != null) {
-                id = bundle.getInt("bookId");
-            }
-            book = PicoloBook.newBookFromUser("", id);
-            PicoloBookService.setBook(book);
-        }else if (mod != null && mod.equals("modify")){
-            book=PicoloBookService.getBook();
-        }
-
-
-    }
-
     public void openColorPicker(int Dcolor, final int c){
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, Dcolor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
@@ -134,4 +119,20 @@ public class SettingsActivity extends AppCompatActivity {
         colorPicker.show();
     }
 
+    private void getIntentArgs(){
+        Intent args= getIntent();
+        Bundle bundle = args.getExtras();
+        if (bundle != null) {
+            mod = bundle.getString("mod");
+        }
+        if (mod != null && mod.equals("new")) {
+            if (bundle != null) {
+                id = bundle.getInt("bookId");
+            }
+            book = PicoloBook.newBookFromUser("", id);
+            PicoloBookService.setBook(book);
+        }else if (mod != null && mod.equals("modify")){
+            book=PicoloBookService.getBook();
+        }
+    }
 }

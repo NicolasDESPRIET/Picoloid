@@ -19,6 +19,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class DeleteBookRecycleViewAdapter extends RecyclerView.Adapter<DeleteBookRecycleViewAdapter.ViewHolder> {
+
     private Context context;
     private JSONArray profilList;
 

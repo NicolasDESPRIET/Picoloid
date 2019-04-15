@@ -21,6 +21,9 @@ import java.util.ArrayList;
 
 public class DeleteBookActivity extends AppCompatActivity {
 
+    private static final String TAG = "DeleteBookActivity";
+
+    //data
     private JSONArray profiles;
     private DeleteBookRecycleViewAdapter adapter;
 
@@ -29,7 +32,13 @@ public class DeleteBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_book);
 
-        Button cancel = findViewById(R.id.cancelDel);
+        initViews();
+    }
+
+    private void initViews(){
+        initRecycleView();
+
+        Button cancel = findViewById(R.id.deleteBook_CancelDeleteButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,18 +46,11 @@ public class DeleteBookActivity extends AppCompatActivity {
             }
         });
 
-        initlist();
-
-        Button validate = findViewById(R.id.validateDel);
+        Button validate = findViewById(R.id.deleteBook_DeleteButton);
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO CORRIGER CETTE SUPPRESSION DE MERDE
                 ArrayList<Integer> list = adapter.getDeleted();
-
-                /*for (int i = 0; i< list.size(); i++){
-                    Toast.makeText(DeleteBookActivity.this, list.get(i).toString(), Toast.LENGTH_SHORT).show();
-                }*/
 
                 for (int i = 0; i < profiles.length() ; i++) {
                     for (int j = 0; j< list.size(); j++){
@@ -66,24 +68,35 @@ public class DeleteBookActivity extends AppCompatActivity {
                 startActivity(kk);
             }
         });
-
     }
 
-    private void initlist(){
+    private void initRecycleView(){
+        initList();
+
+        RecyclerView recyclerView = findViewById(R.id.deleteBook_Recycler);
+        adapter = new DeleteBookRecycleViewAdapter(this, profiles);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initList(){
         try {
             profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        initRecycleView();
     }
 
-    private void initRecycleView(){
-        RecyclerView recyclerView = findViewById(R.id.delete_recycler);
-        adapter = new DeleteBookRecycleViewAdapter(this, profiles);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    private void delete(){
+        setDeleted();
+
+        for ( int i = 0; i < profiles.length(); i++){
+            if (deleted.get(i)) profiles.remove(i);
+        }
+
+        JsonCreator.saveAll(getApplicationContext(), profiles);
+        Intent returnToMain = new Intent(DeleteBookActivity.this, MainActivity.class);
+        startActivity(returnToMain);
     }
 
 }

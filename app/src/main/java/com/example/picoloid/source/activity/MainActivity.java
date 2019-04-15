@@ -22,9 +22,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
+    //data
     private JSONArray profiles = null;
 
     private static final String TAG = "MainActivity";
@@ -34,33 +36,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        calculateScreenSize();
-        initlist();
+        calculateScreenSize(); //sets screen size for future button placement
 
-        Button openSettingsPage = findViewById(R.id.openPageButton);
+        initViews();
+    }
+
+    private void initViews(){
+        initRecycleView();
+
+        Button openSettingsPage = findViewById(R.id.main_CreateBookButton);
         openSettingsPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii=new Intent(MainActivity.this, SettingsActivity.class);
-                ii.putExtra("bookId", getBiggerId()+1);
-                ii.putExtra("mod", "new");
-                startActivity(ii);
+                createNewBook();
             }
         });
 
-        Button openDeleteAc = findViewById(R.id.deleteButtonPage);
+        Button openDeleteAc = findViewById(R.id.main_DeleteBookButton);
         openDeleteAc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent jj = new Intent(MainActivity.this, DeleteBookActivity.class);
-                startActivity(jj);
+                deleteBook();
             }
         });
     }
 
-    private void initlist(){
+    private void createNewBook(){
+        Intent ii=new Intent(MainActivity.this, SettingsActivity.class);
+        ii.putExtra("bookId", getLastId()+1);
+        ii.putExtra("mod", "new");
+        startActivity(ii);
+    }
+
+    private void deleteBook(){
+        Intent jj = new Intent(MainActivity.this, DeleteBookActivity.class);
+        startActivity(jj);
+    }
+
+    private void initRecycleView(){
         try {
-            JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
+            initlist();
+            setRecycleViewAdapter();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,18 +86,21 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        initRecycleView();
     }
 
-    private void initRecycleView(){
-        RecyclerView recyclerView = findViewById(R.id.main_recycler);
+    private void initlist() throws IOException,JSONException{
+        JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
+        profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
+    }
+
+    private void setRecycleViewAdapter(){
+        RecyclerView recyclerView = findViewById(R.id.main_RecyclerView);
         MainRecycleViewAdapter adapter = new MainRecycleViewAdapter(this, profiles);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private int getBiggerId(){
+    private int getLastId(){
         int id = 0;
         for(int i = 0; i < profiles.length(); i++){
             try {

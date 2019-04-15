@@ -1,6 +1,7 @@
 package com.example.picoloid.source.managerData;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloBookSettings;
@@ -14,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URI;
+
 
 public class ObjectManager {
 
@@ -67,7 +68,7 @@ public class ObjectManager {
     public static PicoloButton loadPicolobuttonfromJson(JSONObject jsonObject) throws JSONException {
         /*
          * create empty button and empty coordonate for him
-         * create URI from the string path image in the jsonobject
+         * create Uri from the string path image in the jsonobject
          * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();

@@ -1,7 +1,5 @@
 package com.example.picoloid.source.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,13 +25,13 @@ public class PageActivityEditor extends AppCompatActivity {
 
     private static final String TAG = "PageActivityEdit";
 
-    private RelativeLayout buttonLayout;
-
+    //data
     private PicoloPage currentPage;
-
     private List<PicoloButtonEditView> buttonList;
-
     private PicoloButtonEditView selectedButton;
+
+    //xml
+    private RelativeLayout buttonLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +40,17 @@ public class PageActivityEditor extends AppCompatActivity {
 
         ApplicationRuntimeInfos.isEdit = true;
 
-        buttonLayout = (RelativeLayout)findViewById(R.id.buttonLayout_Edit);
-
         getIntentArgs();
 
+        initViews();
+    }
+
+    private void initViews(){
+        buttonLayout = (RelativeLayout)findViewById(R.id.pageEditor_Layout);
+        printPicoloButtons();
+    }
+
+    private void printPicoloButtons(){
         PicoloButtonViewPrinter printer = new PicoloButtonViewPrinter(
                 currentPage,
                 this,
@@ -53,20 +58,12 @@ public class PageActivityEditor extends AppCompatActivity {
         );
         printer.showButtons("edit");
         buttonList = printer.getEditButtonList();
-        for(int i=0;i<buttonList.size();i++){
-            buttonList.get(i).setEditor(this);
-        }
+        setEditorOnButtons();
     }
 
-    private void getIntentArgs(){
-        Intent args= getIntent();
-        Bundle bundle = args.getExtras();
-        try{
-            int id = (int)bundle.get("pageId");
-            currentPage = PicoloBookService.getBook().getPageFromId(id);
-        }catch (Exception e){
-            Log.d(TAG, "init: coulnd't load page");
-            finish();
+    private void setEditorOnButtons(){
+        for(int i=0;i<buttonList.size();i++){
+            buttonList.get(i).setEditor(this);
         }
     }
 
@@ -80,38 +77,52 @@ public class PageActivityEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.save_changes:
-                Log.d(TAG, "onOptionsItemSelected: user clicked");
-                saveModifs();
-                JsonCreator.save(this);
-                returnToUserMode();
+            case R.id.pageEditor_SaveChangesButton:
+                saveChangeButton();
                 break;
-            case R.id.change_button_data:
-                if(selectedButton == null)return true;
-                Intent ii = new Intent(getApplicationContext(), ButtonEditorActivity.class);
-                ii.putExtra("pageId",currentPage.getId());
-                ii.putExtra("buttonId",selectedButton.getButtonData().getId());
-                Log.d(TAG, "onOptionsItemSelected: selected button id = "+selectedButton.getId() + "title:"+selectedButton.getButtonData().getId());
-                startActivity(ii);
+            case R.id.pageEditor_EditButtonData:
+                editButtonData();
                 break;
-            case R.id.add_button:
-                PicoloButton newButton = new PicoloButton();
-                currentPage.addButton(newButton);
-                saveModifs();
-                JsonCreator.save(this);
-                refreshPage();
-            case R.id.delete_button:
-                if(selectedButton == null)return true;
-                DeleteButtonDialog dialog = new DeleteButtonDialog(this,this,selectedButton.getButtonData());
-                dialog.showDialog();
+            case R.id.pageEditor_AddNewButton:
+                addNewButton();
+                break;
+            case R.id.pageEditor_DeleteButton:
+                deleteButton();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
         return true;
     }
 
-    public void saveModifs(){
+    private void saveChangeButton(){
+        saveChangesLocally();
+        JsonCreator.save(this);
+        returnToUserMode();
+    }
+
+    private void editButtonData(){
+        if(selectedButton == null) return;
+        Intent openButtonDataEditor = new Intent(getApplicationContext(), ButtonEditorActivity.class);
+        openButtonDataEditor.putExtra("pageId",currentPage.getId());
+        openButtonDataEditor.putExtra("buttonId",selectedButton.getButtonData().getId());
+        startActivity(openButtonDataEditor);
+    }
+
+    private void addNewButton(){
+        PicoloButton newButton = new PicoloButton();
+        currentPage.addButton(newButton);
+        saveChangesLocally();
+        refreshPage();
+    }
+
+    private void deleteButton(){
+        if(selectedButton == null) return;
+        DeleteButtonDialog dialog = new DeleteButtonDialog(this,this,selectedButton.getButtonData());
+        dialog.showDialog();
+    }
+
+    public void saveChangesLocally(){
         for(int i=0; i< buttonList.size();i++){
             updateSingleViewCoord(buttonList.get(i));
         }
@@ -120,6 +131,7 @@ public class PageActivityEditor extends AppCompatActivity {
     private void returnToUserMode(){
         Intent ii = new Intent(getApplicationContext(), PageActivityUser.class);
         ii.putExtra("pageId",currentPage.getId());
+
         startActivity(ii);
         finish();
     }
@@ -141,6 +153,18 @@ public class PageActivityEditor extends AppCompatActivity {
             buttonList.get(i).unselect();
         }
         selectedButton = null;
+    }
+
+    private void getIntentArgs(){
+        Intent args= getIntent();
+        Bundle bundle = args.getExtras();
+        try{
+            int id = (int)bundle.get("pageId");
+            currentPage = PicoloBookService.getBook().getPageFromId(id);
+        }catch (Exception e){
+            Log.d(TAG, "init: coulnd't load page");
+            finish();
+        }
     }
 
     public void setSelectedButton(PicoloButtonEditView button){

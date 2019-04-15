@@ -7,7 +7,7 @@
     tools:context=".source.activity.ButtonEditorActivity">
 
     <Button
-        android:id="@+id/buttoneditor_savebutton"
+        android:id="@+id/buttonEditor_SaveChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/buttoneditor_title"
+        android:id="@+id/buttonEditor_ButtonTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/buttoneditor_radiogroup"
+        android:id="@+id/buttonEditor_ButtonTypeRadioGroup"
         android:layout_width="203dp"
         android:layout_height="202dp"
         android:layout_marginStart="8dp"
@@ -46,38 +46,40 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/btnedit_none"
+            android:id="@+id/buttonEditor_Type_None"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="None" />
 
         <RadioButton
-            android:id="@+id/btnedit_image"
+            android:id="@+id/buttonEditor_Type_Image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Image" />
 
         <RadioButton
-            android:id="@+id/btnedit_video"
+            android:id="@+id/buttonEditor_Type_Video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Video" />
 
         <RadioButton
-            android:id="@+id/btnedit_sound"
+            android:id="@+id/buttonEditor_Type_Sound"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Sound" />
 
         <RadioButton
-            android:id="@+id/btnedit_page"
+            android:id="@+id/buttonEditor_Type_Page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Page" />
+
     </RadioGroup>
+
 </android.support.constraint.ConstraintLayout>
