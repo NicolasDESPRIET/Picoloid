@@ -25,9 +25,6 @@ public class DeleteBookActivity extends AppCompatActivity {
 
     //data
     private JSONArray profiles;
-    private ArrayList<Boolean> deleted;
-
-    //xml
     private DeleteBookRecycleViewAdapter adapter;
 
     @Override
@@ -53,7 +50,22 @@ public class DeleteBookActivity extends AppCompatActivity {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delete();
+                ArrayList<Integer> list = adapter.getDeleted();
+
+                for (int i = 0; i < profiles.length() ; i++) {
+                    for (int j = 0; j< list.size(); j++){
+                        try {
+                            if ( profiles.getJSONObject(i).getInt("id") == list.get(j)){
+                                profiles.remove(i);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                JsonCreator.saveDeleted(DeleteBookActivity.this, profiles);
+                Intent kk = new Intent(DeleteBookActivity.this, MainActivity.class);
+                startActivity(kk);
             }
         });
     }
@@ -87,7 +99,4 @@ public class DeleteBookActivity extends AppCompatActivity {
         startActivity(returnToMain);
     }
 
-    private void setDeleted(){
-        this.deleted = adapter.getDeleted();
-    }
 }
