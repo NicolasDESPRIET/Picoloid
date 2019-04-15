@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     //data
     private JSONArray profiles = null;
 
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             initlist();
             setRecycleViewAdapter();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
