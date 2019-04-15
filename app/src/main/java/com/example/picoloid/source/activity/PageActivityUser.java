@@ -119,7 +119,8 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void about(){
-
+        Intent about = new Intent(this, About.class);
+        this.startActivity(about);
     }
 
     private void showAllPages(){
