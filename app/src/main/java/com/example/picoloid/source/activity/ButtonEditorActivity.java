@@ -1,6 +1,7 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,18 +12,18 @@ import android.widget.RadioGroup;
 import com.example.picoloid.R;
 import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
-import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
+import com.example.picoloid.source.util.VideoPicker;
 
-import static com.example.picoloid.source.model.PicoloButtonType.IMAGE;
-import static com.example.picoloid.source.model.PicoloButtonType.NONE;
-import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
-import static com.example.picoloid.source.model.PicoloButtonType.SOUND;
-import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
+import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
+import static com.example.picoloid.source.view.TypeToRadioConverter.convertTypeToRadioButtonId;
 
 public class ButtonEditorActivity extends AppCompatActivity {
 
     private static final String TAG = "ButtonEditorActivity";
+
+    //objects
+    private VideoPicker videoPicker;
 
     //data
     private PicoloButton currentButton;
@@ -37,6 +38,8 @@ public class ButtonEditorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_editor);
+
+        videoPicker = new VideoPicker(this);
 
         getIntentArgs();
         initViews();
@@ -56,6 +59,14 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
         radioGroup = (RadioGroup)findViewById(R.id.buttonEditor_ButtonTypeRadioGroup);
         radioGroup.check(convertTypeToRadioButtonId(currentButton.getType()));
+
+        Button videoPickerButton = (Button) findViewById(R.id.buttonEditor_VideoPicker);
+        videoPickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                videoPicker.showPictureDialog();
+            }
+        });
     }
 
     private void saveAndQuit(){
@@ -82,37 +93,10 @@ public class ButtonEditorActivity extends AppCompatActivity {
         }
     }
 
-    private PicoloButtonType convertRadioButtonIdToState(int id){
-        switch(id){
-            case R.id.buttonEditor_Type_None:
-                return NONE;
-            case R.id.buttonEditor_Type_Image:
-                return IMAGE;
-            case R.id.buttonEditor_Type_Video:
-                return VIDEO;
-            case R.id.buttonEditor_Type_Sound:
-                return SOUND;
-            case R.id.buttonEditor_Type_Page:
-                return PAGE;
-            default:
-                return NONE;
-        }
-    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    private int convertTypeToRadioButtonId(PicoloButtonType type){
-        switch(type){
-            case NONE:
-                return R.id.buttonEditor_Type_None;
-            case IMAGE:
-                return R.id.buttonEditor_Type_Image;
-            case VIDEO:
-                return R.id.buttonEditor_Type_Video;
-            case SOUND:
-                return R.id.buttonEditor_Type_Sound;
-            case PAGE:
-                return R.id.buttonEditor_Type_Page;
-            default:
-                return R.id.buttonEditor_Type_None;
-        }
+        videoPicker.onActivityResult(requestCode,resultCode,data);
     }
 }
