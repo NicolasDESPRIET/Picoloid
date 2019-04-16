@@ -9,22 +9,26 @@
 
 
     <ImageView
-        android:id="@+id/IV"
-        android:layout_width="301dp"
-        android:layout_height="205dp"
+        android:id="@+id/imageActivity_ImageView"
+        android:layout_width="710dp"
+        android:layout_height="330dp"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="ContentDescription" />
 
     <Button
-        android:id="@+id/button_id"
+        android:id="@+id/imageActivity_GoBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -32,9 +36,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:text="GoBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IV" />
+        app:layout_constraintTop_toBottomOf="@+id/imageActivity_ImageView"
+        app:layout_constraintVertical_bias="0.846" />
 
 </android.support.constraint.ConstraintLayout>
