@@ -10,6 +10,8 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.example.picoloid.source.activity.ButtonEditorActivity;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,11 +20,11 @@ import java.io.OutputStream;
 import java.util.Calendar;
 
 public class VideoPicker {
-    private Activity activity;
+    private ButtonEditorActivity activity;
     private static final String VIDEO_DIRECTORY = "/demonuts";
     private int GALLERY = 1, CAMERA = 2;
 
-    public VideoPicker(Activity activity){
+    public VideoPicker(ButtonEditorActivity activity){
         this.activity = activity;
     }
 
@@ -52,6 +54,7 @@ public class VideoPicker {
     public void chooseVideoFromGallary() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("video/*");
         activity.startActivityForResult(galleryIntent, GALLERY);
     }
 
@@ -71,6 +74,8 @@ public class VideoPicker {
                 Uri contentURI = data.getData();
 
                 String selectedVideoPath = getPath(contentURI);
+                activity.setVideoPath(contentURI);
+
                 Log.d("path",selectedVideoPath);
                 saveVideoToInternalStorage(selectedVideoPath);
 
@@ -78,10 +83,12 @@ public class VideoPicker {
 
         } else if (requestCode == CAMERA) {
             Uri contentURI = data.getData();
+            activity.setVideoPath(contentURI);
             String recordedVideoPath = getPath(contentURI);
             Log.d("frrr",recordedVideoPath);
             saveVideoToInternalStorage(recordedVideoPath);
         }
+
     }
 
     private void saveVideoToInternalStorage (String filePath) {

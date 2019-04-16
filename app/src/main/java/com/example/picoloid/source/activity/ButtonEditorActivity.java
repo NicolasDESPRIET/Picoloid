@@ -1,9 +1,11 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +14,9 @@ import android.widget.RadioGroup;
 import com.example.picoloid.R;
 import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
+import com.example.picoloid.source.util.PicoloButtonUtils;
 import com.example.picoloid.source.util.VideoPicker;
 
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
@@ -28,6 +32,10 @@ public class ButtonEditorActivity extends AppCompatActivity {
     //data
     private PicoloButton currentButton;
     private int currentPageId;
+
+    private Uri videoPath;
+    private Uri imagePath;
+    private Uri soundPath;
 
     //xml
     private EditText buttonTitle;
@@ -71,7 +79,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     private void saveAndQuit(){
         currentButton.setTitle(buttonTitle.getText().toString());
-        currentButton.setType(convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId()));
+        saveType();
 
         JsonCreator.save(getApplicationContext());
 
@@ -93,10 +101,34 @@ public class ButtonEditorActivity extends AppCompatActivity {
         }
     }
 
+    private void saveType(){
+        PicoloButtonType type = convertRadioButtonIdToState(radioGroup.getCheckedRadioButtonId());
+        switch(type){
+            case NONE:
+                PicoloButtonUtils.switchButtonToNone(currentButton);
+                break;
+            case VIDEO:
+                PicoloButtonUtils.switchButtonToVideo(currentButton,videoPath);
+                break;
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         videoPicker.onActivityResult(requestCode,resultCode,data);
+    }
+
+    public void setVideoPath(Uri path){
+        videoPath = path;
+    }
+
+    public void setImagePath(Uri path){
+        imagePath = path;
+    }
+
+    public void setSoundPath(Uri path){
+        soundPath = path;
     }
 }

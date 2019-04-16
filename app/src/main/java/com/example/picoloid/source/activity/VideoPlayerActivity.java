@@ -26,6 +26,8 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
+        Log.d(TAG, "onCreate: Video act opened");
+
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
         try{
@@ -33,6 +35,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
             showVideo();
         }catch (Exception e){
             Log.d(TAG, "couldn't load video");
+            e.printStackTrace();
             finish();
         }
     }
@@ -40,7 +43,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     private void showVideo() throws Exception{
 
         videoView = (VideoView) findViewById(R.id.vView);
-        MediaController m = new MediaController(this);
+        meController = new MediaController(this);
         videoView.setVideoPath(videoPath);
         meController.setAnchorView(videoView);
         videoView.setMediaController(meController);
