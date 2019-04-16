@@ -21,20 +21,20 @@ import java.util.Calendar;
 
 public class VideoPicker {
     private ButtonEditorActivity activity;
-    private static final String VIDEO_DIRECTORY = "/demonuts";
+    private static final String VIDEO_DIRECTORY = "/PicoloRessources";
     private int GALLERY = 1, CAMERA = 2;
 
     public VideoPicker(ButtonEditorActivity activity){
         this.activity = activity;
     }
 
-    public void showPictureDialog(){
-        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(activity);
-        pictureDialog.setTitle("Select Action");
-        String[] pictureDialogItems = {
+    public void showVideoDialog(){
+        AlertDialog.Builder videoDialog = new AlertDialog.Builder(activity);
+        videoDialog.setTitle("Select Action");
+        String[] videoDialogItems = {
                 "Select video from gallery",
                 "Record video from camera" };
-        pictureDialog.setItems(pictureDialogItems,
+        videoDialog.setItems(videoDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -48,7 +48,7 @@ public class VideoPicker {
                         }
                     }
                 });
-        pictureDialog.show();
+        videoDialog.show();
     }
 
     public void chooseVideoFromGallary() {
@@ -74,7 +74,7 @@ public class VideoPicker {
                 Uri contentURI = data.getData();
 
                 String selectedVideoPath = getPath(contentURI);
-                activity.setVideoPath(contentURI);
+                activity.setVideoPath(selectedVideoPath);
 
                 Log.d("path",selectedVideoPath);
                 saveVideoToInternalStorage(selectedVideoPath);
@@ -83,8 +83,9 @@ public class VideoPicker {
 
         } else if (requestCode == CAMERA) {
             Uri contentURI = data.getData();
-            activity.setVideoPath(contentURI);
+
             String recordedVideoPath = getPath(contentURI);
+            activity.setVideoPath(recordedVideoPath);
             Log.d("frrr",recordedVideoPath);
             saveVideoToInternalStorage(recordedVideoPath);
         }

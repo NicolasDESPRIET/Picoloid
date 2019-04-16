@@ -13,7 +13,7 @@ import com.example.picoloid.R;
 
 public class ImageActivity extends AppCompatActivity {
 
-    private ImageView imageview;
+    private ImageView imageView;
     private static final String TAG = "ImageActivity";
 
     private String imagePath;
@@ -22,6 +22,8 @@ public class ImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+
+        imageView = (ImageView)findViewById(R.id.IV);
 
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
@@ -35,11 +37,7 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void showImage() throws Exception{
-        Bitmap myBitmap = BitmapFactory.decodeFile(imagePath);
-
-        ImageView myImage = (ImageView) findViewById(R.id.IV);
-
-        myImage.setImageBitmap(myBitmap);
+        imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
     }
 
 }

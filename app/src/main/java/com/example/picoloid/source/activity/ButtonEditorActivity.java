@@ -16,6 +16,7 @@ import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
+import com.example.picoloid.source.util.ImagePicker;
 import com.example.picoloid.source.util.PicoloButtonUtils;
 import com.example.picoloid.source.util.VideoPicker;
 
@@ -28,6 +29,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     //objects
     private VideoPicker videoPicker;
+    private ImagePicker imagePicker;
 
     //data
     private PicoloButton currentButton;
@@ -48,6 +50,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_button_editor);
 
         videoPicker = new VideoPicker(this);
+        imagePicker = new ImagePicker(this);
 
         getIntentArgs();
         initViews();
@@ -72,13 +75,22 @@ public class ButtonEditorActivity extends AppCompatActivity {
         videoPickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                videoPicker.showPictureDialog();
+                videoPicker.showVideoDialog();
+            }
+        });
+
+        Button imagePickerButton = (Button) findViewById(R.id.buttonEditor_ImagePicker);
+        imagePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagePicker.showPictureDialog();
             }
         });
     }
 
     private void saveAndQuit(){
         currentButton.setTitle(buttonTitle.getText().toString());
+        currentButton.setImagePath(imagePath);
         saveType();
 
         JsonCreator.save(getApplicationContext());
@@ -107,6 +119,9 @@ public class ButtonEditorActivity extends AppCompatActivity {
             case NONE:
                 PicoloButtonUtils.switchButtonToNone(currentButton);
                 break;
+            case IMAGE:
+                PicoloButtonUtils.switchButtonToImage(currentButton);
+                break;
             case VIDEO:
                 PicoloButtonUtils.switchButtonToVideo(currentButton,videoPath);
                 break;
@@ -118,17 +133,18 @@ public class ButtonEditorActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         videoPicker.onActivityResult(requestCode,resultCode,data);
+        imagePicker.onActivityResult(requestCode,resultCode,data);
     }
 
-    public void setVideoPath(Uri path){
-        videoPath = path;
+    public void setVideoPath(String path){
+        videoPath = Uri.parse(path);
     }
 
-    public void setImagePath(Uri path){
-        imagePath = path;
+    public void setImagePath(String path){
+        imagePath = Uri.parse(path);
     }
 
-    public void setSoundPath(Uri path){
-        soundPath = path;
+    public void setSoundPath(String path){
+        soundPath = Uri.parse(path);
     }
 }
