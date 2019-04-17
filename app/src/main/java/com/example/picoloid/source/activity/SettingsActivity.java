@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.managerData.JsonCreator;
@@ -81,7 +80,6 @@ public class SettingsActivity extends AppCompatActivity {
                 book.setName(nameBook.getText().toString());
                 book.setId(id);
                 PicoloBookService.setBook(book);
-                Toast.makeText(SettingsActivity.this, book.getSettings().getBackgroundColor() + " -- " + book.getSettings().getOverviewFrameworkColor(), Toast.LENGTH_LONG).show();
 
                 JsonCreator.save(getApplicationContext());
                 if (mod.equals("new")){
@@ -89,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(ii);
                 }else{
                     Intent ii=new Intent(SettingsActivity.this, PageActivityUser.class);
-                    ii.putExtra("pageId", PicoloBookService.getBook().getId());
+                    ii.putExtra("pageId", 0);
                     startActivity(ii);
                 }
             }
