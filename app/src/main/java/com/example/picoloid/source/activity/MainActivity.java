@@ -57,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 deleteBook();
             }
         });
+
+        Button openTestImage = findViewById(R.id.main_VideoImageButton);
+        openTestImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     private void createNewBook(){

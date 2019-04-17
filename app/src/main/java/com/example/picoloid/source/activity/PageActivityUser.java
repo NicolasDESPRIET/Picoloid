@@ -1,9 +1,8 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,11 +34,13 @@ public class PageActivityUser extends AppCompatActivity {
 
         getIntentArgs();
 
+        this.setTitle("Picoloid : Livre de " + PicoloBookService.getBook().getName() + " - " + currentPage.getName());
+
         initViews();
     }
 
     private void initViews(){
-        buttonLayout = (RelativeLayout)findViewById(R.id.pageUser_Layout);
+        buttonLayout = (RelativeLayout)findViewById(R.id.pageUserlayout);
 
         PicoloButtonViewPrinter printer = new PicoloButtonViewPrinter(
                 currentPage,
@@ -124,7 +125,8 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void showAllPages(){
-
+        Intent ii = new Intent(PageActivityUser.this, ListPageActivity.class);
+        startActivity(ii);
     }
 
     private void createNewPage(){

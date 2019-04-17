@@ -87,16 +87,4 @@ public class DeleteBookActivity extends AppCompatActivity {
         }
     }
 
-    private void delete(){
-        setDeleted();
-
-        for ( int i = 0; i < profiles.length(); i++){
-            if (deleted.get(i)) profiles.remove(i);
-        }
-
-        JsonCreator.saveAll(getApplicationContext(), profiles);
-        Intent returnToMain = new Intent(DeleteBookActivity.this, MainActivity.class);
-        startActivity(returnToMain);
-    }
-
 }
