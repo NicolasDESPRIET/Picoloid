@@ -2,7 +2,9 @@ package com.example.picoloid.source.activity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import com.example.picoloid.source.util.PicoloButtonUtils;
 import com.example.picoloid.source.util.VideoPicker;
 
 import static com.example.picoloid.source.model.PicoloButtonType.NONE;
+import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertTypeToRadioButtonId;
 
@@ -55,6 +58,8 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private ConstraintLayout pageLayout;
 
     private ImageView imagePreview;
+    private ImageView imagePreview2;
+    private ImageView videoPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,11 +124,18 @@ public class ButtonEditorActivity extends AppCompatActivity {
             }
         });
 
+        imagePreview2 = (ImageView)findViewById(R.id.buttonEditor_ImagePreview2);
+        if(currentButton.getImagePath() != null){
+            imagePreview2.setImageBitmap(BitmapFactory.decodeFile(currentButton.getImagePath().toString()));
+        }
+
+        videoPreview = (ImageView)findViewById(R.id.buttonEditor_VideoPreview);
+        if(currentButton.getType() == VIDEO && currentButton.getSpecialPath() != null){
+            videoPreview.setImageBitmap(ThumbnailUtils.createVideoThumbnail(currentButton.getSpecialPath().getPath(), MediaStore.Video.Thumbnails.MICRO_KIND));
+        }
 
 
-
-
-
+        refreshSpecialLayout();
     }
 
     private void refreshSpecialLayout(){
@@ -208,11 +220,13 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     public void setVideoPath(String path){
         videoPath = Uri.parse(path);
+        videoPreview.setImageBitmap(ThumbnailUtils.createVideoThumbnail(path, MediaStore.Video.Thumbnails.MICRO_KIND));
     }
 
     public void setImagePath(String path){
         imagePath = Uri.parse(path);
         imagePreview.setImageBitmap(BitmapFactory.decodeFile(path));
+        imagePreview2.setImageBitmap(BitmapFactory.decodeFile(path));
     }
 
     public void setSoundPath(String path){
