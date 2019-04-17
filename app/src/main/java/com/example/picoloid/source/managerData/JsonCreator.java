@@ -75,7 +75,6 @@ public class JsonCreator {
         JSONObject settings = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonSetting.json"));
 
         settings.put("backgroundColor", picoloBook.getSettings().getBackgroundColor());
-        settings.put("OverviewFrameworkColor", picoloBook.getSettings().getOverviewFrameworkColor());
 
         book.put("name", picoloBook.getName());
         book.put("id", picoloBook.getId());

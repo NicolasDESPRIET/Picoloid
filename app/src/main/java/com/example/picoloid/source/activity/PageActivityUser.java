@@ -101,6 +101,7 @@ public class PageActivityUser extends AppCompatActivity {
     private void goToEditMode(){
         Intent ii = new Intent(this, PageActivityEditor.class);
         ii.putExtra("pageId",currentPage.getId());
+        ii.putExtra("bookId",PicoloBookService.getBook().getId());
         this.startActivity(ii);
         finish();
     }
@@ -116,6 +117,7 @@ public class PageActivityUser extends AppCompatActivity {
     private void options(){
         Intent settings = new Intent(this, SettingsActivity.class);
         settings.putExtra("mod","modify");
+        settings.putExtra("bookId", PicoloBookService.getBook().getId());
         this.startActivity(settings);
         finish();
     }

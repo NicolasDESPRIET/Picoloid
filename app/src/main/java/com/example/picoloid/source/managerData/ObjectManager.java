@@ -36,12 +36,10 @@ public class ObjectManager {
         PicoloBook book = new PicoloBook(jsonObject.getString("name"), jsonObject.getInt("id"));
         JSONArray pagelist = jsonObject.getJSONArray("list_page");
         PicoloBookSettings settings = null;
-        if (jsonObject.getJSONObject("settings").getString("backgroundColor")== null
-                && jsonObject.getJSONObject("settings").getString("OverviewFrameworkColor")==null){
+        if (jsonObject.getJSONObject("settings").getString("backgroundColor")== null){
             settings = new PicoloBookSettings();
         }else{
-            settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getString("backgroundColor"),
-                    jsonObject.getJSONObject("settings").getString("OverviewFrameworkColor"));
+            settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getString("backgroundColor"));
         }
         for (int i = 0; i < pagelist.length(); i++){
             PicoloPage page = loadPicoloPagefromJson(pagelist.getJSONObject(i));
