@@ -1,7 +1,6 @@
 package com.example.picoloid.source.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.example.picoloid.source.model.PicoloButton;
