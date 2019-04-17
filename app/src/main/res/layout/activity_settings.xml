@@ -15,7 +15,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:background="#FFFFFF"
-        android:text="Nom"
+        android:text="Name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textStyle="bold"

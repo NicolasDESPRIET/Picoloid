@@ -32,7 +32,6 @@ public class PicoloButtonViewPrinter {
     }
 
     public void showButtons(String buttonType){
-        Log.d(TAG, "showButtons: PRINT");
         List<PicoloButton> buttonList = currentPage.getButtonList();
         for(int i=0;i<buttonList.size();i++){
             switch(buttonType){
