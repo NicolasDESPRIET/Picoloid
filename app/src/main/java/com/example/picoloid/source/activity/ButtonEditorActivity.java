@@ -136,7 +136,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
         createPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewPageFromButtonEditorDialog dialog = new NewPageFromButtonEditorDialog(getApplicationContext(),currentButton,activity);
+                NewPageFromButtonEditorDialog dialog = new NewPageFromButtonEditorDialog(ButtonEditorActivity.this,currentButton,activity);
                 dialog.showDialog();
             }
         });
@@ -262,7 +262,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     }
 
     public void setPagePointerId(int id){
-        currentButton.setPageId(id);
+        pagePointerId = id;
         pageNamePreview.setText(PicoloBookService.getBook().getPageFromId(id).getName());
     }
 }

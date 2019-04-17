@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.example.picoloid.source.activity.ButtonEditorActivity;
@@ -54,6 +55,7 @@ public class NewPageFromButtonEditorDialog {
         PicoloPage page = new PicoloPage(input);
         PicoloBookService.getBook().addPage(page);
         buttonData.setPageId(page.getId());
+        Log.d("WAOW", "positiveButton: "+page.getId());
         activity.setPagePointerId(page.getId());
         JsonCreator.save(context);
     }
