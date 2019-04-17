@@ -16,11 +16,12 @@ public class PicoloButton {
     public PicoloButton(){
         title = "Undefined"; //HARDCODE
         this.id = -1;
-        imagePath = null;
         coord = new PicoloButtonCoord();
         type = PicoloButtonType.NONE;
-        specialPath = null;
         pageId = -1;
+        imagePath = null;
+        specialPath = null;
+
     }
 
     public String getTitle() {
