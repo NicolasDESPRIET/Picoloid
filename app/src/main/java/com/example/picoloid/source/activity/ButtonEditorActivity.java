@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.dialog.NewPageFromButtonEditorDialog;
 import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
@@ -26,6 +28,7 @@ import com.example.picoloid.source.util.PicoloButtonUtils;
 import com.example.picoloid.source.util.VideoPicker;
 
 import static com.example.picoloid.source.model.PicoloButtonType.NONE;
+import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
 import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertTypeToRadioButtonId;
@@ -45,6 +48,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private Uri videoPath;
     private Uri imagePath;
     private Uri soundPath;
+    private int pagePointerId;
 
     //xml
     private EditText buttonTitle;
@@ -60,6 +64,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private ImageView imagePreview;
     private ImageView imagePreview2;
     private ImageView videoPreview;
+    private TextView pageNamePreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,8 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
         videoPicker = new VideoPicker(this);
         imagePicker = new ImagePicker(this);
+
+
 
         getIntentArgs();
         initViews();
@@ -124,6 +131,16 @@ public class ButtonEditorActivity extends AppCompatActivity {
             }
         });
 
+        Button createPageButton = (Button) findViewById(R.id.buttonEditor_PageCreater);
+        final ButtonEditorActivity activity = this;
+        createPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewPageFromButtonEditorDialog dialog = new NewPageFromButtonEditorDialog(getApplicationContext(),currentButton,activity);
+                dialog.showDialog();
+            }
+        });
+
         imagePreview2 = (ImageView)findViewById(R.id.buttonEditor_ImagePreview2);
         if(currentButton.getImagePath() != null){
             imagePreview2.setImageBitmap(BitmapFactory.decodeFile(currentButton.getImagePath().toString()));
@@ -132,6 +149,11 @@ public class ButtonEditorActivity extends AppCompatActivity {
         videoPreview = (ImageView)findViewById(R.id.buttonEditor_VideoPreview);
         if(currentButton.getType() == VIDEO && currentButton.getSpecialPath() != null){
             videoPreview.setImageBitmap(ThumbnailUtils.createVideoThumbnail(currentButton.getSpecialPath().getPath(), MediaStore.Video.Thumbnails.MICRO_KIND));
+        }
+
+        pageNamePreview = (TextView)findViewById(R.id.buttonEditor_PageName);
+        if(currentButton.getType() == PAGE && currentButton.getPageId() > -1){
+            pageNamePreview.setText(PicoloBookService.getBook().getPageFromId(currentButton.getPageId()).getName());
         }
 
 
@@ -205,6 +227,12 @@ public class ButtonEditorActivity extends AppCompatActivity {
             case VIDEO:
                 PicoloButtonUtils.switchButtonToVideo(currentButton,videoPath);
                 break;
+            case SOUND:
+                PicoloButtonUtils.switchButtonToVideo(currentButton,soundPath);
+                break;
+            case PAGE:
+                PicoloButtonUtils.switchButtonToPage(currentButton,pagePointerId);
+                break;
         }
     }
 
@@ -231,5 +259,10 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     public void setSoundPath(String path){
         soundPath = Uri.parse(path);
+    }
+
+    public void setPagePointerId(int id){
+        currentButton.setPageId(id);
+        pageNamePreview.setText(PicoloBookService.getBook().getPageFromId(id).getName());
     }
 }
