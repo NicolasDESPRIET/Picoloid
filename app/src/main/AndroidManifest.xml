@@ -18,6 +18,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
+            android:name=".source.activity.About"
+            android:screenOrientation="landscape">
+        </activity>
             android:name=".source.activity.ListPageActivity"
             android:screenOrientation="landscape" />
         <activity
