@@ -97,7 +97,6 @@ public class PicoloButtonView extends AppCompatButton {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
     }
 
     private void openPage(){
