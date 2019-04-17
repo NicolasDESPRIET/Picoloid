@@ -34,6 +34,8 @@ public class PageActivityUser extends AppCompatActivity {
 
         getIntentArgs();
 
+        this.setTitle("Picoloid : Livre de " + PicoloBookService.getBook().getName() + " - " + currentPage.getName());
+
         initViews();
     }
 
@@ -124,7 +126,8 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void showAllPages(){
-
+        Intent ii = new Intent(PageActivityUser.this, ListPageActivity.class);
+        startActivity(ii);
     }
 
     private void createNewPage(){
