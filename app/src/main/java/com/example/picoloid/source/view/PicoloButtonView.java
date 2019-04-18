@@ -102,6 +102,7 @@ public class PicoloButtonView extends AppCompatButton {
     private void openPage(){
         Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
         openNewPage.putExtra("pageId", buttonData.getPageId());
+        Log.d(TAG, "openPage WAOW "+buttonData.getPageId());
         getContext().startActivity(openNewPage);
     }
 
