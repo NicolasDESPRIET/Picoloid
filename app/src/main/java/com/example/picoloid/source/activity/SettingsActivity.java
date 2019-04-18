@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.managerData.JsonCreator;
@@ -44,10 +45,9 @@ public class SettingsActivity extends AppCompatActivity {
         nameBook = findViewById(R.id.nameBookData);
         showBGC = findViewById(R.id.textView);
 
-        DefaultColor1 = Color.parseColor(book.getSettings().getBackgroundColor());
-
         showBGC.setBackgroundColor(DefaultColor1);
         nameBook.setText(book.getName());
+
 
         Button validate = findViewById(R.id.validate);
         Button picker1 = findViewById(R.id.pickColorBG);
@@ -87,7 +87,8 @@ public class SettingsActivity extends AppCompatActivity {
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 showBGC.setBackgroundColor(color);
                 DefaultColor1 = color;
-                book.getSettings().setBackgroundColor(Integer.toHexString(DefaultColor1).toUpperCase().substring(2));
+                book.getSettings().setBackgroundColor(color);
+                Toast.makeText(SettingsActivity.this, String.valueOf(book.getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
             }
         });
         colorPicker.show();
@@ -111,5 +112,6 @@ public class SettingsActivity extends AppCompatActivity {
                 pageId = bundle.getInt("pageId");
             }
         }
+        DefaultColor1 = book.getSettings().getBackgroundColor();
     }
 }

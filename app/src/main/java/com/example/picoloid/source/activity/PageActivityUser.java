@@ -1,15 +1,19 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.NewPageDialog;
+import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -41,12 +45,15 @@ public class PageActivityUser extends AppCompatActivity {
 
     private void initViews(){
         buttonLayout = (RelativeLayout)findViewById(R.id.pageUserlayout);
+        buttonLayout.setBackgroundColor(PicoloBookService.getBook().getSettings().getBackgroundColor());
 
         PicoloButtonViewPrinter printer = new PicoloButtonViewPrinter(
                 currentPage,
                 this,
                 buttonLayout
         );
+
+        Toast.makeText(this, String.valueOf(PicoloBookService.getBook().getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
         printer.showButtons("user");
     }
 

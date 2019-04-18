@@ -39,7 +39,7 @@ public class ObjectManager {
         if (jsonObject.getJSONObject("settings").getString("backgroundColor")== null){
             settings = new PicoloBookSettings();
         }else{
-            settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getString("backgroundColor"));
+            settings = new PicoloBookSettings(jsonObject.getJSONObject("settings").getInt("backgroundColor"));
         }
         for (int i = 0; i < pagelist.length(); i++){
             PicoloPage page = loadPicoloPagefromJson(pagelist.getJSONObject(i));
@@ -50,7 +50,7 @@ public class ObjectManager {
     }
 
 
-    public static PicoloPage loadPicoloPagefromJson (JSONObject jsonObject) throws JSONException{
+    private static PicoloPage loadPicoloPagefromJson(JSONObject jsonObject) throws JSONException{
         // init the picolopage with her name from the json
         PicoloPage picoloPage = new PicoloPage(jsonObject.getString("name"));
         picoloPage.setId(jsonObject.getInt("id"));
@@ -64,7 +64,7 @@ public class ObjectManager {
         return picoloPage;
     }
 
-    public static PicoloButton loadPicolobuttonfromJson(JSONObject jsonObject) throws JSONException {
+    private static PicoloButton loadPicolobuttonfromJson(JSONObject jsonObject) throws JSONException {
         /*
          * create empty button and empty coordonate for him
          * create Uri from the string path image in the jsonobject
