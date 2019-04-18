@@ -3,6 +3,7 @@ package com.example.picoloid.source.service;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
@@ -12,7 +13,7 @@ public class MediaPlayerService {
     private MediaPlayer mediaPlayer;
     private Context context;
     private MediaPlayerService() {
-        mediaPlayer = null;
+        mediaPlayer =null;
         context = null;
     }
 
@@ -21,18 +22,17 @@ public class MediaPlayerService {
         private static final MediaPlayerService INSTANCE = new MediaPlayerService();
     }
 
+    public static void setContext(Context context){
 
-    public static void setContext(Context ctxt){
-        MediaPlayerServiceHolder.INSTANCE.mediaPlayer.stop();
-        MediaPlayerServiceHolder.INSTANCE.context = ctxt;
+        MediaPlayerServiceHolder.INSTANCE.context = context;
     }
 
     public static void startMediaPlayer(Uri son)throws URISyntaxException{
         if(MediaPlayerServiceHolder.INSTANCE.mediaPlayer!=null){
             MediaPlayerServiceHolder.INSTANCE.mediaPlayer.stop();
         }
-        if (MediaPlayerServiceHolder.INSTANCE.context != null){
-            MediaPlayerServiceHolder.INSTANCE.mediaPlayer =  MediaPlayer.create(MediaPlayerServiceHolder.INSTANCE.context ,son);
+        if(MediaPlayerServiceHolder.INSTANCE.context!=null) {
+            MediaPlayerServiceHolder.INSTANCE.mediaPlayer = MediaPlayer.create(MediaPlayerServiceHolder.INSTANCE.context, son);
         }
         MediaPlayerServiceHolder.INSTANCE.mediaPlayer.start();
 

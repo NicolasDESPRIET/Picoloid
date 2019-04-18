@@ -1,15 +1,22 @@
 package com.example.picoloid.source.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.NewPageDialog;
+import com.example.picoloid.source.model.PicoloBook;
+import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -40,13 +47,16 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void initViews(){
-        buttonLayout = (RelativeLayout)findViewById(R.id.pageUserlayout);
+        buttonLayout = findViewById(R.id.pageUserlayout);
+        buttonLayout.setBackgroundColor(PicoloBookService.getBook().getSettings().getBackgroundColor());
 
         PicoloButtonViewPrinter printer = new PicoloButtonViewPrinter(
                 currentPage,
                 this,
                 buttonLayout
         );
+
+        Toast.makeText(this, String.valueOf(PicoloBookService.getBook().getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
         printer.showButtons("user");
     }
 
@@ -101,12 +111,14 @@ public class PageActivityUser extends AppCompatActivity {
     private void goToEditMode(){
         Intent ii = new Intent(this, PageActivityEditor.class);
         ii.putExtra("pageId",currentPage.getId());
+        ii.putExtra("bookId",PicoloBookService.getBook().getId());
         this.startActivity(ii);
         finish();
     }
 
     private void createNewNextPage(){
-
+        NewPageDialog dialog = new NewPageDialog(currentPage,this,true);
+        dialog.showDialog();
     }
 
     private void help(){
@@ -116,6 +128,7 @@ public class PageActivityUser extends AppCompatActivity {
     private void options(){
         Intent settings = new Intent(this, SettingsActivity.class);
         settings.putExtra("mod","modify");
+        settings.putExtra("bookId", PicoloBookService.getBook().getId());
         this.startActivity(settings);
         finish();
     }
@@ -131,7 +144,7 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void createNewPage(){
-        NewPageDialog dialog = new NewPageDialog(this,this,false);
+        NewPageDialog dialog = new NewPageDialog(currentPage,this,false);
         dialog.showDialog();
     }
 
@@ -145,7 +158,10 @@ public class PageActivityUser extends AppCompatActivity {
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
         try{
-            int id = (int)bundle.get("pageId");
+            int id = 0;
+            if (bundle != null) {
+                id = (int)bundle.get("pageId");
+            }
             currentPage = PicoloBookService.getBook().getPageFromId(id);
         }catch (Exception e){
             finish();

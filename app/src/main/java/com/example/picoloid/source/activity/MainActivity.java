@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
         JsonManager.InitFile(JsonManager.readJsonFromAsset(this,"jsonProfil.json"),this);
         profiles = new JSONObject(JsonManager.readOnFile(this)).getJSONArray("book");
     }
-
     private void setRecycleViewAdapter(){
         RecyclerView recyclerView = findViewById(R.id.main_RecyclerView);
         MainRecycleViewAdapter adapter = new MainRecycleViewAdapter(this, profiles);

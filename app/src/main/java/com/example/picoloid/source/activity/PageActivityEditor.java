@@ -46,7 +46,9 @@ public class PageActivityEditor extends AppCompatActivity {
     }
 
     private void initViews(){
-        buttonLayout = (RelativeLayout)findViewById(R.id.pageEditor_Layout);
+        buttonLayout = findViewById(R.id.pageEditor_Layout);
+        buttonLayout.setBackgroundColor(PicoloBookService.getBook().getSettings().getBackgroundColor());
+
         printPicoloButtons();
     }
 
@@ -159,7 +161,10 @@ public class PageActivityEditor extends AppCompatActivity {
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
         try{
-            int id = (int)bundle.get("pageId");
+            int id = 0;
+            if (bundle != null) {
+                id = (int)bundle.get("pageId");
+            }
             currentPage = PicoloBookService.getBook().getPageFromId(id);
         }catch (Exception e){
             Log.d(TAG, "init: coulnd't load page");
