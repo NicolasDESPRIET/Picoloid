@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.model.PicoloButtonCoord;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.PicoloBookService;
 
@@ -90,7 +91,7 @@ public class JsonCreator {
     }
 
     private static JSONObject saveJsonPageFromObject(Context context, PicoloPage picoloPage) throws IOException, JSONException {
-        JSONObject page = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonButton.json"));
+        JSONObject page = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonPage.json"));
         page.put("name", picoloPage.getName());
         page.put("id", picoloPage.getId());
         JSONArray buttonlist = new JSONArray();
@@ -110,6 +111,14 @@ public class JsonCreator {
         button.put("title", picoloButton.getTitle());
         button.put("id", picoloButton.getId());
         button.put("type", picoloButton.getType());
+
+        JSONObject coord= new JSONObject(JsonManager.readJsonFromAsset(context, "jsonCoordonate.json"));
+        coord.put("width", picoloButton.getCoord().getWidth());
+        coord.put("height", picoloButton.getCoord().getHeight());
+        coord.put("leftMargin",picoloButton.getCoord().getLeftMargin());
+        coord.put("topMargin",picoloButton.getCoord().getTopMargin());
+        button.put("coordonate", coord);
+
         if (picoloButton.getImagePath() == null){
             button.put("image_path", null);
         }else{

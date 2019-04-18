@@ -2,9 +2,11 @@ package com.example.picoloid.source.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.NewPageDialog;
 import com.example.picoloid.source.model.PicoloBook;
+import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
 import com.example.picoloid.source.service.PicoloBookService;
@@ -114,7 +117,8 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void createNewNextPage(){
-
+        NewPageDialog dialog = new NewPageDialog(currentPage,this,true);
+        dialog.showDialog();
     }
 
     private void help(){
@@ -140,7 +144,7 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void createNewPage(){
-        NewPageDialog dialog = new NewPageDialog(this,this,false);
+        NewPageDialog dialog = new NewPageDialog(currentPage,this,false);
         dialog.showDialog();
     }
 

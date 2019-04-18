@@ -35,7 +35,7 @@ public class ObjectManager {
     public static PicoloBook loadPicoloBookfromJson (JSONObject jsonObject) throws JSONException{
         PicoloBook book = new PicoloBook(jsonObject.getString("name"), jsonObject.getInt("id"));
         JSONArray pagelist = jsonObject.getJSONArray("list_page");
-        PicoloBookSettings settings = null;
+        PicoloBookSettings settings;
         if (jsonObject.getJSONObject("settings").getString("backgroundColor")== null){
             settings = new PicoloBookSettings();
         }else{
@@ -74,9 +74,8 @@ public class ObjectManager {
         Uri image_path = null;
         Uri special_path = null;
 
-        if (jsonObject.getString("image_path") != null){
-            image_path = Uri.parse(jsonObject.getString("image_path"));
-        }
+        button.setImagePath(image_path);
+        button.setSpecialPath(special_path);
 
         /*
          * set variable in the PicoloButtonCoord with the variable in the json
@@ -121,7 +120,6 @@ public class ObjectManager {
          * finish the settings of the buttons and return it
          * */
         button.setTitle(jsonObject.getString("title"));
-        button.setImagePath(image_path);
         button.setCoord(coord);
         button.setId(jsonObject.getInt("id"));
         return button;
