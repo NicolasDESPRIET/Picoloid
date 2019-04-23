@@ -1,4 +1,4 @@
-package com.example.picoloid.source.util;
+package com.example.picoloid.source.dialog;
 
 import android.app.Activity;
 import android.content.DialogInterface;

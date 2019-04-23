@@ -23,11 +23,10 @@ import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
 import com.example.picoloid.source.service.PicoloBookService;
-import com.example.picoloid.source.util.ImagePicker;
+import com.example.picoloid.source.dialog.ImagePicker;
 import com.example.picoloid.source.util.PicoloButtonUtils;
-import com.example.picoloid.source.util.VideoPicker;
+import com.example.picoloid.source.dialog.VideoPicker;
 
-import static com.example.picoloid.source.model.PicoloButtonType.NONE;
 import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
 import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
