@@ -3,7 +3,7 @@
   "id" : null,
   "coordonate" : null,
   "type" : null,
-  "image_path" : null,
-  "special_path" : null,
+  "image_path" : "",
+  "special_path" : "",
   "page_id" : null
 }

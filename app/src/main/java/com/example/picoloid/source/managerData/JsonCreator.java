@@ -120,7 +120,7 @@ public class JsonCreator {
         button.put("coordonate", coord);
 
         if (picoloButton.getImagePath() == null){
-            button.put("image_path", null);
+            button.put("image_path", "");
         }else{
             button.put("image_path", picoloButton.getImagePath().getPath());
         }
@@ -129,7 +129,7 @@ public class JsonCreator {
         switch (button.getString("type")){
             case "VIDEO":
                 if (picoloButton.getSpecialPath() == null){
-                    button.put("special_path", null);
+                    button.put("special_path", "");
                 }else{
                     button.put("special_path", picoloButton.getSpecialPath().getPath());
                 }
@@ -137,7 +137,7 @@ public class JsonCreator {
                 break;
             case "SOUND":
                 if (picoloButton.getSpecialPath() == null){
-                    button.put("special_path", null);
+                    button.put("special_path", "");
                 }else{
                     button.put("special_path", picoloButton.getSpecialPath().getPath());
                 }

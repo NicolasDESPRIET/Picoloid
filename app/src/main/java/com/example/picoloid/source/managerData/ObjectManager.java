@@ -94,14 +94,14 @@ public class ObjectManager {
                 PicoloButtonUtils.switchButtonToImage(button);
                 break;
             case "VIDEO":
-                if(jsonObject.getString("special_path") != null){
+                if(!jsonObject.getString("special_path").equals("")){
                     PicoloButtonUtils.switchButtonToVideo(button,Uri.parse(jsonObject.getString("special_path")));
                 }else{
                     PicoloButtonUtils.switchButtonToNone(button);
                 }
                 break;
             case "SOUND":
-                if(jsonObject.getString("special_path") != null){
+                if(!jsonObject.getString("special_path").equals("")){
                     PicoloButtonUtils.switchButtonToSound(button,Uri.parse(jsonObject.getString("special_path")));
                 }else{
                     PicoloButtonUtils.switchButtonToNone(button);
@@ -115,7 +115,7 @@ public class ObjectManager {
         /*
          * finish the settings of the buttons and return it
          * */
-        if ( jsonObject.get("image_path") != null){
+        if (!jsonObject.getString("image_path").equals("")){
             button.setImagePath(Uri.parse(jsonObject.getString("image_path")));
         }
         button.setTitle(jsonObject.getString("title"));
