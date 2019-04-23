@@ -17,6 +17,7 @@ import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.MainRecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
+import com.example.picoloid.source.service.MediaPlayerService;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;

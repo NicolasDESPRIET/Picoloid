@@ -14,6 +14,7 @@ import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.activity.VideoPlayerActivity;
 import com.example.picoloid.source.model.PicoloButton;
+import com.example.picoloid.source.service.MediaPlayerService;
 
 import java.net.URISyntaxException;
 
@@ -33,6 +34,8 @@ public class PicoloButtonView extends AppCompatButton {
 
         this.buttonData = buttonData;
         this.setText(buttonData.getTitle());
+
+        this.setContentDescription(buttonData.getTitle());
 
         try{
             BitmapDrawable bdrawable = new BitmapDrawable(context.getResources(),BitmapFactory.decodeFile(buttonData.getImagePath().toString()));
@@ -100,15 +103,16 @@ public class PicoloButtonView extends AppCompatButton {
 
         Log.d(TAG, "startSoundPlaying");
         Uri son = buttonData.getSpecialPath();
-        setContext(getContext());
         try {
-            startMediaPlayer(son);
+            MediaPlayerService.startMediaPlayer(son);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
 
     private void openPage(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
         openNewPage.putExtra("pageId", buttonData.getPageId());
         Log.d(TAG, "openPage WAOW "+buttonData.getPageId());

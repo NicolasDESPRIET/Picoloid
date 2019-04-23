@@ -19,15 +19,18 @@ import android.widget.TextView;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.NewPageFromButtonEditorDialog;
+import com.example.picoloid.source.dialog.SoundPicker;
 import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloButtonType;
+import com.example.picoloid.source.service.MediaPlayerService;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.dialog.ImagePicker;
 import com.example.picoloid.source.util.PicoloButtonUtils;
 import com.example.picoloid.source.dialog.VideoPicker;
 
 import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
+import static com.example.picoloid.source.model.PicoloButtonType.SOUND;
 import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertRadioButtonIdToState;
 import static com.example.picoloid.source.view.TypeToRadioConverter.convertTypeToRadioButtonId;
@@ -39,6 +42,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     //objects
     private VideoPicker videoPicker;
     private ImagePicker imagePicker;
+    private SoundPicker soundPicker;
 
     //data
     private PicoloButton currentButton;
@@ -64,6 +68,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private ImageView imagePreview2;
     private ImageView videoPreview;
     private TextView pageNamePreview;
+    private TextView soundPickerPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +77,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
         videoPicker = new VideoPicker(this);
         imagePicker = new ImagePicker(this);
-
-
+        soundPicker = new SoundPicker(this);
 
         getIntentArgs();
         initViews();
@@ -92,6 +96,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
                 saveAndQuit();
             }
         });
+
         //IMAGE FORMULAR
         Button imagePickerButton = (Button) findViewById(R.id.buttonEditor_ImagePicker);
         imagePickerButton.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +134,20 @@ public class ButtonEditorActivity extends AppCompatActivity {
                 videoPicker.showVideoDialog();
             }
         });
+
+        Button soundPickerButton = (Button) findViewById(R.id.buttonEditor_SoundPicker);
+        soundPickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                soundPicker.showSoundDialog();
+            }
+        });
+
+        soundPickerPreview = (TextView) findViewById(R.id.buttonEditor_SoundPickerPreview);
+        if(currentButton.getType() == SOUND){
+            soundPickerPreview.setText(getFileName(currentButton.getSpecialPath()));
+        }
+
 
         Button createPageButton = (Button) findViewById(R.id.buttonEditor_PageCreater);
         final ButtonEditorActivity activity = this;
@@ -227,7 +246,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
                 PicoloButtonUtils.switchButtonToVideo(currentButton,videoPath);
                 break;
             case SOUND:
-                PicoloButtonUtils.switchButtonToVideo(currentButton,soundPath);
+                PicoloButtonUtils.switchButtonToSound(currentButton,soundPath);
                 break;
             case PAGE:
                 PicoloButtonUtils.switchButtonToPage(currentButton,pagePointerId);
@@ -241,7 +260,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
         videoPicker.onActivityResult(requestCode,resultCode,data);
         imagePicker.onActivityResult(requestCode,resultCode,data);
-
+        soundPicker.onActivityResult(requestCode,resultCode,data);
 
     }
 
@@ -258,10 +277,17 @@ public class ButtonEditorActivity extends AppCompatActivity {
 
     public void setSoundPath(String path){
         soundPath = Uri.parse(path);
+        soundPickerPreview.setText(getFileName(soundPath));
     }
 
     public void setPagePointerId(int id){
         pagePointerId = id;
         pageNamePreview.setText(PicoloBookService.getBook().getPageFromId(id).getName());
     }
+
+    private String getFileName(Uri uri){
+        String path = uri.getPath();
+        return path.substring(path.lastIndexOf("/")+1);
+    }
+
 }
