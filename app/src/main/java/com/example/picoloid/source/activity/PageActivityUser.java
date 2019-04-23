@@ -19,6 +19,7 @@ import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloButton;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
+import com.example.picoloid.source.service.MediaPlayerService;
 import com.example.picoloid.source.service.PicoloBookService;
 import com.example.picoloid.source.view.PicoloButtonViewPrinter;
 
@@ -38,6 +39,8 @@ public class PageActivityUser extends AppCompatActivity {
         setContentView(R.layout.activity_page_user);
 
         ApplicationRuntimeInfos.isEdit = false;
+
+        MediaPlayerService.setContext(this);
 
         getIntentArgs();
 
