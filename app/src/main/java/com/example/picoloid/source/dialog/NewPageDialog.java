@@ -37,7 +37,7 @@ public class NewPageDialog {
         builder.setTitle("Nouvelle page :");
 
         final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -84,7 +84,7 @@ public class NewPageDialog {
         next.setTitle("page suivante");
         PicoloButtonCoord nextCoord = new PicoloButtonCoord();
         nextCoord.setDimensions(300,150);
-        nextCoord.setPosition(width-300,height - 400);
+        nextCoord.setPosition(width-350,height - 375);
         next.setCoord(nextCoord);
         userPage.addButton(next);
 
@@ -94,7 +94,7 @@ public class NewPageDialog {
         previous.setTitle("précedent");
         PicoloButtonCoord previousCoord = new PicoloButtonCoord();
         previousCoord.setDimensions(300,150);
-        previousCoord.setPosition(20,height- 800);
+        previousCoord.setPosition(50,height- 375);
         previous.setCoord(previousCoord);
         page.addButton(previous);
 

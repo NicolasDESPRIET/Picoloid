@@ -9,20 +9,20 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:icon="@mipmap/owl"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/owl_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".source.activity.deletePageActivity"></activity>
         <activity
             android:name=".source.activity.About"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".source.activity.ListPageActivity"
             android:screenOrientation="landscape" />
