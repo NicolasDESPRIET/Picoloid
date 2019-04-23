@@ -2,6 +2,8 @@ package com.example.picoloid.source.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -31,6 +33,13 @@ public class PicoloButtonView extends AppCompatButton {
 
         this.buttonData = buttonData;
         this.setText(buttonData.getTitle());
+
+        try{
+            BitmapDrawable bdrawable = new BitmapDrawable(context.getResources(),BitmapFactory.decodeFile(buttonData.getImagePath().toString()));
+            this.setBackground(bdrawable);
+        }catch(Exception e){
+            //put default image
+        }
     }
 
     @Override
