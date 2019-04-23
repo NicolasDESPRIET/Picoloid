@@ -56,7 +56,6 @@ public class PageActivityUser extends AppCompatActivity {
                 buttonLayout
         );
 
-        Toast.makeText(this, String.valueOf(PicoloBookService.getBook().getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
         printer.showButtons("user");
     }
 

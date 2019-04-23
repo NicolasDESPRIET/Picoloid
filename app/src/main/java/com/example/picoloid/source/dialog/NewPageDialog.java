@@ -84,7 +84,7 @@ public class NewPageDialog {
         next.setTitle("page suivante");
         PicoloButtonCoord nextCoord = new PicoloButtonCoord();
         nextCoord.setDimensions(300,150);
-        nextCoord.setPosition(width-320,height-170);
+        nextCoord.setPosition(width-300,height - 400);
         next.setCoord(nextCoord);
         userPage.addButton(next);
 
@@ -94,8 +94,8 @@ public class NewPageDialog {
         previous.setTitle("précedent");
         PicoloButtonCoord previousCoord = new PicoloButtonCoord();
         previousCoord.setDimensions(300,150);
-        previousCoord.setPosition(20,height-170);
-        previous.setCoord(nextCoord);
+        previousCoord.setPosition(20,height- 800);
+        previous.setCoord(previousCoord);
         page.addButton(previous);
 
         JsonCreator.save(context);
