@@ -88,7 +88,6 @@ public class SettingsActivity extends AppCompatActivity {
                 showBGC.setBackgroundColor(color);
                 DefaultColor1 = color;
                 book.getSettings().setBackgroundColor(color);
-                Toast.makeText(SettingsActivity.this, String.valueOf(book.getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
             }
         });
         colorPicker.show();

@@ -78,9 +78,6 @@ public class PageActivityUser extends AppCompatActivity {
             case R.id.pageUser_CreateNewNextPage:
                 createNewNextPage();
                 break;
-            case R.id.pageUser_Help:
-                help();
-                break;
             case R.id.pageUser_Options:
                 options();
                 break;
@@ -107,10 +104,12 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void deletePage(){
-
+        MediaPlayerService.pauseMediaPlayer();
     }
 
     private void goToEditMode(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent ii = new Intent(this, PageActivityEditor.class);
         ii.putExtra("pageId",currentPage.getId());
         ii.putExtra("bookId",PicoloBookService.getBook().getId());
@@ -119,15 +118,15 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void createNewNextPage(){
+        MediaPlayerService.pauseMediaPlayer();
+
         NewPageDialog dialog = new NewPageDialog(currentPage,this,true);
         dialog.showDialog();
     }
 
-    private void help(){
-
-    }
-
     private void options(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent settings = new Intent(this, SettingsActivity.class);
         settings.putExtra("mod","modify");
         settings.putExtra("bookId", PicoloBookService.getBook().getId());
@@ -136,21 +135,29 @@ public class PageActivityUser extends AppCompatActivity {
     }
 
     private void about(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent about = new Intent(this, About.class);
         this.startActivity(about);
     }
 
     private void showAllPages(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent ii = new Intent(PageActivityUser.this, ListPageActivity.class);
         startActivity(ii);
     }
 
     private void createNewPage(){
+        MediaPlayerService.pauseMediaPlayer();
+
         NewPageDialog dialog = new NewPageDialog(currentPage,this,false);
         dialog.showDialog();
     }
 
     private void changeUser(){
+        MediaPlayerService.pauseMediaPlayer();
+
         Intent main = new Intent(this, MainActivity.class);
         this.startActivity(main);
         finish();
