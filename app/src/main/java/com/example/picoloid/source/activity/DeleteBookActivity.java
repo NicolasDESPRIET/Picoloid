@@ -46,7 +46,7 @@ public class DeleteBookActivity extends AppCompatActivity {
             }
         });
 
-        Button validate = findViewById(R.id.deleteBook_DeleteButton);
+        Button validate = findViewById(R.id.delete_DeleteButton);
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

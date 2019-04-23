@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".source.activity.DeleteBookActivity">
+    tools:context=".source.activity.deletePageActivity">
 
     <android.support.v7.widget.RecyclerView
 
-        android:id="@+id/deleteBook_Recycler"
+        android:id="@+id/deletePa_Recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -18,13 +18,13 @@
         android:padding="5dp"
         android:scrollbars="vertical"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/delete_DeleteButton"
+        app:layout_constraintBottom_toTopOf="@+id/deletePage_DeleteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/delete_DeleteButton"
+        android:id="@+id/deletePage_DeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,13 +33,13 @@
         android:text="Valider"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteBook_CancelDeleteButton"
+        app:layout_constraintEnd_toStartOf="@+id/deletePage_CancelDeleteButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/deleteBook_CancelDeleteButton"
+        android:id="@+id/deletePage_CancelDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,4 +51,5 @@
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
+
 </android.support.constraint.ConstraintLayout>
