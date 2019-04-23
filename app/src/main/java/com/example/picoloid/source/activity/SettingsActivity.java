@@ -15,59 +15,47 @@ import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.service.PicoloBookService;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText nameBook;
-    private TextView showBGC;
-    private TextView showOFC;
+    private static final String TAG = "SettingsActivity";
+
+    //data
     private PicoloBook book;
-    private String C1;
-    private String C2;
-    private int id;
+    private int bookId;
+    private int pageId = 0;
     private String mod;
     private int DefaultColor1;
-    private int DefaultColor2;
-
+    //xml
+    private EditText nameBook;
+    private TextView showBGC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        init();
+        getIntentArgs();
 
+        initViews();
+    }
+
+    private void initViews(){
         nameBook = findViewById(R.id.nameBookData);
-        showOFC = findViewById(R.id.textView2);
         showBGC = findViewById(R.id.textView);
+
+        showBGC.setBackgroundColor(DefaultColor1);
+        nameBook.setText(book.getName());
+
 
         Button validate = findViewById(R.id.validate);
         Button picker1 = findViewById(R.id.pickColorBG);
-        Button picker2 = findViewById(R.id.pickColorOF);
-
-        DefaultColor1 = Color.parseColor(book.getSettings().getBackgroundColor());
-        DefaultColor2 = Color.parseColor(book.getSettings().getOverviewFrameworkColor());
-
-        showBGC.setBackgroundColor(DefaultColor1);
-        showOFC.setBackgroundColor(DefaultColor2);
-        nameBook.setText(book.getName());
 
         picker1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openColorPicker(DefaultColor1,0);
-            }
-        });
-
-        picker2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openColorPicker(DefaultColor2, 1);
+                openColorPicker(DefaultColor1);
             }
         });
 
@@ -75,48 +63,20 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 book.setName(nameBook.getText().toString());
-                book.setId(id);
+                book.setId(bookId);
                 PicoloBookService.setBook(book);
-                Toast.makeText(SettingsActivity.this, book.getSettings().getBackgroundColor() + " -- " + book.getSettings().getOverviewFrameworkColor(), Toast.LENGTH_LONG).show();
-                try {
-                    JsonCreator.save(getApplicationContext());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (mod.equals("new")){
-                    Intent ii=new Intent(SettingsActivity.this, MainActivity.class);
-                    startActivity(ii);
-                }else{
-                    Intent ii=new Intent(SettingsActivity.this, PageActivityUser.class);
-                    ii.putExtra("pageId", PicoloBookService.getBook().getId());
-                    startActivity(ii);
-                }
+
+                JsonCreator.save(getApplicationContext());
+
+                Intent ii=new Intent(SettingsActivity.this, PageActivityUser.class);
+                ii.putExtra("pageId", pageId);
+                startActivity(ii);
+
             }
         });
     }
 
-    private void init(){
-        Intent args= getIntent();
-        Bundle bundle = args.getExtras();
-        if (bundle != null) {
-            mod = bundle.getString("mod");
-        }
-        if (mod != null && mod.equals("new")) {
-            if (bundle != null) {
-                id = bundle.getInt("bookId");
-            }
-            book = PicoloBook.newBookFromUser("", id);
-            PicoloBookService.setBook(book);
-        }else if (mod != null && mod.equals("modify")){
-            book=PicoloBookService.getBook();
-        }
-
-
-    }
-
-    public void openColorPicker(int Dcolor, final int c){
+    public void openColorPicker(int Dcolor){
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, Dcolor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -125,18 +85,33 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
-                if (c == 0){
-                    showBGC.setBackgroundColor(color);
-                    DefaultColor1 = color;
-                    book.getSettings().setBackgroundColor(Integer.toHexString(DefaultColor1).toUpperCase().substring(2));
-                }else{
-                    showOFC.setBackgroundColor(color);
-                    DefaultColor2 = color;
-                    book.getSettings().setOverviewFrameworkColor(Integer.toHexString(DefaultColor2).toUpperCase().substring(2));
-                }
+                showBGC.setBackgroundColor(color);
+                DefaultColor1 = color;
+                book.getSettings().setBackgroundColor(color);
+                Toast.makeText(SettingsActivity.this, String.valueOf(book.getSettings().getBackgroundColor()), Toast.LENGTH_SHORT).show();
             }
         });
         colorPicker.show();
     }
 
+    private void getIntentArgs(){
+        Intent args= getIntent();
+        Bundle bundle = args.getExtras();
+        if (bundle != null) {
+            mod = bundle.getString("mod");
+        }
+        if (mod != null && mod.equals("new")) {
+            if (bundle != null) {
+                bookId = bundle.getInt("bookId");
+            }
+            book = PicoloBook.newBookFromUser("", bookId);
+        }else if (mod != null && mod.equals("modify")){
+            book = PicoloBookService.getBook();
+            if (bundle != null) {
+                bookId = bundle.getInt("bookId");
+                pageId = bundle.getInt("pageId");
+            }
+        }
+        DefaultColor1 = book.getSettings().getBackgroundColor();
+    }
 }

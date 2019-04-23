@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9B9C98"
@@ -9,106 +11,87 @@
     <TextView
         android:id="@+id/nameBook"
         android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="70dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:background="#FFFFFF"
-        android:text="Nom"
+        android:text="Name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/nameBookData"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="205dp"
-        android:layout_marginTop="81dp"
-        android:layout_toEndOf="@+id/nameBook"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="#ffffff"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="Autofill,LabelFor" />
 
     <TextView
         android:id="@+id/colorBackground"
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/nameBook"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="71dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
         android:background="#ffffff"
         android:text="couleur de fond"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/colorOverviewFramework"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/colorBackground"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="70dp"
-        android:background="#ffffff"
-        android:text="couleur de selection"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameBook"
         tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/validate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/colorOverviewFramework"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="460dp"
-        android:layout_marginTop="123dp"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="valider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/nameBookData"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="51dp"
-        android:layout_toEndOf="@+id/colorBackground" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/colorOverviewFramework" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameBookData" />
 
     <Button
         android:id="@+id/pickColorBG"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nameBookData"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_height="48dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Couleur"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/pickColorOF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pickColorBG"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="50dp"
-        android:layout_toEndOf="@+id/textView2"
-        android:text="Couleur"
-        tools:ignore="HardcodedText" />
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

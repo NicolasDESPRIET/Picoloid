@@ -1,33 +1,25 @@
 package com.example.picoloid.source.model;
 
+import android.content.Intent;
+import android.graphics.Color;
+
 public class PicoloBookSettings {
 
-    private String backgroundColor;
-    private String OverviewFrameworkColor;
+    private int backgroundColor;
 
     public PicoloBookSettings() {
-        this.backgroundColor = "#FFFFFF";
-        this.OverviewFrameworkColor = "#FF0000";
+        this.backgroundColor = Color.WHITE;
     }
 
-    public PicoloBookSettings(String backgroundColor, String overviewFrameworkColor) {
+    public PicoloBookSettings(int backgroundColor) {
         this.backgroundColor = backgroundColor;
-        this.OverviewFrameworkColor = overviewFrameworkColor;
     }
 
-    public String getBackgroundColor() {
+    public int getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(String backgroundColor) {
+    public void setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
-    }
-
-    public String getOverviewFrameworkColor() {
-        return OverviewFrameworkColor;
-    }
-
-    public void setOverviewFrameworkColor(String overviewFrameworkColor) {
-        OverviewFrameworkColor = overviewFrameworkColor;
     }
 }
