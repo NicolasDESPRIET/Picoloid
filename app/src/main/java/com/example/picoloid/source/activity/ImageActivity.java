@@ -34,6 +34,7 @@ public class ImageActivity extends AppCompatActivity {
     private void initViews(){
         imageView = (ImageView)findViewById(R.id.imageActivity_ImageView);
         imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+        imageView.setAdjustViewBounds(true);
 
         Button goBackButton = (Button)findViewById(R.id.imageActivity_GoBackButton);
         goBackButton.setOnClickListener(new View.OnClickListener() {

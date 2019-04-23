@@ -74,7 +74,6 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startImageActivity(){
         if(buttonData.getImagePath() == null){
-            Toast.makeText(getContext(), "Undefined path", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -85,7 +84,6 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startVideoActivity(){
         if(buttonData.getSpecialPath() == null){
-            Toast.makeText(getContext(), "Undefined path", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "startVideoActivity: path null");
             return;
         }
@@ -97,7 +95,6 @@ public class PicoloButtonView extends AppCompatButton {
 
     private void startSoundPlaying(){
         if(buttonData.getSpecialPath() == null){
-            Toast.makeText(getContext(), "Undefined path", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -115,7 +112,6 @@ public class PicoloButtonView extends AppCompatButton {
 
         Intent openNewPage =new Intent(getContext(), PageActivityUser.class);
         openNewPage.putExtra("pageId", buttonData.getPageId());
-        Log.d(TAG, "openPage WAOW "+buttonData.getPageId());
         getContext().startActivity(openNewPage);
     }
 
