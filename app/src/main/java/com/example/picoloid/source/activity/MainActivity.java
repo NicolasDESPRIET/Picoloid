@@ -17,6 +17,7 @@ import com.example.picoloid.R;
 import com.example.picoloid.source.adapter.MainRecycleViewAdapter;
 import com.example.picoloid.source.managerData.JsonManager;
 import com.example.picoloid.source.service.ApplicationRuntimeInfos;
+import com.example.picoloid.source.service.MediaPlayerService;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
                         }
 
                         // check for permanent denial of any permission
@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 withErrorListener(new PermissionRequestErrorListener() {
                     @Override
                     public void onError(DexterError error) {
-                        Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .onSameThread()

@@ -1,5 +1,6 @@
 package com.example.picoloid.source.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,14 +17,20 @@ import com.example.picoloid.source.model.PicoloPage;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ListPageRecycleViewAdapter extends RecyclerView.Adapter<ListPageRecycleViewAdapter.ViewHolder> {
 
+    Activity activity;
     Context context;
     List<PicoloPage> list;
+    boolean isFromButton;
 
-    public ListPageRecycleViewAdapter(Context context, List<PicoloPage> list) {
+    public ListPageRecycleViewAdapter(Context context, List<PicoloPage> list, Activity activity, boolean isFromButton) {
+        this.activity = activity;
         this.context = context;
         this.list = list;
+        this.isFromButton = isFromButton;
     }
 
     @NonNull
@@ -39,11 +46,22 @@ public class ListPageRecycleViewAdapter extends RecyclerView.Adapter<ListPageRec
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii = new Intent(context, PageActivityUser.class);
-                ii.putExtra("pageId",list.get(i).getId());
-                context.startActivity(ii);
+                onPageSelected(i);
             }
         });
+    }
+
+    private void onPageSelected(int id){
+        if(isFromButton){
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("pageId",list.get(id).getId());
+            activity.setResult(RESULT_OK,returnIntent);
+            activity.finish();
+        }else{
+            Intent ii = new Intent(context, PageActivityUser.class);
+            ii.putExtra("pageId",list.get(id).getId());
+            context.startActivity(ii);
+        }
     }
 
     @Override

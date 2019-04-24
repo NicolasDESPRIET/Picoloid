@@ -9,7 +9,10 @@ import static com.example.picoloid.source.model.PicoloButtonType.PAGE;
 import static com.example.picoloid.source.model.PicoloButtonType.SOUND;
 import static com.example.picoloid.source.model.PicoloButtonType.VIDEO;
 
+//used to parse the information from the radioButtonGroup in ButtonEditorActivity
 public class TypeToRadioConverter {
+
+    private static final String TAG = "TypeRadioConverter";
 
     public static PicoloButtonType convertRadioButtonIdToState(int id){
         switch(id){

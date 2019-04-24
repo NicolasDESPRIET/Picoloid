@@ -20,12 +20,6 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/pageUser_Help"
-        android:icon="@drawable/ic_baseline_build_24px"
-        android:title="help"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/pageUser_Options"
         android:icon="@drawable/ic_baseline_build_24px"
         android:title="options"
