@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.picoloid.R;
 import com.example.picoloid.source.dialog.NewPageFromButtonEditorDialog;
+import com.example.picoloid.source.dialog.PagePicker;
 import com.example.picoloid.source.dialog.SoundPicker;
 import com.example.picoloid.source.managerData.JsonCreator;
 import com.example.picoloid.source.model.PicoloButton;
@@ -43,6 +44,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
     private VideoPicker videoPicker;
     private ImagePicker imagePicker;
     private SoundPicker soundPicker;
+    private PagePicker pagePicker;
 
     //data
     private PicoloButton currentButton;
@@ -78,6 +80,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
         videoPicker = new VideoPicker(this);
         imagePicker = new ImagePicker(this);
         soundPicker = new SoundPicker(this);
+        pagePicker = new PagePicker(this);
 
         getIntentArgs();
         initViews();
@@ -162,6 +165,14 @@ public class ButtonEditorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 NewPageFromButtonEditorDialog dialog = new NewPageFromButtonEditorDialog(ButtonEditorActivity.this,currentButton,activity);
                 dialog.showDialog();
+            }
+        });
+
+        Button choosePageButton = (Button) findViewById(R.id.buttonEditor_PagePicker);
+        choosePageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pagePicker.choosePage();
             }
         });
 
@@ -267,7 +278,7 @@ public class ButtonEditorActivity extends AppCompatActivity {
         videoPicker.onActivityResult(requestCode,resultCode,data);
         imagePicker.onActivityResult(requestCode,resultCode,data);
         soundPicker.onActivityResult(requestCode,resultCode,data);
-
+        pagePicker.onActivityResult(requestCode,resultCode,data);
     }
 
     public void setVideoPath(String path){
