@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
@@ -18,11 +17,8 @@ import com.example.picoloid.source.service.MediaPlayerService;
 
 import java.net.URISyntaxException;
 
-import static com.example.picoloid.source.service.MediaPlayerService.setContext;
-import static com.example.picoloid.source.service.MediaPlayerService.startMediaPlayer;
 
-//import com.example.picoloid.source.service.MediaPlayerService;
-
+//Main view of the app : inherits from android Button and is associated with a PicoloButton data structure
 public class PicoloButtonView extends AppCompatButton {
 
     public static final String TAG = "PicoloButtonView";
@@ -76,7 +72,6 @@ public class PicoloButtonView extends AppCompatButton {
         if(buttonData.getImagePath() == null){
             return;
         }
-
         Intent openImage = new Intent(getContext(), ImageActivity.class);
         openImage.putExtra("imagePath", buttonData.getImagePath().getPath());
         getContext().startActivity(openImage);
@@ -87,7 +82,6 @@ public class PicoloButtonView extends AppCompatButton {
             Log.d(TAG, "startVideoActivity: path null");
             return;
         }
-        Log.d(TAG, "startVideoActivity: path non null, starting");
         Intent openVideo = new Intent(getContext(), VideoPlayerActivity.class);
         openVideo.putExtra("videoPath", buttonData.getSpecialPath().getPath());
         getContext().startActivity(openVideo);
@@ -97,8 +91,6 @@ public class PicoloButtonView extends AppCompatButton {
         if(buttonData.getSpecialPath() == null){
             return;
         }
-
-        Log.d(TAG, "startSoundPlaying");
         Uri son = buttonData.getSpecialPath();
         try {
             MediaPlayerService.startMediaPlayer(son);
