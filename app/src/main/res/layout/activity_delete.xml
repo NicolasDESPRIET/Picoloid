@@ -18,13 +18,13 @@
         android:padding="5dp"
         android:scrollbars="vertical"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/deleteBook_DeleteButton"
+        app:layout_constraintBottom_toTopOf="@+id/delete_DeleteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/deleteBook_DeleteButton"
+        android:id="@+id/delete_DeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

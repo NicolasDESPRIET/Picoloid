@@ -71,11 +71,9 @@ public class ObjectManager {
          * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();
-        Uri image_path = null;
-        Uri special_path = null;
 
-        button.setImagePath(image_path);
-        button.setSpecialPath(special_path);
+        button.setImagePath(null);
+        button.setSpecialPath(null);
 
         /*
          * set variable in the PicoloButtonCoord with the variable in the json
@@ -96,19 +94,17 @@ public class ObjectManager {
                 PicoloButtonUtils.switchButtonToImage(button);
                 break;
             case "VIDEO":
-                if (jsonObject.getString("special_path") == null){
-                    PicoloButtonUtils.switchButtonToVideo(button, null);
+                if(!jsonObject.getString("special_path").equals("")){
+                    PicoloButtonUtils.switchButtonToVideo(button,Uri.parse(jsonObject.getString("special_path")));
                 }else{
-                    special_path = Uri.parse(jsonObject.getString("special_path"));
-                    PicoloButtonUtils.switchButtonToVideo(button, special_path);
+                    PicoloButtonUtils.switchButtonToNone(button);
                 }
                 break;
             case "SOUND":
-                if (jsonObject.getString("special_path") == null){
-                    PicoloButtonUtils.switchButtonToSound(button, null);
+                if(!jsonObject.getString("special_path").equals("")){
+                    PicoloButtonUtils.switchButtonToSound(button,Uri.parse(jsonObject.getString("special_path")));
                 }else{
-                    special_path = Uri.parse(jsonObject.getString("special_path"));
-                    PicoloButtonUtils.switchButtonToSound(button, special_path);
+                    PicoloButtonUtils.switchButtonToNone(button);
                 }
                 break;
             case "PAGE":
@@ -119,6 +115,9 @@ public class ObjectManager {
         /*
          * finish the settings of the buttons and return it
          * */
+        if (!jsonObject.getString("image_path").equals("")){
+            button.setImagePath(Uri.parse(jsonObject.getString("image_path")));
+        }
         button.setTitle(jsonObject.getString("title"));
         button.setCoord(coord);
         button.setId(jsonObject.getInt("id"));

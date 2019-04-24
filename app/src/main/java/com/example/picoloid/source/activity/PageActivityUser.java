@@ -105,6 +105,8 @@ public class PageActivityUser extends AppCompatActivity {
 
     private void deletePage(){
         MediaPlayerService.pauseMediaPlayer();
+        Intent pp = new Intent(this, DeletePageActivity.class);
+        this.startActivity(pp);
     }
 
     private void goToEditMode(){
