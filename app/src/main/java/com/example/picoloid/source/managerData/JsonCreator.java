@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.example.picoloid.source.model.PicoloBook;
 import com.example.picoloid.source.model.PicoloButton;
-import com.example.picoloid.source.model.PicoloButtonCoord;
 import com.example.picoloid.source.model.PicoloPage;
 import com.example.picoloid.source.service.PicoloBookService;
 

@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".source.activity.deletePageActivity"></activity>
+        <activity
+            android:name=".source.activity.DeletePageActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".source.activity.About"
             android:screenOrientation="landscape" />
