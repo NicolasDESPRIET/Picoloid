@@ -52,8 +52,9 @@ public class PicoloButtonView extends AppCompatButton {
         this.setText(buttonData.getTitle());
 
         //couleur
-        int color = Color.BLACK;
+        int color = Color.WHITE;
         this.setTextColor(color);
+        this.setShadowLayer(10, 0,0, Color.BLACK);
         //gras, italic et taill
         this.setTypeface(this.getTypeface(), Typeface.ITALIC);
         this.setTypeface(this.getTypeface(), Typeface.BOLD);
