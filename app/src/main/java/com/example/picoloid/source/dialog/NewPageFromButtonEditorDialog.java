@@ -32,7 +32,7 @@ public class NewPageFromButtonEditorDialog {
         builder.setTitle("Nom de la page :");
 
         final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
         builder.setPositiveButton("Créer une nouvelle page et la lier à ce bouton", new DialogInterface.OnClickListener() {
