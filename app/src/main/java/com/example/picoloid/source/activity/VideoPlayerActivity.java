@@ -2,6 +2,7 @@ package com.example.picoloid.source.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.VideoView;
 import android.widget.MediaController;
 
 import com.example.picoloid.R;
+import com.example.picoloid.source.service.PicoloBookService;
 
 public class VideoPlayerActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
     //xml
     private VideoView videoView;
+    private ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +40,18 @@ public class VideoPlayerActivity extends AppCompatActivity {
         }
     }
 
-    private void initViews() throws Exception{
-        videoView = (VideoView) findViewById(R.id.videoActivity_VideoView);
+    private void initViews(){
+
+        layout = findViewById(R.id.videolayout);
+        layout.setBackgroundColor(PicoloBookService.getBook().getSettings().getBackgroundColor());
+        videoView = findViewById(R.id.videoActivity_VideoView);
         meController = new MediaController(this);
         videoView.setVideoPath(videoPath);
         meController.setAnchorView(videoView);
         videoView.setMediaController(meController);
         videoView.start();
 
-        Button goBackButton = (Button)findViewById(R.id.videoActivity_GoBackButton);
+        Button goBackButton = findViewById(R.id.videoActivity_GoBackButton);
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,9 +60,11 @@ public class VideoPlayerActivity extends AppCompatActivity {
         });
     }
 
-    private void getIntentArgs() throws Exception{
+    private void getIntentArgs(){
         Intent args= getIntent();
         Bundle bundle = args.getExtras();
-        videoPath = (String)bundle.get("videoPath");
+        if (bundle != null) {
+            videoPath = (String)bundle.get("videoPath");
+        }
     }
 }
