@@ -1,5 +1,6 @@
 {
   "name" : null,
   "id" : null,
+  "have_next" : null,
   "button_list": []
 }
