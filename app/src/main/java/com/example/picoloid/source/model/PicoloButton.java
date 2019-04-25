@@ -14,7 +14,7 @@ public class PicoloButton {
     private int pageId;
 
     public PicoloButton(){
-        title = "Undefined"; //HARDCODE
+        title = "Nouveau Bouton"; //HARDCODE
         this.id = -1;
         coord = new PicoloButtonCoord();
         type = PicoloButtonType.NONE;

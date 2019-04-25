@@ -3,12 +3,19 @@ package com.example.picoloid.source.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.net.Uri;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 
+import com.example.picoloid.R;
 import com.example.picoloid.source.activity.ImageActivity;
 import com.example.picoloid.source.activity.PageActivityUser;
 import com.example.picoloid.source.activity.VideoPlayerActivity;
@@ -24,17 +31,36 @@ public class PicoloButtonView extends AppCompatButton {
     public static final String TAG = "PicoloButtonView";
 
     private PicoloButton buttonData;
+    private Context context;
 
     public PicoloButtonView(Context context, final PicoloButton buttonData){
         super(context);
 
         this.buttonData = buttonData;
-        this.setText(buttonData.getTitle());
+        this.context = context;
+
+        buttonDesign();
         
         this.setFocusable(true);
         this.setClickable(true);
 
         this.setContentDescription(buttonData.getTitle());
+    }
+
+    private void buttonDesign(){
+
+        this.setText(buttonData.getTitle());
+
+        //couleur
+        int color = Color.BLACK;
+        this.setTextColor(color);
+        //gras, italic et taill
+        this.setTypeface(this.getTypeface(), Typeface.ITALIC);
+        this.setTypeface(this.getTypeface(), Typeface.BOLD);
+        this.setTextSize(22);
+
+        //postion text
+        this.setGravity(Gravity.BOTTOM | Gravity.CENTER);
 
         try{
             BitmapDrawable bdrawable = new BitmapDrawable(context.getResources(),BitmapFactory.decodeFile(buttonData.getImagePath().toString()));
@@ -109,9 +135,4 @@ public class PicoloButtonView extends AppCompatButton {
         openNewPage.putExtra("pageId", buttonData.getPageId());
         getContext().startActivity(openNewPage);
     }
-
-    public PicoloButton getButtonData(){
-        return buttonData;
-    }
-
 }

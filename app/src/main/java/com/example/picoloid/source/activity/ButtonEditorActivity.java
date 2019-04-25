@@ -91,12 +91,6 @@ public class ButtonEditorActivity extends AppCompatActivity {
         //MAIN FORMULAR
         buttonTitle = (EditText) findViewById(R.id.buttonEditor_ButtonTitle);
         buttonTitle.setText(currentButton.getTitle());
-        buttonTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buttonTitle.getText().clear();
-            }
-        });
 
         saveButton = (Button) findViewById(R.id.buttonEditor_SaveChanges);
         saveButton.setOnClickListener(new View.OnClickListener() {
