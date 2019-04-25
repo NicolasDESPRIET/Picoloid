@@ -38,8 +38,8 @@
             android:layout_marginEnd="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nom du bouton"
-            tools:ignore="HardcodedText" />
+            android:hint="Nom du bouton"
+            tools:ignore="HardcodedText,Autofill,LabelFor" />
 
         <Button
             android:id="@+id/buttonEditor_SaveChanges"

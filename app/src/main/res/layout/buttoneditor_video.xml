@@ -8,17 +8,17 @@
 
     <ImageView
         android:id="@+id/buttonEditor_VideoPreview"
-        android:layout_width="527dp"
-        android:layout_height="448dp"
+        android:layout_width="507dp"
+        android:layout_height="325dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toEndOf="@+id/buttonEditor_VideoPicker"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@color/colorPrimary" />
 
     <Button
@@ -30,12 +30,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#009688"
-        android:text="Choisir une vidéo"
         android:textColor="#FFFFFF"
+        android:text="Choisir une vidéo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEditor_VideoPreview"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
