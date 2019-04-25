@@ -29,19 +29,19 @@ public class NewPageFromButtonEditorDialog {
 
     public void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Nouvelle page :");
+        builder.setTitle("Nom de la page :");
 
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Créer une nouvelle page et la lier à ce bouton", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 positiveButton(input.getText().toString());
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

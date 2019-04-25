@@ -22,15 +22,15 @@ public class DeleteButtonDialog {
 
     public void showDialog(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setTitle("Do you really want to delete this button ?");
+        alertDialogBuilder.setTitle("Voulez-vous vraiment supprimer ce bouton ?");
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                .setPositiveButton("Oui",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         positiveButton();
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton("Non",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         dialog.cancel();
                     }

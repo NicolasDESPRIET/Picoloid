@@ -21,10 +21,10 @@ public class ImagePicker {
 
     public void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(activity);
-        pictureDialog.setTitle("Select Action");
+        pictureDialog.setTitle("Que voulez-vous faire ?");
         String[] pictureDialogItems = {
-                "Select image from gallery",
-                "Take image from camera" };
+                "Sélectionner une image depuis la gallerie",
+                "Prendre une photo" };
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
