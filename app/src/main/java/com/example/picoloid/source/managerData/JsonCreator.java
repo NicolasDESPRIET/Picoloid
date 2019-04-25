@@ -93,6 +93,7 @@ public class JsonCreator {
         JSONObject page = new JSONObject(JsonManager.readJsonFromAsset(context, "jsonPage.json"));
         page.put("name", picoloPage.getName());
         page.put("id", picoloPage.getId());
+        page.put("have_next", picoloPage.getHaveNext());
         JSONArray buttonlist = new JSONArray();
 
         for (int i = 0; i< picoloPage.getButtonList().size(); i++){

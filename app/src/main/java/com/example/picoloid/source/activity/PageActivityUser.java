@@ -122,8 +122,13 @@ public class PageActivityUser extends AppCompatActivity {
     private void createNewNextPage(){
         MediaPlayerService.pauseMediaPlayer();
 
-        NewPageDialog dialog = new NewPageDialog(currentPage,this,true);
-        dialog.showDialog();
+        if (currentPage.getHaveNext() == 0){
+            NewPageDialog dialog = new NewPageDialog(currentPage,this,true);
+            currentPage.setHaveNext(1);
+            dialog.showDialog();
+        }else{
+            Toast.makeText(this, "Cette page possède déja une page suivant", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void options(){

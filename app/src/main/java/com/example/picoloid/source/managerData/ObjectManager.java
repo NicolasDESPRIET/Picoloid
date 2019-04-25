@@ -51,12 +51,11 @@ public class ObjectManager {
 
 
     private static PicoloPage loadPicoloPagefromJson(JSONObject jsonObject) throws JSONException{
-        // init the picolopage with her name from the json
         PicoloPage picoloPage = new PicoloPage(jsonObject.getString("name"));
         picoloPage.setId(jsonObject.getInt("id"));
-        // take the button list in JSONArray from the JSONObject
+        picoloPage.setHaveNext(jsonObject.getInt("have_next"));
         JSONArray Buttonlist = jsonObject.getJSONArray("button_list");
-        // browse the JSONArray of button for create each button
+
         for (int i=0; i<Buttonlist.length(); i++) {
             PicoloButton button = loadPicolobuttonfromJson(Buttonlist.getJSONObject(i));
             picoloPage.addJsonButton(button);
@@ -65,27 +64,17 @@ public class ObjectManager {
     }
 
     private static PicoloButton loadPicolobuttonfromJson(JSONObject jsonObject) throws JSONException {
-        /*
-         * create empty button and empty coordonate for him
-         * create Uri from the string path image in the jsonobject
-         * */
         PicoloButton button = new PicoloButton();
         PicoloButtonCoord coord = new PicoloButtonCoord();
 
         button.setImagePath(null);
         button.setSpecialPath(null);
 
-        /*
-         * set variable in the PicoloButtonCoord with the variable in the json
-         * */
         coord.setDimensions(jsonObject.getJSONObject("coordonate").getInt("width"),
                 jsonObject.getJSONObject("coordonate").getInt("height"));
         coord.setPosition(jsonObject.getJSONObject("coordonate").getInt("leftMargin"),
                 jsonObject.getJSONObject("coordonate").getInt("topMargin"));
 
-        /*
-         * Look the type of the button in the Jsonobject and set it in the picolobutton
-         * */
         switch (jsonObject.getString("type")){
             case "NONE":
                 PicoloButtonUtils.switchButtonToNone(button);
@@ -112,9 +101,6 @@ public class ObjectManager {
                 break;
         }
 
-        /*
-         * finish the settings of the buttons and return it
-         * */
         if (!jsonObject.getString("image_path").equals("")){
             button.setImagePath(Uri.parse(jsonObject.getString("image_path")));
         }
