@@ -30,6 +30,9 @@ public class PicoloButtonView extends AppCompatButton {
 
         this.buttonData = buttonData;
         this.setText(buttonData.getTitle());
+        
+        this.setFocusable(true);
+        this.setClickable(true);
 
         this.setContentDescription(buttonData.getTitle());
 
