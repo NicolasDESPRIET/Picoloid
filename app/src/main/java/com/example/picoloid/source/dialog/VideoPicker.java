@@ -30,10 +30,10 @@ public class VideoPicker {
 
     public void showVideoDialog(){
         AlertDialog.Builder videoDialog = new AlertDialog.Builder(activity);
-        videoDialog.setTitle("Select Action");
+        videoDialog.setTitle("Que voulez-vous faire ?");
         String[] videoDialogItems = {
-                "Select video from gallery",
-                "Record video from camera" };
+                "Sélectionner une vidéo depuis la gallerie",
+                "Prendre une vidéo" };
         videoDialog.setItems(videoDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override

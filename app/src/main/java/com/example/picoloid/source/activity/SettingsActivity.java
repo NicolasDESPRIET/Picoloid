@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         Button validate = findViewById(R.id.validate);
+        Button returnButton = findViewById(R.id.settingReturnButton);
         Button picker1 = findViewById(R.id.pickColorBG);
 
         picker1.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,13 @@ public class SettingsActivity extends AppCompatActivity {
                 ii.putExtra("pageId", pageId);
                 startActivity(ii);
 
+            }
+        });
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

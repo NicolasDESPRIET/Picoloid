@@ -7,46 +7,47 @@
         android:title="goto_editmode_button"
         app:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/pageUser_ShowAllPages"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="Parcourir les pages"
+        app:showAsAction="never"
+        />
     <item
         android:id="@+id/pageUser_CreateNewPage"
         android:icon="@drawable/ic_baseline_build_24px"
-        android:title="create new page"
+        android:title="Créer une nouvelle page"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/pageUser_CreateNewNextPage"
         android:icon="@drawable/ic_baseline_build_24px"
-        android:title="create next page"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/pageUser_Options"
-        android:icon="@drawable/ic_baseline_build_24px"
-        android:title="options"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/pageUser_About"
-        android:icon="@drawable/ic_baseline_build_24px"
-        android:title="about"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/pageUser_ShowAllPages"
-        android:icon="@drawable/ic_baseline_build_24px"
-        android:title="show all pages"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/pageUser_ChangeUser"
-        android:icon="@drawable/ic_baseline_build_24px"
-        android:title="change user"
+        android:title="Créer une page suivante"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/pageUser_DeletePage"
         android:icon="@drawable/ic_baseline_build_24px"
-        android:title="delete page"
+        android:title="Supprimer une page"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_Options"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="Options d'utilisateur"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_ChangeUser"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="Changer d'utilisateur"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/pageUser_About"
+        android:icon="@drawable/ic_baseline_build_24px"
+        android:title="A propos de l'app"
         app:showAsAction="never"
         />
 

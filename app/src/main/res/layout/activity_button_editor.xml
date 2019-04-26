@@ -4,22 +4,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".source.activity.ButtonEditorActivity">
+    tools:context=".source.activity.ButtonEditorActivity"
+    android:background="#EEEEEE">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/buttonEditor_SpecialFormular"
-        android:layout_width="457dp"
-        android:layout_height="233dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="340dp"
+        android:layout_height="147dp"
+        android:background="@drawable/layout_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Titre du bouton"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/buttonEditor_ButtonTitle"
+            android:layout_width="340dp"
+            android:layout_height="46dp"
+            android:layout_below="@id/title1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Nom du bouton"
+            tools:ignore="HardcodedText,Autofill,LabelFor" />
+
+        <Button
+            android:id="@+id/buttonEditor_SaveChanges"
+            android:layout_width="340dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/buttonEditor_ButtonTitle"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="8dp"
+            android:background="#009688"
+            android:textColor="#FFFFFF"
+            android:text="Sauvegarder les changements"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="340dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layout_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/buttonEditor_MainFormular"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEditor_ImageFormular"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout1"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Action du bouton"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <RadioGroup
+            android:id="@+id/buttonEditor_ButtonTypeRadioGroup"
+            android:layout_width="340dp"
+            android:layout_height="116dp"
+            android:layout_below="@id/title2"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/buttonEditor_Type_None"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ne rien faire"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/buttonEditor_Type_Image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ouvrir une image"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/buttonEditor_Type_Page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ouvrir une page"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/buttonEditor_Type_Sound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lire un son (sur la page actuelle)"
+                tools:ignore="HardcodedText" />
+
+            <RadioButton
+                android:id="@+id/buttonEditor_Type_Video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ouvrir et lire une vidéo"
+                tools:ignore="HardcodedText" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/layout_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/relativeLayout1">
+
+        <Button
+            android:id="@+id/buttonEditor_ImagePicker"
+            android:layout_width="169dp"
+            android:layout_height="120dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="55dp"
+            android:layout_toStartOf="@+id/buttonEditor_ImagePreview"
+            android:background="#009688"
+            android:text="Cliquer pour illustrer le bouton"
+            android:textColor="#FFFFFF"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/buttonEditor_ImagePreview"
+            android:layout_width="318dp"
+            android:layout_height="190dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonEditor_ImagePicker"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/colorPrimary"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/layout_background"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+        app:layout_constraintLeft_toRightOf="@+id/relativeLayout2">
 
         <include layout="@layout/buttoneditor_video"/>
         <include layout="@layout/buttoneditor_image"/>
@@ -27,134 +197,6 @@
         <include layout="@layout/buttoneditor_page"/>
         <include layout="@layout/buttoneditor_sound"/>
 
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/buttonEditor_ImageFormular"
-        android:layout_width="461dp"
-        android:layout_height="153dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonEditor_MainFormular"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/buttonEditor_ImagePicker"
-            android:layout_width="107dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginBottom="8dp"
-            android:text="pick image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/buttonEditor_ImagePreview"
-            android:layout_width="219dp"
-            android:layout_height="126dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonEditor_ImagePicker"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/colorPrimary" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/buttonEditor_MainFormular"
-        android:layout_width="248dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/buttonEditor_ButtonTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.578"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/buttonEditor_SaveChanges"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Valider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/buttonEditor_ButtonTypeRadioGroup"
-            android:layout_width="222dp"
-            android:layout_height="116dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/buttonEditor_Type_None"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="None" />
-
-            <RadioButton
-                android:id="@+id/buttonEditor_Type_Image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Image" />
-
-            <RadioButton
-                android:id="@+id/buttonEditor_Type_Page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Page" />
-
-            <RadioButton
-                android:id="@+id/buttonEditor_Type_Sound"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sound" />
-
-            <RadioButton
-                android:id="@+id/buttonEditor_Type_Video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Video" />
-
-        </RadioGroup>
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

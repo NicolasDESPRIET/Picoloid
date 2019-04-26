@@ -10,11 +10,13 @@ public class PicoloPage{
     private String name;
     private int id;
     private List<PicoloButton> buttonList;
+    private int haveNext;
 
     public PicoloPage(String name){
         this.name = name;
         this.id = -1;
         this.buttonList = new ArrayList<PicoloButton>();
+        this.haveNext = 0;
     }
 
     public void addJsonButton(PicoloButton button){
@@ -59,6 +61,14 @@ public class PicoloPage{
             }
         }
         return null;
+    }
+
+    public int getHaveNext() {
+        return haveNext;
+    }
+
+    public void setHaveNext(int haveNext) {
+        this.haveNext = haveNext;
     }
 
     public String getName() {

@@ -34,13 +34,13 @@ public class NewPageDialog {
 
     public void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Nouvelle page :");
+        builder.setTitle("Nom de la page :");
 
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Créer une nouvelle page", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (isNextPage){
@@ -50,7 +50,7 @@ public class NewPageDialog {
                 }
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

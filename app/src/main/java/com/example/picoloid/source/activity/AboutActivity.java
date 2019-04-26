@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.picoloid.R;
 
-public class About extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

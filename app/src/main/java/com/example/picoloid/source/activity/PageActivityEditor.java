@@ -106,9 +106,13 @@ public class PageActivityEditor extends AppCompatActivity {
 
     private void editButtonData(){
         if(selectedButton == null) return;
+        openEditButton(currentPage.getId(),selectedButton.getButtonData().getId());
+    }
+
+    private void openEditButton(int pageId, int buttonId){
         Intent openButtonDataEditor = new Intent(getApplicationContext(), ButtonEditorActivity.class);
-        openButtonDataEditor.putExtra("pageId",currentPage.getId());
-        openButtonDataEditor.putExtra("buttonId",selectedButton.getButtonData().getId());
+        openButtonDataEditor.putExtra("pageId",pageId);
+        openButtonDataEditor.putExtra("buttonId",buttonId);
         startActivity(openButtonDataEditor);
     }
 
@@ -116,7 +120,9 @@ public class PageActivityEditor extends AppCompatActivity {
         PicoloButton newButton = new PicoloButton();
         currentPage.addButton(newButton);
         saveChangesLocally();
-        refreshPage();
+
+        openEditButton(currentPage.getId(),newButton.getId());
+
     }
 
     private void deleteButton(){
